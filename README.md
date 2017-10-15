@@ -40,3 +40,5 @@ Korisnik (admin) ima:
 
 
 Ovo je neki tekst od Aje
+
+Pozzzz svima // Boris

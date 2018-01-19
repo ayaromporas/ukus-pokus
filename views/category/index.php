@@ -1,17 +1,17 @@
 <?php
 $categorymodel = new CategoryModel();
-$queryinstance = new Query();
+$queryInstance = new Query();
 
 $catId = $categorymodel->getId();
 
 //upit za dobijanje recepata iz konkretne kategorije
 
 $query = " AND (recipe_cats like '%," .  $catId . ",%')";
-$recipesAll = $queryinstance->allRows("recipes",$query);
+$recipesAll = $queryInstance->allRows("recipes",$query);
 
 //upit za dobijanje detalja kategorije
 $query = "cat_id=" . $catId;
-$catName = $queryinstance->singleRow("categories",$query);
+$catName = $queryInstance->singleRow("categories",$query);
 
 
 
@@ -30,7 +30,10 @@ $catName = $queryinstance->singleRow("categories",$query);
 			<?php
 			// ispis liste recepata
 			foreach ($recipesAll as $recipe) {
-				$recipeId = $recipe['recipe_id'];
+				$recipeId= mb_strtolower($recipe['recipe_id']." ".$recipe['recipe_title'], 'UTF-8');
+          		$recipeId = str_replace(" ", "-", $recipeId);
+          		$recipeId = $queryInstance->convertExtendedToNormal($recipeId);
+				// $recipeId = $recipe['recipe_id'];
 				$title = $recipe['recipe_title'];
 
 				echo "<p><a href='". ROOT_URL ."recipe/". $recipeId ."'>". $title ."</a></p>";

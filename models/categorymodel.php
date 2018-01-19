@@ -12,7 +12,9 @@ class CategoryModel extends Model{
 
 	public function getId(){
 		if (isset($_GET['id'])) {
-			$id = $_GET['id'];		
+			$id = $_GET['id'];
+			$idq = explode("-", $id);
+			$id= $idq[0];		
 		 	return $id;
 		}
 	} 	

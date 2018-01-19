@@ -282,7 +282,7 @@ $("select").select2({            //select2
       },
      }
 });
-
+  // on_select prikupljanje podataka iz formi
 $("select").on("select2:select", function (evt) {
   
   select_val = $(evt.currentTarget).val();
@@ -299,7 +299,8 @@ $("select").on("select2:select", function (evt) {
     return ajax_call(select_val, checkbox, pagination =1);
  }
 });
-
+  
+   //on_unselect prikupljanje podataka iz formi
 $("select").on("select2:unselect", function (evt) {
     select_val = $(evt.currentTarget).val();
     checkbox =[];
@@ -314,7 +315,7 @@ $("select").on("select2:unselect", function (evt) {
        return ajax_call(select_val, checkbox, pagination =1); 
   }
 });
-
+  // funkcija koja prikuplja podatke kad se klikne na checkbox u dodatnim opcijama
 $(".custom-control-input").click(function(){
       checkbox =[];
      $(".custom-control-input:checked").each(function(){

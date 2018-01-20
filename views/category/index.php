@@ -6,8 +6,9 @@ $catId = $categorymodel->getId();
 
 //upit za dobijanje recepata iz konkretne kategorije
 
+$selector = "recipe_id,recipe_title";
 $query = " AND (recipe_cats like '%," .  $catId . ",%')";
-$recipesAll = $queryInstance->allRows("recipe_id,recipe_title","recipes",$query);
+$recipesAll = $queryInstance->allRows($selector,"recipes",$query);
 
 //upit za dobijanje detalja kategorije
 $query = "cat_id=" . $catId;
@@ -19,7 +20,7 @@ $catName = $queryInstance->singleRow("categories",$query);
 ?>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-12 text-center">
+		<div class="col-sm-12 col-xl-12 text-center">
 			<br><h2>Recepti koji pripadaju kategoriji <span class='green'><?php  echo $catName['cat_name'];  ?></span> </h2><br>
 		</div>	
 	</div>
@@ -31,7 +32,7 @@ $catName = $queryInstance->singleRow("categories",$query);
 				$numberRecipes = count($recipesAll);
 				?>
 			 <div class='col-sm-12 col-xl-12 text-center'>
-			 <h4>Ukupan broj recepata u ovoj kategoriji je :<span style='color: red !important; font-size: 2rem;'> <?php echo $numberRecipes ?></span></h4>
+			 <h4>Ukupan broj recepata u ovoj kategoriji je :<span style='color: #28a745 !important; font-size: 2rem;'> <?php echo $numberRecipes ?></span></h4>
 			 </div><br>
 			 <?php
 
@@ -55,14 +56,10 @@ $catName = $queryInstance->singleRow("categories",$query);
 				// $recipeId = $recipe['recipe_id'];
 				$title = $recipe['recipe_title'];
 				$link =  ROOT_URL ."recipe/". $recipeId;
-				$mouseover = '#28a745';
-				$mouseout = '#212121';
 				?>
-				<div class='col-sm-12 col-xl-4 text-center'>
-					
-				<p><a href=' <?php echo $link ?>' style="color: #212121 !important;" onMouseOver="this.style.color='#28a745'"; onMouseOut="this.style.color='#212121'"><?php echo $title ?></a></p>
-			
-				
+
+				<div class='col-sm-12 col-xl-4 text-center'>					
+				<p><a href='<?php echo $link ?>' style="color: #212121 !important;" onMouseOver="this.style.color='#28a745'"; onMouseOut="this.style.color='#212121'"><?php echo $title ?></a></p>
 				</div>
 			<?php
 			}

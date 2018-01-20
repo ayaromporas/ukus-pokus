@@ -6,8 +6,8 @@ class Query extends Model {
 	protected $tablename;
 	protected $rows;
 	
-	public function allRows($tablename, $querystring = ""){
-		$this->query("SELECT * FROM $tablename WHERE (status = 1) $querystring");
+	public function allRows($selector,$tablename, $querystring = ""){
+		$this->query("SELECT $selector FROM $tablename WHERE (status = 1) $querystring");
 		$rows = $this->resultSet();
 		return $rows;
 	}

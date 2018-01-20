@@ -46,9 +46,10 @@ $slike = explode(",", $recipePhotos);
 foreach ($slike as $item) {
 	$query .=  " photo_id=" . $item . " OR ";
 }
- $query = rtrim($query, "OR ");
- $query = $query . ")";
-$fotkeAll = $queryInstance->allRows("photos",$query);
+$query = rtrim($query, "OR ");
+$query = $query . ")";
+$selector = "cat_id,cat_name";
+$fotkeAll = $queryInstance->allRows("*","photos",$query);
 $counter = count($fotkeAll);
 
 //upit za kategorije
@@ -60,7 +61,7 @@ foreach ($kategorije as $key) {
 }
 $query = rtrim($query, "OR ");
 $query = $query . ")";
-$catAll = $queryInstance->allRows("categories", $query);
+$catAll = $queryInstance->allRows("*","categories", $query);
 
 //upit za dobavljanje sastojaka
 $sastojci = array();
@@ -127,7 +128,10 @@ $commentsAll = $queryInstance->allRows("comments",$query);
 	     <div class="col-8 offset-2">
 		<small><!-- <strong>Nalazi se u kategorijama: </strong> -->
 		<?php foreach ($catAll as $key) {
-			$catId = $key['cat_id'];
+			$catId= mb_strtolower($key['cat_id']." ".$key['cat_name'], 'UTF-8');
+          	$catId = str_replace(" ", "-", $catId);
+          	$catId = $queryInstance->convertExtendedToNormal($catId);
+			// $catId = $key['cat_id'];
 			echo "<a class='btn btn-success btn-sm cats' href=' ". ROOT_URL ."category/$catId'>" . $key['cat_name'] . " </a>&nbsp;&nbsp;";
 		}?>
 	 	</small><br> <br>
@@ -230,12 +234,17 @@ $commentsAll = $queryInstance->allRows("comments",$query);
 	<!-- kategorije ponovo-->
 	<div class="row">
 		<div class="col-8 offset-2">
-			<small><strong>Potražite i druge recepte u kategorijama: </strong> &nbsp;
+			<div class="col-12 text-center">
+			<strong >Potražite i druge recepte u kategorijama: </strong> </div><br>
+			<div class="col-12 text-center">
 			<?php foreach ($catAll as $key) {
-				$catId = $key['cat_id'];
+				$catId= mb_strtolower($key['cat_id']." ".$key['cat_name'], 'UTF-8');
+          		$catId = str_replace(" ", "-", $catId);
+          		$catId = $queryInstance->convertExtendedToNormal($catId);
+				// $catId = $key['cat_id'];
 				echo "<a class='btn btn-success btn-sm cats' href=' ". ROOT_URL ."category/$catId'>" . $key['cat_name'] . " </a>&nbsp;&nbsp;";
-			}?> <br> <br>
-			</small>
+			}?></div> <br> <br>
+			
 		</div>
 	</div> <!-- kategorije kraj -->
 	

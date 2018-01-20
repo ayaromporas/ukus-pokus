@@ -23,17 +23,12 @@ if ($_POST['data'] !=null && $_POST['data'] !="") {
 		$upit->query("SELECT recipe_id,recipe_title FROM recipes WHERE ". $query );
 		$recRows = $upit->resultSet();
 		$numberRecipes = count($recRows);
-		if(isset($_POST['page'])) {
-       			if ($_POST['page'] !=null && $_POST['page'] !="") {
+		if(isset($_POST['page']) && ($_POST['page'] !=null && $_POST['page'] !="") ) {
        			$page = $_POST['page'];
 
        			$start = ($page-1)*12;
        			     			
-       		} else {
-       		$page =1;
-       		$start = 0;
-        		}
-       	}else {
+          	}else {
        		$page =1;
        		$start = 0;
         		}
@@ -80,17 +75,13 @@ if ($_POST['data'] !=null && $_POST['data'] !="") {
 		$upit->query("SELECT recipe_id,recipe_title FROM recipes WHERE ". $query );
 		$recRows = $upit->resultSet();
 		$numberRecipes = count($recRows);
-		if(isset($_POST['page'])) {
-       			if ($_POST['page'] !=null && $_POST['page'] !="") {
+		if(isset($_POST['page']) && ($_POST['page'] !=null && $_POST['page'] !="") ) {
+       			
        			$page = $_POST['page'];
 
        			$start = ($page-1)*12;
        			     			
-       		} else {
-       		$page =1;
-       		$start = 0;
-        		}
-       	}else {
+       		}else {
        			$page =1;
        			$start = 0;
        		}
@@ -137,17 +128,12 @@ if ($_POST['data'] !=null && $_POST['data'] !="") {
 				$upit->query("SELECT recipe_id,recipe_title FROM recipes WHERE ". $query );
 				$recRows = $upit->resultSet();
 				$numberRecipes = count($recRows);
-				if(isset($_POST['page'])) {
-       			if ($_POST['page'] !=null && $_POST['page'] !="") {
+				if(isset($_POST['page']) && ($_POST['page'] !=null && $_POST['page'] !="") ) {
        			$page = $_POST['page'];
 
        			$start = ($page-1)*12;
        			     			
-       		} else {
-       		$page =1;
-       		$start = 0;
-        		}
-       	}else {
+       	  	}else {
        			$start = 0;
        			$page =1;
        		}
@@ -172,7 +158,7 @@ if ($_POST['data'] !=null && $_POST['data'] !="") {
 				$id = $upit->convertExtendedToNormal($id);
 				echo "<div class='col-sm-12 col-xl-4 text-center'>";
 	        	echo '<p>';
-				echo "<a href='recipe/$id' class='recipelist' style='color: #212121 !important;' onMouseOver=this.style.color=$mouseover onMouseOut=this.style.color=$mouseout>" . $item['recipe_title'] . " </a>";
+				echo "<a href='recipe/$id' style='color: #212121 !important;' onMouseOver='this.style.color=$mouseover' onMouseOut='this.style.color=$mouseout'>" . $item['recipe_title'] . " </a>";
 	        	echo "</p>";
 	        	echo "</div>";
 	        		}

@@ -33,15 +33,15 @@
 //var_dump($viewmodel);
 
 foreach ($viewmodel[0][2] as $key => $vrednost) {
-	echo $key. '- - - - ' .$vrednost . '<br>';
+	echo $key. ' - - - - ' .$vrednost . '<br>';
 }
 echo "<br><br><br>";
 foreach ($viewmodel[1][2] as $key => $vrednost) {
-	echo $key. '- - - - ' .$vrednost . '<br>';
+	echo $key. ' - - - - ' .$vrednost . '<br>';
 }
 echo "<br><br><br>";
 foreach ($viewmodel[2][2] as $key => $vrednost) {
-	echo $key. '- - - - ' .$vrednost . '<br>';
+	echo $key. ' - - - - ' .$vrednost . '<br>';
 }
 
 

@@ -2,10 +2,10 @@
 // Define DB params
 
 define("DB_HOST", "localhost");
-define("DB_USER", "pclandrs_ukuspokus");
-define("DB_PASS", "cBUMa8il9-C,");
-define("DB_NAME", "pclandrs_ukuspokus");
+define("DB_USER", "root");
+define("DB_PASS", "");
+define("DB_NAME", "ukuspokus");
 
 // Define URL
-define("ROOT_PATH",  "");
-define("ROOT_URL", "http://ukus-pokus.pcland.in.rs/");
+define("ROOT_PATH",  "/ukus-pokus/");
+define("ROOT_URL", "http://localhost/ukus-pokus/");

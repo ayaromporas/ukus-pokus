@@ -30,8 +30,7 @@
 </div>
 <?php
 
-		
-		var_dump($viewmodel);
+
 
 
 ?>

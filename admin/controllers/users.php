@@ -5,15 +5,15 @@ class Users extends Controller{
 		$this->returnView($viewmodel->register(), true);
 	}
 
-	protected function login(){
+	protected function Login(){
 		$viewmodel = new UserModel();
-		$this->returnView($viewmodel->login(), true);
+		$this->returnView($viewmodel->Login(), true);
 	}
 	protected function viev(){
 		$viewmodel = new UserModel();
 		$this->returnView($viewmodel->viev(), true);
 	}
-	protected function logout(){
+	protected function Logout(){
 		unset($_SESSION['is_logged_in']);
 		unset($_SESSION['user_data']);
 		session_destroy();

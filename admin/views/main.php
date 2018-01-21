@@ -30,7 +30,7 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo ROOT_URL; ?>users/logout">Logout</a>
         </li>
-        <?php else : ?>
+       <?php else : ?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo ROOT_URL; ?>users/login">Login</a>
         </li>

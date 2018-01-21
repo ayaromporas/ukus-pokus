@@ -30,7 +30,7 @@ class UserModel extends Model{
 		return;
 	}
 
-	public function login(){
+	public function Login(){
 
 
 		

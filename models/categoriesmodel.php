@@ -6,7 +6,6 @@ class CategoriesModel extends Model{
 
 		$this->query('SELECT * FROM categories');
 		$catRows = $this->resultSet();
-		//print_r($rows);
 		return $catRows;
 	}	
 }

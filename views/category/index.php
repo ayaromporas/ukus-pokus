@@ -36,15 +36,14 @@ $catName = $queryInstance->singleRow("categories",$query);
 			 </div><br>
 			 <?php
 
-			 if(isset($_POST['page']) && ($_POST['page'] !=null && $_POST['page'] !="") ) {
-       			$page = $_POST['page'];
-
+			 if (isset($_GET['name']) && $_GET['name'] !=null && $_GET['name'] !="") {
+		  		$page = $_GET['name'];
        			$start = ($page-1)*12;
-       			     			
-       	  	  }else {
-       			$start = 0;
+			} else {
+		   		$start = 0;
        			$page =1;
-       		 }
+			}
+
        			$end = 12; 
 
       	$recRowsSliced = array_slice($recipesAll,$start,$end);
@@ -66,7 +65,7 @@ $catName = $queryInstance->singleRow("categories",$query);
 			?>
 				<div class='col-sm-12 col-xl-12 text-center'>
 	       	    <ul class='pagination pagination-sm justify-content-center'>";
-	       		<?php echo printPagination($numberRecipes, $page); ?>
+	       		<?php echo printPagination($numberRecipes, $page, $catId); ?>
 	       		</ul>
 	       		</div><br>
 		
@@ -75,16 +74,17 @@ $catName = $queryInstance->singleRow("categories",$query);
 </div> <!-- end container fluid -->
 
 <?php
-function printPagination($numberRecipes, $page){
+function printPagination($numberRecipes, $page,$catId){
        			
 					$returnPagination="";
+					$tablePagination = "category";
        				
        				$pages =ceil($numberRecipes / 12);
 
        			if ($page > 1) { 
        			
-				$returnPagination .=  "<a class='page-link' style='cursor:pointer;' id ='1'> Prva </a>";
-			    $returnPagination .=  "<a class='page-link' title='Back' style='cursor:pointer;' id ='".($page-1)."'> < </a>";
+				$returnPagination .=  "<a class='page-link' style='cursor:pointer;' href='".ROOT_URL. "" .$tablePagination."/".$catId."/1' id ='1'> Prva </a>";
+			    $returnPagination .=  "<a class='page-link' title='Back' style='cursor:pointer;' href='".ROOT_URL. "" .$tablePagination."/".$catId."/".($page-1)."' id ='".($page-1)."'> < </a>";
 			 	if ($page > 5) { 
 			 	$returnPagination .=  "<a class='page-link' id='point'> ... </a>";}
 					}
@@ -105,14 +105,14 @@ function printPagination($numberRecipes, $page){
 						 	$endd = $pages;
 						 }
 						 }
-
+						
        			for ($pageid=$startt; $pageid<=$endd; $pageid++) {
 
        			if ($pageid == $page){
-       				$returnPagination .=  "<a class='page-link' style='color: red; font-weight:700;cursor:pointer;' id ='".$pageid."'>" . $pageid . "</a>";
+       				$returnPagination .=  "<a class='page-link' style='color: red; font-weight:700;cursor:pointer;' href='".ROOT_URL. "" .$tablePagination."/".$catId."/".$pageid."' id ='".$pageid."'>" . $pageid . "</a>";
        			}else {
 			
-				$returnPagination .=  "<a class='page-link' style='cursor:pointer;' id ='".$pageid."'>" . $pageid . "</a>";
+				$returnPagination .=  "<a class='page-link' style='cursor:pointer;' href='".ROOT_URL. "" .$tablePagination."/".$catId."/".$pageid."' id ='".$pageid."' id ='".$pageid."'>" . $pageid . "</a>";
 				}
 			
 		 
@@ -121,11 +121,13 @@ function printPagination($numberRecipes, $page){
 
 				if ($page< $pages) { 
 				  if ($page < $pages - 3) { $returnPagination .=  "<a class='page-link' id='pointa'> ... </a>";}
-				 $returnPagination .=  "<a class='page-link' style='cursor:pointer;' title='Next' id ='".($page+1)."'> > </a>";
-				 $returnPagination .=  "<a class='page-link' style='cursor:pointer;' id ='".$pages."' > Poslednja <span class='badge badge-warning text-center' id ='".$pages."'>". $pages ."</span></a>";
+				 $returnPagination .=  "<a class='page-link' style='cursor:pointer;' title='Next' href='".ROOT_URL. "" .$tablePagination."/".$catId."/".($page+1)."' id ='".($page+1)."' id ='".($page+1)."'> > </a>";
+				 $returnPagination .=  "<a class='page-link' style='cursor:pointer;' href='".ROOT_URL. "" .$tablePagination."/".$catId."/".$pages."' id ='".$pages."' > Poslednja <span class='badge badge-warning text-center' id ='".$pages."'>". $pages ."</span></a>";
 		}
 
 			return $returnPagination;
        			}
+
+
 
 

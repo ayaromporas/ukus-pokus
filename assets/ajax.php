@@ -75,7 +75,7 @@ if ($_POST['data'] !=null && $_POST['data'] !="") {
 		$upit->query("SELECT recipe_id,recipe_title FROM recipes WHERE ". $query );
 		$recRows = $upit->resultSet();
 		$numberRecipes = count($recRows);
-		if(isset($_POST['page']) && ($_POST['page'] !=null && $_POST['page'] !="") ) {
+		if(isset($_POST['page']) && $_POST['page'] !=null && $_POST['page'] !="" ) {
        			
        			$page = $_POST['page'];
 

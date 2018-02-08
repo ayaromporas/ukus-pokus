@@ -1,36 +1,9 @@
 <?php
 //start session
-
 session_start();
 
-// Boris Vvv.
-
-//Aja
-
 //Include config
-
 require('config.php');
-
-
-/*
-
-require('classes/Messages.php');
-require('classes/Bootstrap.php');
-require('classes/Controller.php');
-require('classes/Model.php');
-
-
-require('controllers/home.php');
-require('controllers/recipes.php');
-require('controllers/users.php');
-
-
-require('models/home.php');
-require('models/recipe.php');
-require('models/user.php');
-
-*/
-
 
 function autoloadClasses($cname){ 
 if(file_exists('classes/'.$cname.".php")){

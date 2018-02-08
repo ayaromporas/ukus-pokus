@@ -7,6 +7,4 @@ class Recipe extends Controller {
 		$this->ReturnView($viewmodel->Index(), true);
 	}
 
-
-
-}
+} 

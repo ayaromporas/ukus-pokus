@@ -1,233 +1,371 @@
 <?php
 
 include ('../config.php');
-include ('../classes/Model.php');
-include ('../classes/Query.php');
-$upit = new Query();
+include ('../classes/Database.php');
+$database = new Database();
+$limit = 8;
+$page = 1;
 
-if ($_POST['data'] !=null && $_POST['data'] !="") {
+if(isset($_POST['page']) ){
+	$page = $_POST['page'];
+	//echo "Promenljiva page: ";
+	//var_dump($page);
+}
 
-	if (isset($_POST['cat']) && $_POST['cat'] !="" && $_POST['cat'] !=null) {
+if(isset($_POST['data']) && is_array($_POST['data'])){
+	$data = $_POST['data'];
+	// echo "Namirnice: ";
+	// print_r($data);
+}
+
+if(isset($_POST['cat']) && is_array($_POST['cat'])){
+	$cat = $_POST['cat'];
+	// echo "Kategorije: ";
+	// print_r($cat);
+}
+ 
+$query = "";
+if(isset($_POST['data']) && is_array($_POST['data'])){
+	$query = " (";
+	foreach ($data as $row) {
+	 $query .= "recipe_ingrs_id like '%" . "," .$row. "," . "%' AND ";
+ 	}
+	$query= rtrim($query, "AND ");
+	$query .= ")";
+
+	if(isset($_POST['cat']) && is_array($_POST['cat'])){
 		$cat = $_POST['cat'];
-		$data = $_POST['data'];
-		$query = "";
-	
-  		foreach ($cat as $roww) {
-        			 $query .= "recipe_cats like '%" . "," .$roww. "," . "%' AND ";
-         			foreach ($data as $row) {
-     			 $query .= "recipe_ingrs_id like '%" . "," .$row. "," . "%' AND ";
-   			 }
-       		}
-
-        		$query= rtrim($query, "AND ");
-		$upit->query("SELECT recipe_id,recipe_title FROM recipes WHERE ". $query );
-		$recRows = $upit->resultSet();
-		$numberRecipes = count($recRows);
-		if(isset($_POST['page']) && ($_POST['page'] !=null && $_POST['page'] !="") ) {
-       			$page = $_POST['page'];
-
-       			$start = ($page-1)*12;
-       			     			
-          	}else {
-       		$page =1;
-       		$start = 0;
-        		}
-        $end = 12; 
-
-      	$recRowsSliced = array_slice($recRows,$start,$end);
-
-		
-		echo "<div class='col-sm-12 col-xl-12 text-center'>";
-		echo "<h4>Ukupno recepata koji ispunjavaju tražene kriterijume : " . "<span style='color: #28a745 !important; font-size: 2rem;'>" . $numberRecipes ."</span></h4>";
-		echo "</div><br><br>";
-
-		if($numberRecipes > 0){	
-			$mouseover = '"#28a745"';
-			$mouseout = '"#212121"';
-
-			
-			
-			foreach ($recRowsSliced as $item) {	  
-				     			
-				$id= mb_strtolower($item['recipe_id']." ".$item['recipe_title'], 'UTF-8');
-				$id = str_replace(" ", "-", $id);
-				$id = $upit->convertExtendedToNormal($id);
-				echo "<div class='col-sm-12 col-xl-4 text-center'>"; 
-	        	echo '<p>';
-				echo "<a href='recipe/$id' class='recipelist' style='color: #212121 !important;' onMouseOver=this.style.color=$mouseover onMouseOut=this.style.color=$mouseout>" . $item['recipe_title'] . " </a>";
-	        	echo "</p>";
-	        	echo "</div>";
-	        		}
-	        	echo "<div class='col-sm-12 col-xl-12 text-center'>";
-	       		echo " <ul class='pagination pagination-sm justify-content-center'>";
-	       		echo printPagination($numberRecipes, $page);
-	       		echo "</ul>";
-	       		echo "</div><br><br>";
-    		}
-
-             } else {
-             	$data = $_POST['data'];	
-		$query = "";
-		foreach ($data as $row) {
-			$query .= "recipe_ingrs_id like '%" . "," .$row. "," . "%' AND ";
-   		}
-	  	$query= rtrim($query, "AND ");
-		$upit->query("SELECT recipe_id,recipe_title FROM recipes WHERE ". $query );
-		$recRows = $upit->resultSet();
-		$numberRecipes = count($recRows);
-		if(isset($_POST['page']) && $_POST['page'] !=null && $_POST['page'] !="" ) {
-       			
-       			$page = $_POST['page'];
-
-       			$start = ($page-1)*12;
-       			     			
-       		}else {
-       			$page =1;
-       			$start = 0;
-       		}
-       	$end = 12; 
-
-      	$recRowsSliced = array_slice($recRows,$start,$end);
-
-		
-		echo "<div class='col-sm-12 col-xl-12 text-center'>";
-		echo "<h4>Ukupno recepata koji ispunjavaju tražene kriterijume : " . "<span style='color: #28a745 !important; font-size: 2rem;'>".$numberRecipes ."</span></h4>";
-		echo "</div><br><br>";
-
-			if($numberRecipes > 0){	
-			$mouseover = '"#28a745"';
-			$mouseout = '"#212121"';
-
-			
-			
-			foreach ($recRowsSliced as $item) {	        			
-				$id= mb_strtolower($item['recipe_id']." ".$item['recipe_title'], 'UTF-8');
-				$id = str_replace(" ", "-", $id);
-				$id = $upit->convertExtendedToNormal($id);
-				echo "<div class='col-sm-12 col-xl-4 text-center'>";
-	        	echo '<p>';
-				echo "<a href='recipe/$id' class='recipelist' style='color: #212121 !important;' onMouseOver=this.style.color=$mouseover onMouseOut=this.style.color=$mouseout>" . $item['recipe_title'] . " </a>";
-	        	echo "</p>";
-	        	echo "</div>";
-	        		}
-	        	echo "<div class='col-sm-12 col-xl-12 text-center'>";
-	       		echo " <ul class='pagination pagination-sm justify-content-center'>";
-	       		echo printPagination($numberRecipes, $page);
-	       		echo "</ul>";
-	       		echo "</div><br><br>";
-    		}
-    	}
-		} else {
-			if (isset($_POST['cat']) && $_POST['cat'] !="" && $_POST['cat'] !=null) {
-				$cat = $_POST['cat'];		
-				$query = "";		
-				foreach ($cat as $row) {
-		      			$query .= "recipe_cats like '%" . "," .$row. "," . "%' AND ";
-		       		}
-		       		$query= rtrim($query, "AND ");
-				$upit->query("SELECT recipe_id,recipe_title FROM recipes WHERE ". $query );
-				$recRows = $upit->resultSet();
-				$numberRecipes = count($recRows);
-				if(isset($_POST['page']) && ($_POST['page'] !=null && $_POST['page'] !="") ) {
-       			$page = $_POST['page'];
-
-       			$start = ($page-1)*12;
-       			     			
-       	  	}else {
-       			$start = 0;
-       			$page =1;
-       		}
-       		$end = 12; 
-
-      	$recRowsSliced = array_slice($recRows,$start,$end);
-
-				
-				echo "<div class='col-sm-12 col-xl-12 text-center'>";
-				echo "<h4>Ukupno recepata koji ispunjavaju tražene kriterijume : " . "<span style='color: #28a745 !important; font-size: 2rem;'>" . $numberRecipes ."</span></h4>";
-				echo "</div><br><br>";
-
-				if($numberRecipes > 0){	
-					$mouseover = '"#28a745"';
-					$mouseout = '"#212121"';
-
-			
-			
-			foreach ($recRowsSliced as $item) {	        			
-				$id= mb_strtolower($item['recipe_id']." ".$item['recipe_title'], 'UTF-8');
-				$id = str_replace(" ", "-", $id);
-				$id = $upit->convertExtendedToNormal($id);
-				echo "<div class='col-sm-12 col-xl-4 text-center'>";
-	        	echo '<p>';
-				echo "<a href='recipe/$id' style='color: #212121 !important;' onMouseOver='this.style.color=$mouseover' onMouseOut='this.style.color=$mouseout'>" . $item['recipe_title'] . " </a>";
-	        	echo "</p>";
-	        	echo "</div>";
-	        		}
-	        	echo "<div class='col-sm-12 col-xl-12 text-center'>";
-	       		echo " <ul class='pagination pagination-sm justify-content-center'>";
-	       		echo printPagination($numberRecipes, $page);
-	       		echo "</ul>";
-	       		echo "</div><br><br>";
-	    			}
-        			}
-       		}
-
-			
-		
-
-
-       		function printPagination($numberRecipes, $page){
-       			
-					$returnPagination="";
-       				
-       				$pages =ceil($numberRecipes / 12);
-
-       			if ($page > 1) { 
-       			
-				$returnPagination .=  "<a class='page-link' style='cursor:pointer;' id ='1'> Prva </a>";
-			    $returnPagination .=  "<a class='page-link' title='Back' style='cursor:pointer;' id ='".($page-1)."'> < </a>";
-			 	if ($page > 5) { 
-			 	$returnPagination .=  "<a class='page-link' id='point'> ... </a>";}
-					}
-				if ($page>3) {
-							if ($page>($pages-3)){
-								$startt = $page - 3;
-						 		$endd = $pages;
-							} else {
-								$startt = $page - 3;
-						 		$endd = $page + 3;
-							}	
-						 } else {
-						 	if ($pages >= 7){
-						 	$startt = 1;
-						 	$endd = 7;
-						 }else {
-						 	$startt = 1;
-						 	$endd = $pages;
-						 }
-						 }
-
-       			for ($pageid=$startt; $pageid<=$endd; $pageid++) {
-
-       			if ($pageid == $page){
-       				$returnPagination .=  "<a class='page-link' style='color: red; font-weight:700;cursor:pointer;' id ='".$pageid."'>" . $pageid . "</a>";
-       			}else {
-			
-				$returnPagination .=  "<a class='page-link' style='cursor:pointer;' id ='".$pageid."'>" . $pageid . "</a>";
-				}
-			
-		 
-				}
-
-
-				if ($page< $pages) { 
-				  if ($page < $pages - 3) { $returnPagination .=  "<a class='page-link' id='pointa'> ... </a>";}
-				 $returnPagination .=  "<a class='page-link' style='cursor:pointer;' title='Next' id ='".($page+1)."'> > </a>";
-				 $returnPagination .=  "<a class='page-link' style='cursor:pointer;' id ='".$pages."' > Poslednja <span class='badge badge-warning text-center' id ='".$pages."'>". $pages ."</span></a>";
+		$query .= " AND (";
+		foreach ($cat as $row) {
+			$query .= "recipe_cats like '%" . "," .$row. "," . "%' AND ";
 		}
+		$query= rtrim($query, "AND ");
+		$query .= ")";
+	}
 
-			return $returnPagination;
-       			}
+//echo $query; 
+$database->query("SELECT recipe_id, recipe_title, prep_time, dirty_dishes, recipe_photos, avg_rating, no_votes, recipe_permalink  FROM recipes WHERE (status=1) AND $query" );
+$recipeResults = $database->resultSet();
+$numberRecipes = count($recipeResults);
+
+//print_r($recipeResults);
+?>
+
+<section id="recipesResults">      
+     <div class="bestRecipes">
+          <div class="container">
+	<br>
+	  <div class="col"><hr></div>
+	  <div class="col"><h2 class='display-5 text-center'>Ukupno ima <span> <?php echo $numberRecipes; ?></span> recepata koji ispunjavaju tražene kriterijume </h2></div>
+	  <div class="col"><hr></div>
+	<br>
+
+	 <div class="row">
+                <?php  //ispis recepata na upit namirnica (i kategorija sa dodatnim if)
+
+                $x = ($page-1) * $limit;
+                     $y = $x + $limit;
+
+                      while ($x < $y){ 
+                	  if (!($x > ($numberRecipes-1))) {
+                	  	
+                	  
+                	$recipe = $recipeResults[$x];
+		$photos = $recipe['recipe_photos'];
+                	$photoArray = explode(",", $photos);
+                	$photoId = $photoArray[0];
+                	$database->query("SELECT photo_alt, photo_link FROM photos WHERE status=1 AND photo_id=$photoId");
+                	$photoSingle = $database->single();
+                	$recipeRating = $recipe['avg_rating']. ""; 
+                	$nFullStars = $recipeRating[0]; 
+                	$halfOrEmptyStar = $recipeRating[2]; 
+
+               ?>
+                       
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="double"><a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipe['recipe_id']; ?>/<?php echo $recipe['recipe_permalink']; ?>"><h5 class="card-title text-center"><?php echo $recipe['recipe_title']; ?></h5></a></div>
+                          <a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipe['recipe_id']; ?>/<?php echo $recipe['recipe_permalink']; ?>">
+                            <img class="card-img-top" src="assets/img/<?php echo $photoSingle['photo_link']; ?>" alt="<?php echo $photoSingle['photo_alt']; ?>">
+                          </a>
+ 
+                          <p>
+<?php
+
+if ($recipe['avg_rating'] < 5.0) {
+	for ($i = 0; $i < $nFullStars; $i++) {
+		echo '<img src="assets/img/zv-pu.png" alt="rejting" class="smallImg">';
+	}
+	if ($halfOrEmptyStar < 5) {
+		echo '<img src="assets/img/zv-pr.png" alt="rejting" class="smallImg">';
+	}elseif ($halfOrEmptyStar >= 5) {
+		echo '<img src="assets/img/zv-po.png" alt="rejting" class="smallImg">';
+	}
+	for ($i = 0; $i < (4-$nFullStars); $i++) {
+		echo '<img src="assets/img/zv-pr.png" alt="rejting" class="smallImg">';
+	}
+
+}elseif ($recipe['avg_rating'] == 5.0) {
+	for ($i = 0; $i < 5; $i++) {
+		echo '<img src="assets/img/zv-pu.png" alt="rejting" class="smallImg">';
+	}
+}
+?> 
+                             &nbsp; <?php echo $recipe['avg_rating']; ?> &nbsp; (<?php echo $recipe['no_votes']; ?> &nbsp; glasova)<br>
+                           <img src="assets/img/sat.png" alt="vreme pripreme" class="smallImg"> &nbsp; <?php echo $recipe['prep_time']; ?> &nbsp; min<br>
+                           <img src="assets/img/posuda.png" alt="posuda" class="smallImg"> &nbsp; <?php echo $recipe['dirty_dishes']; ?> &nbsp; kom prljavog posuđa
+                         </p>
+                        </div>
+                       </div>
+
+                <?php 
+                } $x++;
+            } ?> <!-- Kraj ispisa pronadjenih recepata petljom -->
+
+             </div><!--kraj row -->
+          </div>
+      </div>
+</section> <!-- kraj rezultati pretrage -->
+
+<section id="paginationHome">
+	<br>
+  <nav aria-label="pagination">
+          <ul class="pagination justify-content-center">
+
+	<?php if ($numberRecipes > 0){  //iscrtavanje paginacije
+
+		$i = ($numberRecipes/$limit);
+		$i = ceil($i);
+
+		if ($i == 1) {
+			echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+
+		}elseif (($i > 1) && ($i < 8)) {
+			for ($e = 1; $e < ($i+1); $e++) {
+				if ($e == $page) {
+					echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+				}else{
+					echo '<li class="page-item"><span id=" ' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+				       }
+			}
+
+		}elseif ($i >= 8) {
+			if ($page >= 5){
+				if ($page > ($i-4)) {
+					echo '<li class="page-item"><span id=" ' . "1". ' " class="page-link" onclick="pagination('. "1" .')">1</span></li>';
+					echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+					for ($e = ($i-4); $e < ($i+1); $e++) {
+						if ($e == $page) {
+						echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+						}else{
+						echo '<li class="page-item"><span id=" ' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+						}
+					}
+
+				}else{
+					echo '<li class="page-item"><span id=" ' . "1". ' " class="page-link" onclick="pagination('. "1" .')">1</span></li>';
+					echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>'; 
+
+					for ($e = $page-2; $e < ($page+3); $e++) {
+						if ($e == $page) {
+						echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+						}else{
+						echo '<li class="page-item"><span id=" ' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+						}
+	 				}
+
+					echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+					echo '<li class="page-item"><span id=" ' . $i. ' " class="page-link" onclick="pagination('. $i .')">'.$i.'</span></li>';
+				}	
+
+			}elseif ($page < 5) {
+				for ($e = 1; $e < 6; $e++) {
+					if ($e == $page) {
+						echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+					}else{
+						echo '<li class="page-item"><span id=" ' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+					}
+				}
+				echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+				echo '<li class="page-item"><span id=" ' . $i. ' " class="page-link" onclick="pagination('. $i .')">'.$i.'</span></li>';
+			}
+		}
+	?>
+
+       </ul>
+   </nav>
+</section>
+
+<?php } ?>
+
+<?php
+
+}else{
+	if(isset($_POST['cat']) && is_array($_POST['cat'])){
+		$cat = $_POST['cat'];
+		$query =  "(";
+		foreach ($cat as $row) {
+			$query .= "recipe_cats like '%" . "," .$row. "," . "%' AND ";
+		}
+		$query= rtrim($query, "AND ");
+		$query .= ")";
+	}
+	//echo $query;
+	$database->query("SELECT recipe_id, recipe_title, prep_time, dirty_dishes, recipe_photos, avg_rating, no_votes, recipe_permalink  FROM recipes WHERE (status=1) AND $query" );
+	$recipeResults = $database->resultSet();
+	$numberRecipes = count($recipeResults);	
+?>
+
+<section id="recipesResults">      
+     <div class="bestRecipes">
+          <div class="container">
+	<br>
+	  <div class="col"><hr></div>
+	  <div class="col"><h2 class='display-5 text-center'>Ukupno ima <span> <?php echo $numberRecipes; ?></span> recepata koji ispunjavaju tražene kriterijume </h2></div>
+	  <div class="col"><hr></div>
+	<br>
+
+	 <div class="row">
+                <?php
+                     	
+                  // Ispis pronadjenih recepata petljom, slucaj samo kategorije
+                     $x = ($page-1) * $limit;
+                     $y = $x + $limit;
+
+                      while ($x < $y){ 
+                	  if (!($x > ($numberRecipes-1))) {
+                	  	
+                	$recipe = $recipeResults[$x];		  
+                	$photos = $recipe['recipe_photos'];
+                	$photoArray = explode(",", $photos);
+                	$photoId = $photoArray[0];
+                	$database->query("SELECT photo_alt, photo_link FROM photos WHERE status=1 AND photo_id=$photoId");
+                	$photoSingle = $database->single();
+                	$recipeRating = $recipe['avg_rating']. ""; 
+                	$nFullStars = $recipeRating[0]; 
+                	$halfOrEmptyStar = $recipeRating[2];                 	
+
+               ?> 
+                       
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="double"><a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipe['recipe_id']; ?>/<?php echo $recipe['recipe_permalink']; ?>"><h5 class="card-title text-center"><?php echo $recipe['recipe_title']; ?></h5></a></div>
+                          <a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipe['recipe_id']; ?>/<?php echo $recipe['recipe_permalink']; ?>">
+                            <img class="card-img-top" src="assets/img/<?php echo $photoSingle['photo_link']; ?>" alt="<?php echo $photoSingle['photo_alt']; ?>">
+                          </a>
+ 
+                          <p>
+<?php
+
+if ($recipe['avg_rating'] < 5.0) {
+	for ($i = 0; $i < $nFullStars; $i++) {
+		echo '<img src="assets/img/zv-pu.png" alt="rejting" class="smallImg">';
+	}
+	if ($halfOrEmptyStar < 5) {
+		echo '<img src="assets/img/zv-pr.png" alt="rejting" class="smallImg">';
+	}elseif ($halfOrEmptyStar >= 5) {
+		echo '<img src="assets/img/zv-po.png" alt="rejting" class="smallImg">';
+	}
+	for ($i = 0; $i < (4-$nFullStars); $i++) {
+		echo '<img src="assets/img/zv-pr.png" alt="rejting" class="smallImg">';
+	}
+
+}elseif ($recipe['avg_rating'] == 5.0) {
+	for ($i = 0; $i < 5; $i++) {
+		echo '<img src="assets/img/zv-pu.png" alt="rejting" class="smallImg">';
+	}
+}
+?>  
+
+                             &nbsp; <?php echo $recipe['avg_rating']; ?> &nbsp; (<?php echo $recipe['no_votes']; ?> &nbsp; glasova)<br>
+                           <img src="assets/img/sat.png" alt="vreme pripreme" class="smallImg"> &nbsp; <?php echo $recipe['prep_time']; ?> &nbsp; min<br>
+                           <img src="assets/img/posuda.png" alt="posuda" class="smallImg"> &nbsp; <?php echo $recipe['dirty_dishes']; ?> &nbsp; kom prljavog posuđa
+                         </p>
+                        </div>
+                       </div>
+
+                <?php 
+                } $x++;
+            } ?> <!-- Kraj ispisa pronadjenih recepata petljom -->
 
 
+             </div><!--kraj row -->
+          </div>
+      </div>
+</section> <!-- kraj rezultati pretrage -->
+
+
+<section id="paginationHome">
+	<br>
+  <nav aria-label="pagination">
+          <ul class="pagination justify-content-center">
+
+	<?php if ($numberRecipes > 0){  //iscrtavanje paginacije
+
+		$i = ($numberRecipes/$limit);
+		$i = ceil($i);
+
+		if ($i == 1) {
+			echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+
+		}elseif (($i > 1) && ($i < 8)) {
+			for ($e = 1; $e < ($i+1); $e++) {
+				if ($e == $page) {
+					echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+				}else{
+					echo '<li class="page-item"><span id=" ' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+				       }
+			}
+
+		}elseif ($i >= 8) {
+			if ($page >= 5){
+				if ($page > ($i-4)) {
+					echo '<li class="page-item"><span id=" ' . "1". ' " class="page-link" onclick="pagination('. "1" .')">1</span></li>';
+					echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+					for ($e = ($i-4); $e < ($i+1); $e++) {
+						if ($e == $page) {
+						echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+						}else{
+						echo '<li class="page-item"><span id=" ' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+						}
+					}
+
+				}else{
+					echo '<li class="page-item"><span id=" ' . "1". ' " class="page-link" onclick="pagination('. "1" .')">1</span></li>';
+					echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>'; 
+
+					for ($e = $page-2; $e < ($page+3); $e++) {
+						if ($e == $page) {
+						echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+						}else{
+						echo '<li class="page-item"><span id=" ' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+						}
+					}
+
+					echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+					echo '<li class="page-item"><span id=" ' . $i. ' " class="page-link" onclick="pagination('. $i .')">'.$i.'</span></li>';
+				}	
+
+			}elseif ($page < 5) {
+				for ($e = 1; $e < 6; $e++) {
+					if ($e == $page) {
+						echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+					}else{
+						echo '<li class="page-item"><span id=" ' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+					}
+				}
+				echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+				echo '<li class="page-item"><span id=" ' . $i. ' " class="page-link" onclick="pagination('. $i .')">'.$i.'</span></li>';
+			}			
+		}
+	?>
+       </ul>
+   </nav>
+</section>
+
+<?php } ?>
+
+<?php	
+}
 
 

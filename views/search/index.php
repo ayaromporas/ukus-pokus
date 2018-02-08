@@ -1,16 +1,3 @@
-<?php
-$searchmodel = new SearchModel();
-$queryInstance = new Query();
-
-// upit za dobijanje sastojaka za upis u formu za pretragu
-$ingrRows = $searchmodel->ingredients();
-
-//upit za dobijanje svih kategorija
-$query = " ";
-$catsAll = $queryInstance->allRows("categories",$query);
-
-?>
-
 
 <!-- script za Ajax select2-->
       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>

@@ -1,0 +1,7 @@
+[31-Jan-2018 15:06:39 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hara0210_ukus_pok.recipes' doesn't exist in /home/hara0210/kolezeee.solutions/classes/Database.php:50
+Stack trace:
+#0 /home/hara0210/kolezeee.solutions/classes/Database.php(50): PDOStatement->execute()
+#1 /home/hara0210/kolezeee.solutions/classes/Database.php(58): Database->execute()
+#2 /home/hara0210/kolezeee.solutions/assets/ajax.php(192): Database->resultset()
+#3 {main}
+  thrown in /home/hara0210/kolezeee.solutions/classes/Database.php on line 50

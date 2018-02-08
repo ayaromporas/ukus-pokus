@@ -7,11 +7,6 @@ class Home extends Controller {
 		$this->ReturnView($viewmodel->Index(), true);
 	}
 
-	protected function result(){
-		$viewmodel = new HomeModel();
-		$this->returnView($viewmodel->result(), true);
-	}
-
 }
 
 

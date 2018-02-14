@@ -1,6 +1,5 @@
 <?php
 class DashboardModel extends Model{
-
 	public function Index(){
 		//$rows =  array();
 		$this->query("SELECT * FROM recipes"); 
@@ -13,7 +12,5 @@ class DashboardModel extends Model{
 		$rows2 = $this->resultSet();
 		
 		return array($rows, $rows1, $rows2);
-
-
 	}
 }

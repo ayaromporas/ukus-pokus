@@ -67,7 +67,7 @@ class RecipeModel extends Model{
 
 		//dobijanje odobrenih komentara koji pripadaju tom receptu
 		$recipeId = $recipe['recipe_id'];
-		$this->query("SELECT * FROM comments WHERE status=1 AND recipe_id=$recipeId");
+		$this->query("SELECT * FROM comments WHERE status=1 AND recipe_id=$recipeId ORDER BY comment_time DESC");
 		$commentsAll = $this->resultSet();
 
 		$resultArray = array($recipe, $categoriesAll, $ingrsMainArray, $commentsAll, $photosAll);

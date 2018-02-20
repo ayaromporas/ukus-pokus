@@ -1,48 +1,87 @@
-<h1>Ingredient</h1><hr>
-<table class="table table-sm">
-  <thead>
-    <tr>
-	  <th scope="col">#</th>
-      <th scope="col">Naziv</th>
-      <th scope="col"></th>
-      <th scope="col">Options</th>
-    </tr>
-  </thead>
+<?php 
+
+$ingredients = $viewmodel[0];  //spisak svih namirnica
+?>
+
+<section class="box-typical">
+	<header class="box-typical-header">
+		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-title text-center">			
+				<h3><i class="font-icon color-yellow fas fa-lemon"></i>&nbsp; &nbsp; &nbsp; Namirnice &nbsp; &nbsp; &nbsp; <i class="font-icon color-yellow fas fa-lemon"></i></h3>
+			
+			</div>	
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<select>
+					<option>10</option>
+					<option>25</option>
+					<option>50</option>
+				</select>
+			</div>	
+		</div>
+	</header>
+	<div class="box-typical-body">
+		<div class="table-responsive" id="#ingredientslist">
+			<table class="table table-hover" >
+				<thead>
+					<tr>
+						<th class="text-center">Id</th>
+						<th class="text-center">Naziv</th>
+						<th class="text-center">Status</th>
+						<th class="text-center">Izmeni</th>
+						<th class="text-center">Obriši</th>
+					</tr>
+				</thead>
+				<tbody>
+
+<?php 
+
+foreach ($ingredients as $ingredient) {
+
+	$ingrId = $ingredient['ingredient_id'];
+	$ingrName = $ingredient['ingredient_name'];
+	$ingrStatus = $ingredient['status'];
+	if($ingrStatus == 1){
+		$status = "aktivno";
+		$color = "btn-success";
+	}elseif ($ingrStatus == 0) {
+		$status = "obrisano";
+		$color = "btn-danger";
+	}
 	
-	<form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
-		<tr>
-		  <td></td>
-		  <td><input type="text" name="ingredient_name" class="form-control" /></td>
-		  <td></td>
-		  <td><input class="btn btn-primary btn-sm" name="submit" type="submit" value="Add Ingredients" /></td>
-		</tr>
-	</form>
+?>
+					<tr>
+						<td class="text-center"><span class="label label-pill"><?php echo $ingrId; ?></span></td>
+						<td class="text-center  text-capitalize"><?php echo $ingrName; ?></td>
+						<td class="text-center"><button id="notie-success-a" type="button" class="btn btn-rounded <?php echo $color; ?> btn-sm"><?php echo $status; ?></button></td>
+						<td class="table-icon-cell text-center"><i class="font-icon fas fa-edit"></i></td>
+						<td class="table-icon-cell text-center"><i class="font-icon fas fa-trash"></i></td>
+						
+					</tr>
 
-	<?php $i = 1; 
-		foreach($viewmodel as $item) : 
-			$name = $item['ingredient_name'];
-			$id = $item['ingredient_id']; 
-			$status = $item['status']
-	?>
-	  <tbody>
-    <tr>
-		<td><?php echo $i; $i++ ?></td>
-		<td id="td_name<?php echo $id; ?>"><?php echo $name; ?></td>
-		<td></td>
-		<td id="td<?php echo $id; ?>">
-			<?php
-
-			if($item['status'] == 0){	
-				echo '<button type="button" onclick="edit1('."'activate','ingredients','ingredient_id','status','1',".$id.')" class="btn btn-warning btn-sm">Activate</button>';
-			}else{
-				echo "<button type='button' onclick='edit1(".'"delete","ingredients","ingredient_id","status","0",'.$id.")' class='btn btn-danger btn-sm'>Delete</button>";
-			}?>   
-				<button type="button" onclick="edit1('edit','ingredients','ingredient_id','ingredient_name','<?php echo $name; ?>','<?php echo $id; ?>')"  class="btn btn-success btn-sm">Edit</button>
-		</td>
-    </tr>
-
-<?php endforeach; ?>
+<?php	
+	
+}
+ ?>					
+						
+				
+				</tbody>
+			</table>
+		</div>
+	</div><!--.box-typical-body-->
+</section><!--.box-typical-->
 
 
-  </tbody>
-</table>
+<!-- paginacija -->
+<nav aria-label="Page navigation example" class="text-center">
+  <ul class="pagination">
+    
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item"><a class="page-link" href="#">12</a></li>
+    <li class="page-item active"><a class="page-link" href="#">13</a></li>
+    <li class="page-item"><a class="page-link" href="#">14</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item"><a class="page-link" href="#">37</a></li>
+
+  </ul>
+</nav>

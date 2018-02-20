@@ -1,29 +1,44 @@
-<?php if(isset($_SESSION['is_logged_in'])) {
+<?php 
+/*
+if($admin === true){
   header('Location: '.ROOT_URL.'dashboard');
-} ?>
+}else{
+  header('Location: '.ROOT_URL.'login');
+}
+*/
+?>
 
-<div class="row justify-content-center">
+   
 
-    
-
-  <div class="panel-body col-5"">
-    <h3>User Login</h3>
-    <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
-    	<div class="form-group">
-    		<label>Email</label>
-    		<input type="text" name="email" class="form-control" />
-    	</div>
-    	<div class="form-group">
-    		<label>Password</label>
-    		<input type="password" name="password" class="form-control" />
-    	</div>
-    	<input class="btn btn-primary" name="submit" type="submit" value="Submit" />
-    </form>
-  </div>
-</div>
-
-
-
-  <div class="row justify-content-center">
-
-  </div>
+    <div class="page-center">
+        <div class="page-center-in">
+            <div class="container-fluid">
+                <form class="sign-box" action="" method="">
+                    <div class="sign-avatar">
+                        <img src="<?php echo ROOT_URL; ?>assets/img/avatar-kolezeee.png" alt="">
+                    </div>
+                    <header class="sign-title">Prijavi se</header>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email ili korisničko ime"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Lozinka"/>
+                    </div>
+                    <div class="form-group">
+                        <!-- <div class="checkbox float-left">
+                            <input type="checkbox" id="signed-in"/>
+                            <label for="signed-in">Ostavi me prijavljenog</label>
+                        </div> -->
+                        <div class="float-right reset">
+                            <a href="#">Resetuj lozinku</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-rounded">Uloguj se</button>
+                    <!-- <p class="sign-note">New to our website? <a href="sign-up.html">Sign up</a></p> -->
+                    <!--<button type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>-->
+                </form>
+            </div>
+        </div>
+    </div><!--.page-center-->

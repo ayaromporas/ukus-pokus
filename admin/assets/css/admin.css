@@ -1,0 +1,124 @@
+/* glavni admin css file */
+
+
+
+.blue { color: #007bff; }
+.indigo { color: #6610f2; }
+.purple { color: #6f42c1; }
+.pink { color: #e83e8c; }
+.red { color: #dc3545; }
+.orange { color: #fd7e14; }
+.yellow { color: #ffc107; }
+.green { color: #28a745; }
+.green-light { color: #8BCE6D; }
+.teal { color: #20c997; }
+.cyan { color: #17a2b8; }
+.white { color: #ffffff; }
+.gray { color: #6c757d; }
+.gray-dark { color: #343a40; }
+.beige { color: #8c7c5f; }
+.white { color: #ffffff; }
+.aquamarine { color: #21a788; }
+
+
+#show-hide-sidebar-toggle, #hamburgerhead {
+	margin: 0 ;
+}
+
+.side-menu-list > li.gold .font-icon,
+.side-menu-list > li.gold .glyphicon,
+.side-menu-list > li.gold .fa {
+  color: #FFD200;
+}
+.side-menu-list > li.gold.opened a,
+.side-menu-list > li.gold.opened > span,
+.side-menu-list > li.gold .with-sub > span {
+  border-left-color: #FFD200;
+}
+
+
+.show-hide-sidebar span, .hamburger span {
+	background: #28a745;
+}
+
+.show-hide-sidebar span:before,
+.show-hide-sidebar span:after,
+.hamburger span:before,
+.hamburger span:after {
+	  background-color: #28a745;
+
+}
+
+.show-hide-sidebar:hover span,
+.show-hide-sidebar:hover span:before,
+.show-hide-sidebar:hover span:after,
+.hamburger:hover span,
+.hamburger:hover span:before,
+.hamburger:hover span:after {
+  background-color: #8c7c5f;
+}
+
+.ribbon.bgr-purple {
+	background: #ac6bec;
+}
+
+.ribbon.bgr-purple.left-top:before {
+	border-left-color: #ac6bec;
+}
+
+.ribbon.bgr-purple.left-top:after {
+	border-top-color: #ac6bec;
+}
+
+.btn-yellow {
+  color: #ffffff;
+  background-color: #fdc006;
+  border-color: #fdc006;
+}
+
+.page-link {
+	color: #28a745 !important;
+	font-weight: bold !important;
+
+}
+
+.page-link:focus, .page-link:hover {
+	color: #28a745 !important;
+	background-color: #e9ecef !important;
+	border-color: #dee2e6 !important;
+	font-weight: bold !important;
+}
+
+.page-item.active .page-link {
+	color: #ffffff !important;
+	background-color: #28a745 !important;
+	border-color: #dee2e6 !important;
+	font-weight: bold !important;
+}
+
+.sign-box a, .sign-box a:focus, .sign-box a:hover {
+	color: #28a745 !important;
+}
+
+.sign-box a:hover {
+	    border-bottom-color: rgba(80,220,70,.5);
+}
+
+.sign-box .btn {
+	display: inline;
+}
+a#logged:hover, a#logged:active {
+	color: #ffffff !important;
+}
+
+.grey-icon {
+	color: #919fa9;
+}
+
+.wrap {
+	overflow-wrap: break-word;
+}
+
+
+
+

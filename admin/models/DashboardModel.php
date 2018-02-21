@@ -7,7 +7,7 @@ class DashboardModel extends Model{
 		if(isset($_POST['insert']) && isset($_POST['secure'])){
 
 			if (count($_POST) == 2) {
-				
+
 
 				$titlesArray = array();
 				$title1 = "Pogačice sa čvarcima i belim lukom";
@@ -117,9 +117,9 @@ class DashboardModel extends Model{
 
 					$lastId = $this->lastInsertId();
 					//echo $lastId;
-					
+
 				}
-								
+
 				Messages::setMsg('Uspešno ubačeno 2000 novih recepata! <br>Id poslednjeg recepta u bazi sada je: '. $lastId, 'success');
 			}
 			return;
@@ -128,4 +128,3 @@ class DashboardModel extends Model{
 
 	}/*kraj index */
 } /* kraj klasa */
-

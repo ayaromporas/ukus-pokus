@@ -1,7 +1,31 @@
-<?php 
+<?php
+include ('../classes/Database.php');
+$database = new Database();
+
+//dobavljanje brojeva za prikaz u sidebar-u
+$database->query('SELECT COUNT(*) FROM recipes');
+$nrRecipes = $database->resultSet();
+$database->query('SELECT COUNT(*) FROM photos');
+$nrPhotos = $database->resultSet();
+$database->query('SELECT COUNT(*) FROM users WHERE status!=0');
+$nrUsers = $database->resultSet();
+$database->query('SELECT COUNT(*) FROM units');
+$nrUnits = $database->resultSet();
+$database->query('SELECT COUNT(*) FROM ingredients');
+$nrIngrs = $database->resultSet();
+$database->query('SELECT COUNT(*) FROM categories');
+$nrCats = $database->resultSet();
+$database->query('SELECT COUNT(*) FROM comments WHERE status=2');
+$nrCommentsHeld = $database->resultSet();
+$database->query('SELECT COUNT(*) FROM comments WHERE status=1');
+$nrCommentsApproved = $database->resultSet();
+$database->query('SELECT COUNT(*) FROM comments WHERE status=0');
+$nrCommentsBanned = $database->resultSet();
 
 
 
+
+//postavljanje promenljivih na true ili false, one se koriste da dozvole ili ne dozvole prikaz delova strane
 if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESSION['status'])){
         if ($_SESSION['status'] == 1) {
 
@@ -16,16 +40,15 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
             $editor = false;
 
         }elseif ($_SESSION['status'] == 3) {
-          
+
             $superadmin = false;
             $admin = false;
             $editor = true;
-
         }
 
         $username = $_SESSION['username'];
         $userName = $_SESSION['user_name'];
-        
+
 }else{
         $superadmin = false;
         $admin = false;
@@ -78,6 +101,7 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
 
 <body class="with-side-menu">
 
+
   <header class="site-header">
       <div class="container-fluid">
 
@@ -92,7 +116,7 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
           <button id="show-hide-sidebar-toggle" class="show-hide-sidebar">
               <span>toggle menu</span>
           </button>
-  
+
           <button class="hamburger hamburger--htla" id="hamburgerhead">
               <span>toggle menu</span>
           </button>
@@ -105,35 +129,35 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
                           <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <!-- <img src="assets/img/avatar-2-64.png" alt=""> --><i class="font-icon glyphicon glyphicon-king"></i>
                           </button>
-                     
+
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
-                              <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-user"></span>Zdravo, 
-<?php 
-if(($superadmin === true) || ($admin === true) || ($editor === true)) { 
+                              <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-user"></span>Zdravo,
+<?php
+if(($superadmin === true) || ($admin === true) || ($editor === true)) {
   echo $userName;
 }else{
   echo 'Demo';
 }
  ?>
                               </a>
-                              <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Moj profil</a>            
+                              <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Moj profil</a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="<?php echo ROOT_URL; ?>home/logout"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
                           </div>
                       </div>
 
 
-                  
-  
+
+
                   </div><!--.site-header-shown-->
               </div><!--site-header-content-in-->
           </div><!--.site-header-content-->
       </div><!--.container-fluid-->
   </header><!--.site-header-->
 
-<?php 
+<?php
 
-if(($superadmin === true) || ($admin === true) || ($editor === true)) { 
+if(($superadmin === true) || ($admin === true) || ($editor === true)) {
 
 ?>
 
@@ -183,7 +207,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
               </ul>
 
           </li>
-          
+
           <li class="blue-sky with-sub">
                   <span>
                     <i class="font-icon fas fa-cogs"></i>
@@ -212,9 +236,9 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                   <span class="lbl">Komentari</span>
               </span>
               <ul>
-                  <li><a href="<?php echo ROOT_URL; ?>comments"><span class="lbl">Na čekanju</span><span class="label label-custom label-pill label-warning">10</span></a></li>
-                  <li><a href="#"><span class="lbl">Odobreni</span><span class="label label-custom label-pill label-success">276</span></a></li>
-                  <li><a href="#"><span class="lbl">Banovani</span><span class="label label-custom label-pill label-danger">13</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>comments"><span class="lbl">Na čekanju</span><span class="label label-custom label-pill label-warning"><?php echo $nrCommentsHeld[0]['COUNT(*)']; ?></span></a></li>
+                  <li><a href="#"><span class="lbl">Odobreni</span><span class="label label-custom label-pill label-success"><?php echo $nrCommentsApproved[0]['COUNT(*)']; ?></span></a></li>
+                  <li><a href="#"><span class="lbl">Banovani</span><span class="label label-custom label-pill label-danger"><?php echo $nrCommentsBanned[0]['COUNT(*)']; ?></span></a></li>
               </ul>
           </li>
 
@@ -224,7 +248,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                   <span class="lbl">Recepti</span>
               </span>
               <ul>
-                  <li><a href="<?php echo ROOT_URL; ?>recipes"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success">310</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>recipes"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success"><?php echo $nrRecipes[0]['COUNT(*)']; ?></span></a></li>
                   <li><a href="<?php echo ROOT_URL; ?>recipes/insert"><span class="lbl">Dodaj novi recept</span></a></li>
               </ul>
           </li>
@@ -235,9 +259,9 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                     <span class="lbl">Namirnice</span>
                  </span>
                 <ul>
-                  <li><a href="<?php echo ROOT_URL; ?>ingredients"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success">120</span></a></li>
-                  <li><a href="#"><span class="lbl">Dodaj novu namirnicu</span></a></li>
-  
+                  <li><a href="<?php echo ROOT_URL; ?>ingredients"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success"><?php echo $nrIngrs[0]['COUNT(*)']; ?></span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>ingredients/insert"><span class="lbl">Dodaj novu namirnicu</span></a></li>
+
                </ul>
           </li>
 
@@ -247,7 +271,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                   <span class="lbl">Kategorije</span>
               </span>
               <ul>
-                  <li><a href="<?php echo ROOT_URL; ?>categories"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success">21</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>categories"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success"><?php echo $nrCats[0]['COUNT(*)']; ?></span></a></li>
                   <li><a href="<?php echo ROOT_URL; ?>categories/insert"><span class="lbl">Dodaj novu kategoriju</span></a></li>
 
               </ul>
@@ -259,8 +283,8 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                     <span class="lbl">Jedinice mere</span>
                  </span>
                 <ul>
-                  <li><a href="<?php echo ROOT_URL; ?>units"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success">53</span></a></li>
-                  <li><a href="#"><span class="lbl">Dodaj novu jedinicu mere</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>units"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success"><?php echo $nrUnits[0]['COUNT(*)']; ?></span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>units/insert"><span class="lbl">Dodaj novu jedinicu mere</span></a></li>
 
               </ul>
           </li>
@@ -270,8 +294,8 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                     <span class="lbl">Slike</span>
                  </span>
                 <ul>
-                  <li><a href="<?php echo ROOT_URL; ?>images"><span class="lbl">Pregled</span><span class="label label-custom label-pill label-success">921</span></a></li>
-                  <li><a href="#"><span class="lbl">Dodaj novu sliku</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>images"><span class="lbl">Pregled</span><span class="label label-custom label-pill label-success"><?php echo $nrPhotos[0]['COUNT(*)']; ?></span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>images/insert"><span class="lbl">Dodaj novu sliku</span></a></li>
                   <li><a href="https://tinypng.com/" target="blank"><span class="lbl">Kompresuj slike</span></a></li>
               </ul>
           </li>
@@ -282,8 +306,8 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                     <span class="lbl">Administratori</span>
                  </span>
                 <ul>
-                  <li><a href="<?php echo ROOT_URL; ?>users"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success">6</span></a></li>
-                  <li><a href="#"><span class="lbl">Dodaj admina</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>users"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success"><?php echo $nrUsers[0]['COUNT(*)']; ?></span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>users/insert"><span class="lbl">Dodaj admina</span></a></li>
 
               </ul>
           </li>
@@ -307,10 +331,10 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                   <li><a href="https://github.com/ayaromporas/ukus-pokus" target="blank"><span class="lbl">Git</span></a></li>
                   <li><a href="https://getbootstrap.com/docs/4.0/getting-started/introduction/" target="blank"><span class="lbl">Bootstrap</span></a></li>
                   <li><a href="http://themesanytime.com/startui/demo/index.html" target="blank"><span class="lbl">Start UI</span></a></li>
-                  
+
               </ul>
           </li>
-        
+
           <li class="aquamarine with-sub">
               <span>
                   <i class="font-icon fas fa-address-book"></i>
@@ -323,15 +347,15 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
           </li>
 
       </ul>
-  
+
   </nav><!--.side-menu-->
 
 
-  
+
 <!-- Sadrzaj stranice -->
   <div class="page-content">
     <div class="container-fluid">
-    
+
 <?php require($view); ?>
 <?php Messages::display(); ?>
 
@@ -339,7 +363,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
   </div><!--.page-content-->
 
 
-<?php 
+<?php
 
 }else{ ?>
 
@@ -390,7 +414,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
               </ul>
 
           </li>
-          
+
           <li class="blue-sky with-sub">
                   <span>
                     <i class="font-icon fas fa-cogs"></i>
@@ -522,10 +546,10 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                   <li><a href="#"><span class="lbl">Git</span></a></li>
                   <li><a href="#"><span class="lbl">Bootstrap</span></a></li>
                   <li><a href="#"><span class="lbl">Start UI</span></a></li>
-                  
+
               </ul>
           </li>
-        
+
           <li class="aquamarine with-sub">
               <span>
                   <i class="font-icon fas fa-address-book"></i>
@@ -538,14 +562,14 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
           </li>
 
       </ul>
-  
+
   </nav><!--.side-menu-->
 
 
   <!-- Sadrzaj stranice -->
   <div class="page-content">
     <div class="container-fluid">
-    
+
 <?php require($view); ?>
 
 <?php Messages::display(); ?>
@@ -555,7 +579,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
 
 
 
-  <?php 
+  <?php
 
 }
    ?>

@@ -1,7 +1,7 @@
 <?php
 
 class RecipeModel extends Model{
- 
+
 	public function getid(){
 		if (isset($_GET['id'])) {
 			$id = $_GET['id'];
@@ -9,12 +9,12 @@ class RecipeModel extends Model{
 		}else{
 			header('Location: ' . ROOT_URL);
 		}
-	} 
- 
+	}
+
 	public function Index(){
 
 		$nr = $this->getid();   // $nr - number of recipe (id)
-		
+
 		$this->query("SELECT * FROM recipes WHERE status=1 AND recipe_id=$nr");
 		$recipe = $this->single();
 
@@ -51,15 +51,15 @@ class RecipeModel extends Model{
 
 			$ingrsSingleString = $ingrsAllSingle;
 			$ingrsSingleArray = explode(",", $ingrsSingleString);
-			$ingrSingleId = $ingrsSingleArray[0]; 
-			$ammount = $ingrsSingleArray[1]; 
-			$ingrUnitId = $ingrsSingleArray[2]; 
+			$ingrSingleId = $ingrsSingleArray[0];
+			$ammount = $ingrsSingleArray[1];
+			$ingrUnitId = $ingrsSingleArray[2];
 
 			$this->query("SELECT ingredient_id, ingredient_name FROM ingredients WHERE status=1 AND ingredient_id=$ingrSingleId");
-			$ingr = $this->single(); 
+			$ingr = $this->single();
 
 			$this->query("SELECT unit_id, unit_name FROM units WHERE status=1 AND unit_id=$ingrUnitId");
-			$unit = $this->single(); 
+			$unit = $this->single();
 
 			$ingrArray = array($ingr, $ammount, $unit);
 			array_push($ingrsMainArray, $ingrArray);
@@ -72,16 +72,7 @@ class RecipeModel extends Model{
 
 		$resultArray = array($recipe, $categoriesAll, $ingrsMainArray, $commentsAll, $photosAll);
 
-		return $resultArray;	
+		return $resultArray;
 	}
 
 }
-
-
-
-
-
-
-
-
-

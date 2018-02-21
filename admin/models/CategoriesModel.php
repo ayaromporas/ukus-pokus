@@ -9,7 +9,7 @@ class CategoriesModel extends Model{
 		$resultArray = array($categories);
 
 		return $resultArray;
-		
+
 	}
 
 	public function Insert(){
@@ -23,23 +23,33 @@ class CategoriesModel extends Model{
 			$catphoto = $postArray['catphoto'];
 			$catdescription = $postArray['catdescription'];
 
-			$this->query('INSERT INTO categories (cat_name, cat_permalink, cat_photo, cat_description) VALUES (:cat_name, :cat_permalink, :cat_photo, :cat_description)');
-			$this->bind(':cat_name', $catname);
-			$this->bind(':cat_permalink', $catpermalink);
-			$this->bind(':cat_photo', $catphoto);
-			$this->bind(':cat_description', $catdescription);
-			$this->execute();
+			$this->query("SELECT cat_name FROM categories WHERE cat_name = '{$catname}' ");
+			$result = $this->resultSet();
 
-			$lastId = $this->lastInsertId();
+			if (count($result) > 0) {
+
+				Messages::setMsg('Takva kategorija već postoji!', 'error');
+				return;
+
+			}else{
+
+				$this->query('INSERT INTO categories (cat_name, cat_permalink, cat_photo, cat_description) VALUES (:cat_name, :cat_permalink, :cat_photo, :cat_description)');
+				$this->bind(':cat_name', $catname);
+				$this->bind(':cat_permalink', $catpermalink);
+				$this->bind(':cat_photo', $catphoto);
+				$this->bind(':cat_description', $catdescription);
+				$this->execute();
+
+				$lastId = $this->lastInsertId();
 
 
-			Messages::setMsg('Uspešno ubačena nova kategorija! <br>Id poslednje kategorije u bazi sada je: '. $lastId, 'success');
-
+				Messages::setMsg('Uspešno ubačena nova kategorija! <br>Id poslednje kategorije u bazi sada je: '. $lastId, 'success');
+			}
 		}
 
 		return;
-		
+
 	}
 
-		
+
 }

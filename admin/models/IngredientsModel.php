@@ -20,11 +20,11 @@ class IngredientsModel extends Model{
 
 			$ingname = $postArray['ingname'];
 
-			if ($ingname != "") {	
+			if ($ingname != "") {
 
 				//var_dump($ingname) ;
-				$this->query("SELECT * FROM ingredients WHERE ingredient_name = '{$ingname}' " );
-				$result = $this->resultSet();				
+				$this->query("SELECT ingredient_name FROM ingredients WHERE ingredient_name = '{$ingname}' " );
+				$result = $this->resultSet();
 
 				if (count($result) > 0) {
 
@@ -47,10 +47,9 @@ class IngredientsModel extends Model{
 				Messages::setMsg('Polje za naziv mora biti popunjeno', 'error');
 			}
 
-		
+
 		} // kraj if post
 
 	} // kraj insert
 } // kraj klase
 ?>
-

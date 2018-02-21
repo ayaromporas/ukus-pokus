@@ -99,7 +99,7 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
 
 </head>
 
-<body class="with-side-menu">
+<body class="with-side-menu" >
 
 
   <header class="site-header">
@@ -142,7 +142,19 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                               </a>
                               <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Moj profil</a>
                               <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="<?php echo ROOT_URL; ?>home/logout"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
+                              <a class="dropdown-item" href="
+<?php
+if(($superadmin === true) || ($admin === true) || ($editor === true)) {
+  echo ROOT_URL. 'home/logout' . '"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout';
+}else{
+  echo ROOT_URL. '"><span class="font-icon glyphicon glyphicon-log-in"></span>Login';
+}
+?>
+
+
+
+
+                            </a>
                           </div>
                       </div>
 
@@ -162,7 +174,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
 ?>
 
 <div class="mobile-menu-left-overlay"></div>
-  <nav class="side-menu">
+  <nav class="side-menu ">
       <ul class="side-menu-list">
           <li class="indigo with-sub">
               <span>
@@ -468,8 +480,8 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                     <span class="lbl">Namirnice</span>
                  </span>
                 <ul>
-                  <li><a href="#"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success">720</span></a></li>
-                  <li><a href="#"><span class="lbl">Dodaj novu namirnicu</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>ingredients"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success">720</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>ingredients/insert"><span class="lbl">Dodaj novu namirnicu</span></a></li>
                   <li><a href="#"><span class="lbl">Izmeni</span></a></li>
                   <li><a href="#"><span class="lbl">Obriši</span></a></li>
                </ul>

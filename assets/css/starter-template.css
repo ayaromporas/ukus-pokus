@@ -430,6 +430,7 @@ padding-bottom: 1.2%;
 div.stars{
   max-width: 280px;
   display: inline-block;
+  cursor: pointer;
 }
 input.star{
   display: none;
@@ -440,6 +441,7 @@ label.star {
   font-size: 2rem;
   color: #8B8B8B;
   transition: all .2s;
+  cursor: pointer;
 }
 input.star:checked ~ label.star:before {
   content:'\f005';

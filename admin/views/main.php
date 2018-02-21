@@ -237,8 +237,8 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
               </span>
               <ul>
                   <li><a href="<?php echo ROOT_URL; ?>comments"><span class="lbl">Na čekanju</span><span class="label label-custom label-pill label-warning"><?php echo $nrCommentsHeld[0]['COUNT(*)']; ?></span></a></li>
-                  <li><a href="#"><span class="lbl">Odobreni</span><span class="label label-custom label-pill label-success"><?php echo $nrCommentsApproved[0]['COUNT(*)']; ?></span></a></li>
-                  <li><a href="#"><span class="lbl">Banovani</span><span class="label label-custom label-pill label-danger"><?php echo $nrCommentsBanned[0]['COUNT(*)']; ?></span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>comments/approved"><span class="lbl">Odobreni</span><span class="label label-custom label-pill label-success"><?php echo $nrCommentsApproved[0]['COUNT(*)']; ?></span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>comments/banned"><span class="lbl">Banovani</span><span class="label label-custom label-pill label-danger"><?php echo $nrCommentsBanned[0]['COUNT(*)']; ?></span></a></li>
               </ul>
           </li>
 

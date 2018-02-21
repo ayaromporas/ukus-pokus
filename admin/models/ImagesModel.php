@@ -1,6 +1,6 @@
 <?php
 class ImagesModel extends Model{
-	
+
 	public function Index(){
 
 		$this->query('SELECT * FROM photos LIMIT 12');
@@ -9,7 +9,11 @@ class ImagesModel extends Model{
 		$resultArray = array($images);
 
 		return $resultArray;
-		
+
+	}
+
+	public function Insert(){
+		return;
 	}
 }
 ?>

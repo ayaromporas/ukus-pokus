@@ -6,7 +6,7 @@ if (($superadmin || $admin || $editor) === true) {
 
 
 
-<h1>ulogovan insert ingredients</h1>
+<h1>ulogovan insert image</h1>
 
 
 
@@ -16,7 +16,7 @@ if (($superadmin || $admin || $editor) === true) {
 
 
 
-<h1>stranica za insert sastojaka</h1>
+<h1>stranica za insert slika</h1>
 
 
 

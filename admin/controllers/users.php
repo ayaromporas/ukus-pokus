@@ -6,6 +6,10 @@ class Users extends Controller{
 		$this->returnView($viewmodel->Index(), true);
 	}
 
+	protected function Insert(){
+		$viewmodel = new UnitsModel();
+		$this->ReturnView($viewmodel->Insert(), true);
+	}
 
 	protected function Register(){
 		$viewmodel = new UserModel();
@@ -20,6 +24,7 @@ class Users extends Controller{
 		$viewmodel = new UserModel();
 		$this->returnView($viewmodel->View(), true);
 	}
+
 	protected function Logout(){
 		unset($_SESSION['logged']);
 		unset($_SESSION['username']);
@@ -28,6 +33,7 @@ class Users extends Controller{
 		// Redirect
 		header('Location: '.ROOT_URL);
 	}
+
 	protected function Edit(){
 		$viewmodel = new UserModel();
 		$this->returnView($viewmodel->Edit(), true);

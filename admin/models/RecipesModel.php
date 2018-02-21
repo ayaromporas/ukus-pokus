@@ -11,6 +11,10 @@ class RecipesModel extends Model{
 		$resultArray = array($recipes, $users);
 
 		return $resultArray;
-		
+
+	}
+
+	public function Insert(){
+		return;
 	}
 }

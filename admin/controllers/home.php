@@ -1,5 +1,6 @@
 <?php
 class Home extends Controller{
+	
 	protected function Index(){
 		$viewmodel = new HomeModel();
 		$this->returnView($viewmodel->Index(), true);
@@ -7,7 +8,7 @@ class Home extends Controller{
 
 	protected function Logout(){
 
-		unset($_SESSION['logged']);	
+		unset($_SESSION['logged']);
 		unset($_SESSION['username']);
 		unset($_SESSION['user_name']);
 		unset($_SESSION['user_id']);

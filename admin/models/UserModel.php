@@ -1,6 +1,6 @@
 <?php
 class UserModel extends Model{
-	
+
 	public function Index(){
 
 		$this->query('SELECT * FROM users ORDER BY user_name ASC');
@@ -9,9 +9,13 @@ class UserModel extends Model{
 		$resultArray = array($users);
 
 		return $resultArray;
-		
+
 	}
 
-	
+	public function Insert(){
+		return;
+	}
+
+
 
 }

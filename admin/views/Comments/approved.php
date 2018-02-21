@@ -1,6 +1,6 @@
 <?php
 
-$comments = $viewmodel[0];  //spisak svih komentara na cekanju
+$comments = $viewmodel[0];  //spisak svih odobrenih komentara
 ?>
 
 
@@ -14,7 +14,7 @@ if (($superadmin || $admin || $editor) === true) {
 	<header class="box-typical-header">
 		<div class="tbl-row">
 			<div class="tbl-cell tbl-cell-title text-center">
-				<h3><i class="font-icon aquamarine fas fa-comments"></i>&nbsp; &nbsp; &nbsp; Komentari na čekanju &nbsp; &nbsp; &nbsp; <i class="font-icon aquamarine fas fa-comments"></i></h3>
+				<h3><i class="font-icon aquamarine fas fa-comments"></i>&nbsp; &nbsp; &nbsp; Odobreni komentari &nbsp; &nbsp; &nbsp; <i class="font-icon aquamarine fas fa-comments"></i></h3>
 
 			</div>
 			<div class="tbl-cell tbl-cell-action-bordered">
@@ -126,7 +126,7 @@ foreach ($comments as $comment) {
 	<header class="box-typical-header">
 		<div class="tbl-row">
 			<div class="tbl-cell tbl-cell-title text-center">
-				<h3><i class="font-icon aquamarine fas fa-comments"></i>&nbsp; &nbsp; &nbsp; Komentari na čekanju &nbsp; &nbsp; &nbsp; <i class="font-icon aquamarine fas fa-comments"></i></h3>
+				<h3><i class="font-icon aquamarine fas fa-comments"></i>&nbsp; &nbsp; &nbsp; Odobreni komentari &nbsp; &nbsp; &nbsp; <i class="font-icon aquamarine fas fa-comments"></i></h3>
 
 			</div>
 			<div class="tbl-cell tbl-cell-action-bordered">

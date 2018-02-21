@@ -10,8 +10,32 @@ class CommentsModel extends Model{
 		$resultArray = array($comments);
 
 		return $resultArray;
-		
+
 	}
 
-		
+	public function Banned(){
+
+		$this->query('SELECT comments.comment_id, comments.comment_name, comments.comment_email, comments.comment_text, comments.comment_time, comments.status, recipes.recipe_id, recipes.recipe_title FROM comments LEFT JOIN recipes ON comments.recipe_id = recipes.recipe_id  WHERE comments.status=0 ORDER BY comments.comment_time ASC LIMIT 12');
+
+		$comments = $this->resultSet();
+
+		$resultArray = array($comments);
+
+		return $resultArray;
+
+	}
+
+	public function Approved(){
+
+		$this->query('SELECT comments.comment_id, comments.comment_name, comments.comment_email, comments.comment_text, comments.comment_time, comments.status, recipes.recipe_id, recipes.recipe_title FROM comments LEFT JOIN recipes ON comments.recipe_id = recipes.recipe_id  WHERE comments.status=1 ORDER BY comments.comment_time ASC LIMIT 12');
+
+		$comments = $this->resultSet();
+
+		$resultArray = array($comments);
+
+		return $resultArray;
+
+	}
+
+
 }

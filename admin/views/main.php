@@ -506,8 +506,8 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
                     <span class="lbl">Jedinice mere</span>
                  </span>
                 <ul>
-                  <li><a href="#"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success">73</span></a></li>
-                  <li><a href="#"><span class="lbl">Dodaj novu jedinicu mere</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>units"><span class="lbl">Pretraga</span><span class="label label-custom label-pill label-success">73</span></a></li>
+                  <li><a href="<?php echo ROOT_URL; ?>units/insert"><span class="lbl">Dodaj novu jedinicu mere</span></a></li>
                   <li><a href="#"><span class="lbl">Izmeni</span></a></li>
                   <li><a href="#"><span class="lbl">Obriši</span></a></li>
               </ul>

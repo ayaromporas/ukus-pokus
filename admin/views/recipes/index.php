@@ -44,6 +44,9 @@ if (($superadmin || $admin || $editor) === true){
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<a href="<?php echo ROOT_URL; ?>recipes/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
+			</div>
 			<div class="tbl-cell tbl-cell-title text-center">			
 				<h3><i class="font-icon color-red fas fa-utensils"></i>&nbsp; &nbsp; &nbsp; Recepti &nbsp; &nbsp; &nbsp; <i class="font-icon color-red fas fa-utensils"></i></h3>
 			
@@ -158,6 +161,9 @@ $i++;
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<a href="<?php echo ROOT_URL; ?>recipes/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
+			</div>
 			<div class="tbl-cell tbl-cell-title text-center">			
 				<h3><i class="font-icon color-red fas fa-utensils"></i>&nbsp; &nbsp; &nbsp; Recepti &nbsp; &nbsp; &nbsp; <i class="font-icon color-red fas fa-utensils"></i></h3>
 			

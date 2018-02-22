@@ -6,6 +6,9 @@ $ingredients = $viewmodel[0];  //spisak svih namirnica
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<a href="<?php echo ROOT_URL; ?>ingredients/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
+			</div>
 			<div class="tbl-cell tbl-cell-title text-center">			
 				<h3><i class="font-icon color-yellow fas fa-lemon"></i>&nbsp; &nbsp; &nbsp; Namirnice &nbsp; &nbsp; &nbsp; <i class="font-icon color-yellow fas fa-lemon"></i></h3>
 			

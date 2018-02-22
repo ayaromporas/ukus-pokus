@@ -8,6 +8,9 @@ if(($superadmin || $admin || $editor) === true){
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<a href="<?php echo ROOT_URL; ?>units/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
+			</div>
 			<div class="tbl-cell tbl-cell-title text-center">			
 				<h3><i class="font-icon purple fas fa-balance-scale"></i>&nbsp; &nbsp; &nbsp; Jedinice mere &nbsp; &nbsp; &nbsp; <i class="font-icon purple fas fa-balance-scale"></i></h3>
 			
@@ -73,6 +76,22 @@ foreach ($units as $unit) {
 		</div>
 	</div><!--.box-typical-body-->
 </section><!--.box-typical-->
+
+<!-- paginacija -->
+<nav aria-label="Page navigation example" class="text-center">
+  <ul class="pagination">
+    
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item"><a class="page-link" href="#">12</a></li>
+    <li class="page-item active"><a class="page-link" href="#">13</a></li>
+    <li class="page-item"><a class="page-link" href="#">14</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item"><a class="page-link" href="#">37</a></li>
+
+  </ul>
+</nav>
+
 
 
 <?php 
@@ -85,6 +104,9 @@ foreach ($units as $unit) {
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<a href="<?php echo ROOT_URL; ?>units/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
+			</div>
 			<div class="tbl-cell tbl-cell-title text-center">			
 				<h3><i class="font-icon purple fas fa-balance-scale"></i>&nbsp; &nbsp; &nbsp; Jedinice mere &nbsp; &nbsp; &nbsp; <i class="font-icon purple fas fa-balance-scale"></i></h3>
 			
@@ -151,7 +173,20 @@ foreach ($units as $unit) {
 	</div><!--.box-typical-body-->
 </section><!--.box-typical-->
 
+<!-- paginacija -->
+<nav aria-label="Page navigation example" class="text-center">
+  <ul class="pagination">
+    
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item"><a class="page-link" href="#">12</a></li>
+    <li class="page-item active"><a class="page-link" href="#">13</a></li>
+    <li class="page-item"><a class="page-link" href="#">14</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item"><a class="page-link" href="#">37</a></li>
 
+  </ul>
+</nav>
 
  
 

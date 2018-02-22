@@ -8,6 +8,9 @@ if(($superadmin || $admin || $editor) === true){
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<a href="<?php echo ROOT_URL; ?>images/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
+			</div>
 			<div class="tbl-cell tbl-cell-title text-center">			
 				<h3><i class="font-icon color-blue far fa-images"></i>&nbsp; &nbsp; &nbsp; Slike &nbsp; &nbsp; &nbsp; <i class="font-icon color-blue far fa-images"></i></h3>
 			
@@ -129,6 +132,9 @@ foreach ($images as $image) {
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<a href="<?php echo ROOT_URL; ?>images/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
+			</div>
 			<div class="tbl-cell tbl-cell-title text-center">			
 				<h3><i class="font-icon color-blue far fa-images"></i>&nbsp; &nbsp; &nbsp; Slike &nbsp; &nbsp; &nbsp; <i class="font-icon color-blue far fa-images"></i></h3>
 			
@@ -162,6 +168,7 @@ foreach ($images as $image) {
 		$color = "btn-danger";
 	}
 	$recId = $image['recipe_id'];
+	$recTitle = $image['recipe_title'];
 	
 ?>
 
@@ -197,7 +204,7 @@ foreach ($images as $image) {
 			<header class="title"><a href="#"><?php echo $imageName; ?></a></header>
 		</div>
 		<div class="card-typical-section">
-			<div class="card-typical-linked">Pripada receptu &nbsp;<a href="#"><span class="label label-pill"><?php echo $recId; ?></span></a></div>
+			<div class="card-typical-linked">Pripada receptu:<br> <?php echo $recTitle; ?>&nbsp;<span class="label label-pill"> <?php echo $recId; ?></span></div>
 			<a href="#" class="card-typical-likes">
 				<button type="button" class="btn btn-rounded <?php echo $color; ?> btn-sm"><?php echo $status; ?></button>
 			</a>

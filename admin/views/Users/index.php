@@ -72,10 +72,20 @@ $users = $viewmodel[0];  //spisak svih korisnika
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<a href="<?php echo ROOT_URL; ?>users/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
+			</div>	
 			<div class="tbl-cell tbl-cell-title text-center">			
 				<h3><i class="font-icon fas fa-chess-king"></i>&nbsp; &nbsp; &nbsp; Administratori&nbsp; &nbsp; &nbsp; <i class="font-icon fas fa-chess-king"></i></h3>
 			
-			</div>		
+			</div>	
+			<div class="tbl-cell tbl-cell-action-bordered">
+				<select>
+					<option>10</option>
+					<option>25</option>
+					<option>50</option>
+				</select>
+			</div>	
 		</div>
 	</header>
 	<div class="box-typical-body">
@@ -148,5 +158,20 @@ foreach ($users as $user) {
 		</div>
 	</div><!--.box-typical-body-->
 </section><!--.box-typical-->
+
+<!-- paginacija -->
+<nav aria-label="Page navigation example" class="text-center">
+  <ul class="pagination">
+    
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item"><a class="page-link" href="#">12</a></li>
+    <li class="page-item active"><a class="page-link" href="#">13</a></li>
+    <li class="page-item"><a class="page-link" href="#">14</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item"><a class="page-link" href="#">37</a></li>
+
+  </ul>
+</nav>
 
 

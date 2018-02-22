@@ -41,6 +41,7 @@ foreach ($images as $image) {
 		$color = "btn-danger";
 	}
 	$recId = $image['recipe_id'];
+	$recTitle = $image['recipe_title'];
 	
 ?>
 
@@ -76,7 +77,7 @@ foreach ($images as $image) {
 			<header class="title"><a href="#"><?php echo $imageName; ?></a></header>
 		</div>
 		<div class="card-typical-section">
-			<div class="card-typical-linked">Pripada receptu &nbsp;<a href="#"><span class="label label-pill"><?php echo $recId; ?></span></a></div>
+			<div class="card-typical-linked">Pripada receptu:<br> <?php echo $recTitle; ?>&nbsp;<span class="label label-pill"> <?php echo $recId; ?></span></div>
 			<a href="#" class="card-typical-likes">
 				<button type="button" class="btn btn-rounded <?php echo $color; ?> btn-sm"><?php echo $status; ?></button>
 			</a>

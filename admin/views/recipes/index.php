@@ -40,7 +40,7 @@ for ($i = 1; $i < ($nrUsers+1); $i++) {
 if (($superadmin || $admin || $editor) === true){
  ?>
 
-<br><br>
+<br>
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
@@ -157,7 +157,7 @@ $i++;
 
 
 
-<br><br>
+<br>
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">

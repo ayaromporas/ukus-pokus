@@ -242,7 +242,6 @@ foreach ($comments as $comment) {
 
 
 
-
   <script src="<?php echo ROOT_URL; ?>assets/js/lib/salvattore/salvattore.min.js"></script>
   <script type="text/javascript" src="<?php echo ROOT_URL; ?>assets/js/lib/match-height/jquery.matchHeight.min.js"></script>
   <script>

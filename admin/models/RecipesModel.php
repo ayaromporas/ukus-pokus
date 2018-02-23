@@ -15,6 +15,14 @@ class RecipesModel extends Model{
 	}
 
 	public function Insert(){
+
+		$this->query('SELECT ingredient_id, ingredient_name FROM ingredients WHERE status=1');
+		$ingredientsAll = $this->resultSet();
+
+		$this->query('SELECT unit_id, unit_name FROM units WHERE status=1');
+		$unitsAll = $this->resultSet();
+
+		
 		return;
 	}
 }

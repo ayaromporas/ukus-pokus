@@ -45,7 +45,7 @@ if(($superadmin || $admin || $editor) === true){
 		</div>
 
 		<div class="text-center">
-			<button  class="btn btn-rounded btn-success">Sačuvaj</button>
+			<button  class="btn btn-rounded btn-success" type="text">Sačuvaj</button>
 	</div>
 
 	</form>

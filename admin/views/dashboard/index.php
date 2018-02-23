@@ -15,7 +15,7 @@ if(($superadmin || $admin || $editor) === true){
 	<div class="card-block text-center">
 		<form action="<?php echo ROOT_URL; ?>dashboard" name="testDB" method="POST">
 			<input type="hidden" value="secure" name="secure">
-			<button type="submit" name="insert" value="insert" class="btn btn-success btn-rounded">+ 2000</button>
+			<button type="submit" name="insert" value="insert" class="btn btn-success btn-rounded">+ 10000</button>
 		</form>
 	</div>
 </section>

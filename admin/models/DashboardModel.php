@@ -83,7 +83,7 @@ class DashboardModel extends Model{
 
 
 
-				for ($i = 0; $i < 2000; $i++) {
+				for ($i = 0; $i < 10000; $i++) {
 
 					$recipetitle = $titlesArray[mt_rand(0,9)];
 					$description = $descArray[mt_rand(0,2)];

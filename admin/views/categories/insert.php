@@ -6,7 +6,7 @@ if(($superadmin || $admin || $editor) === true){
 <div class="box-typical box-typical-padding">				
 	<h5 class="m-t-lg with-border text-center"><i class="font-icon color-green glyphicon glyphicon-bookmark"></i>&nbsp;&nbsp;&nbsp;<strong>Unos nove kategorije</strong>&nbsp;&nbsp;&nbsp;<i class="font-icon color-green glyphicon glyphicon-bookmark"></i></h5><br>
 
-	<form method="POST" action="<?php echo ROOT_URL; ?>/categories/insert" name="newcat">
+	<form method="POST" action="<?php echo ROOT_URL; ?>categories/insert" name="newcat">
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Naziv</label>
 			<div class="col-sm-9">

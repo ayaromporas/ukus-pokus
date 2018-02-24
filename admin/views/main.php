@@ -83,7 +83,10 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
     <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/separate/pages/widgets.min.css">
     <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/separate/elements/cards.min.css">
     <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/lib/summernote/summernote.css"/>
-<link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/separate/pages/editor.min.css">
+    <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/separate/pages/editor.min.css">
+    <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/separate/vendor/select2.min.css">
+    <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/separate/vendor/bootstrap-select/bootstrap-select.min.css">
+
 
       <!-- Font awesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -611,9 +614,10 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
     });
   </script>
 
-
-  <script src="<?php echo ROOT_URL; ?>assetsjs/lib/peity/jquery.peity.min.js"></script>
-  <script src="<?php echo ROOT_URL; ?>assetsjs/lib/table-edit/jquery.tabledit.min.js"></script>
+  <script src="<?php echo ROOT_URL; ?>assets/js/bootstrap-filestyle.min.js"> </script>
+  <script src="<?php echo ROOT_URL; ?>assets/js/lib/select2/select2.full.min.js"></script>
+  <script src="<?php echo ROOT_URL; ?>assets/js/lib/peity/jquery.peity.min.js"></script>
+  <script src="<?php echo ROOT_URL; ?>assets/js/lib/table-edit/jquery.tabledit.min.js"></script>
   <script src="<?php echo ROOT_URL; ?>assets/js/app.js"></script>
 
 

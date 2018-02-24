@@ -7,7 +7,7 @@ if(($superadmin || $admin || $editor) === true){
 
 	<h5 class="m-t-lg with-border text-center"><i class="font-icon yellow fas fa-lemon"></i>&nbsp;&nbsp;&nbsp;<strong>Unos nove namirnice</strong>&nbsp;&nbsp;&nbsp;<i class="font-icon yellow fas fa-lemon"></i></h5><br>
 
-	<form method="POST" action="<?php echo ROOT_URL; ?>/ingredients/insert" name="newingr">
+	<form method="POST" action="<?php echo ROOT_URL; ?>ingredients/insert" name="newingr">
     <div class="form-group row">
 			<label class="col-sm-2 form-control-label">Naziv</label>
 			<div class="col-sm-9">

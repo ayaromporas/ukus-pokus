@@ -6,7 +6,7 @@ if(($superadmin || $admin || $editor) === true){
 <div class="box-typical box-typical-padding">				
 	<h5 class="m-t-lg with-border text-center"><i class="font-icon color-blue far fa-images"></i>&nbsp;&nbsp;&nbsp;<strong>Unos nove slike</strong>&nbsp;&nbsp;&nbsp;<i class="font-icon color-blue far fa-images"></i></h5><br>
 
-	<form method="POST" action="<?php echo ROOT_URL; ?>/images/insert" name="newphoto">
+	<form method="POST" action="<?php echo ROOT_URL; ?>images/insert" name="newphoto">
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Naziv</label>
 			<div class="col-sm-9">

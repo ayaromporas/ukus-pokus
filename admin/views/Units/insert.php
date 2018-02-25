@@ -11,7 +11,7 @@ if(($superadmin || $admin || $editor) === true){
     <div class="form-group row">
 			<label class="col-sm-2 form-control-label">Naziv</label>
 			<div class="col-sm-9">
-				<p class="form-control-static"><input type="text" class="form-control" id="unitname" placeholder='Početno slovo mora biti malo, npr. "dcl"... ' name="unitname"></p>
+				<p class="form-control-static"><input type="text" class="form-control" id="unitname" placeholder='Početno slovo mora biti malo, npr. "dcl"... ' name="unitname" required="required"></p>
 			</div>
     </div>
 

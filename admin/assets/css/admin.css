@@ -126,3 +126,42 @@ a#logged:hover, a#logged:active {
 .select2-container--default .select2-selection--multiple .select2-selection__rendered {
 	padding: 5px 5px 0 5px !important;
 }
+
+
+/*
+.photoinsert1 div.note-btn-group.btn-group.note-style {
+	display: none;
+}
+.photoinsert1 div.note-btn-group.btn-group.note-font {
+	display: none;
+}
+.photoinsert1 div.note-btn-group.btn-group.note-fontname {
+	display: none;
+}
+.photoinsert1 div.note-btn-group.btn-group.note-color {
+	display: none;
+}
+.photoinsert1 div.note-btn-group.btn-group.note-para {
+	display: none;
+}
+.photoinsert1 div.note-btn-group.btn-group.note-table {
+	display: none;
+}
+.photoinsert1 div.note-btn-group.btn-group.note-view {
+	display: none;
+}
+.photoinsert1 i.note-icon-video {
+	display: none;
+}
+.photoinsert1 i.note-icon-link {
+	display: none;
+}
+.photoinsert1 div.note-toolbar.panel-heading {
+	text-align: center;
+}
+*/
+
+.addfields {
+	cursor: pointer;
+}
+

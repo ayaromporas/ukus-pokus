@@ -1,5 +1,6 @@
 <?php
 class RecipesModel extends Model{
+	
 	public function Index(){
 
 		$this->query('SELECT recipe_id, recipe_title, prep_time, dirty_dishes, status, user_id, avg_rating, no_votes FROM recipes ORDER BY recipe_title ASC LIMIT 10');
@@ -27,9 +28,10 @@ class RecipesModel extends Model{
 
 		$resultArray = array($ingredientsAll, $unitsAll, $catsAll);
 
+		
 		return $resultArray;
 
 		
-		return;
+		
 	}
 }

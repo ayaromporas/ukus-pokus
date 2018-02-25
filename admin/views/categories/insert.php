@@ -10,25 +10,25 @@ if(($superadmin || $admin || $editor) === true){
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Naziv</label>
 			<div class="col-sm-9">
-				<p class="form-control-static"><input type="text" class="form-control" id="catname" placeholder='Početno slovo mora biti veliko, npr. "Bez šećera"... ' name="catname"></p>
+				<p class="form-control-static"><input type="text" class="form-control" id="catname" placeholder='Početno slovo mora biti veliko, npr. "Bez šećera"... ' name="catname" required="required"></p>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Permalink</label>
 			<div class="col-sm-9">
-				<p class="form-control-static"><input type="text" class="form-control" id="catpermalink" name="catpermalink" placeholder='Permalink ne sme sadržati razmake, samo crtice "-", npr. "bez-secera"... '></p>
+				<p class="form-control-static"><input type="text" class="form-control" id="catpermalink" name="catpermalink" placeholder='Permalink ne sme sadržati razmake, samo crtice "-", npr. "bez-secera"... ' required="required"></p>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Fotografija</label>
 			<div class="col-sm-9">
-				<p class="form-control-static"><input type="text" class="form-control" id="catphoto" name="catphoto" placeholder='Link fotografije, u obliku npr. "bezsecera.jpg"...' ></p>
+				<p class="form-control-static"><input type="text" class="form-control" id="catphoto" name="catphoto" placeholder='Link fotografije, u obliku npr. "bezsecera.jpg"...' required="required"></p>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Opis</label>
 			<div class="col-sm-9 summernote-theme-1">
-				<textarea rows="6" class="summernote" id="catdescription" placeholder="Uneti kraći opis sadržaja ove kategorije..." name="catdescription"></textarea>
+				<textarea rows="6" class="summernote" id="catdescription" placeholder="Uneti kraći opis sadržaja ove kategorije..." name="catdescription" required="required"></textarea>
 			</div>
 			
 		</div>

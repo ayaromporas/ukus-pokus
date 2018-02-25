@@ -165,3 +165,7 @@ a#logged:hover, a#logged:active {
 	cursor: pointer;
 }
 
+.hidethis {
+	display: none;
+}
+

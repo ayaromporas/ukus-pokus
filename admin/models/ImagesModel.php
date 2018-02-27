@@ -31,6 +31,10 @@ class ImagesModel extends Model{
 				}else{
 					$photorecId = $postArray['photorecid'];
 				}
+				if(strlen($photoname) < 5){
+					Messages::setMsg('Slika mora imati naziv duzi od 5 slova!', 'error');
+					return;
+				}
 				
 
 				$this->query("SELECT photo_link FROM photos WHERE photo_link = '{$photolink}' ");

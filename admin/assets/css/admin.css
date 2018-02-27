@@ -169,3 +169,10 @@ a#logged:hover, a#logged:active {
 	display: none;
 }
 
+#recipeimginsert {
+	transform: scale(0.8);
+}
+
+img.imgrec {
+	width: 100% !important;
+}

@@ -10,7 +10,7 @@ if(($superadmin || $admin || $editor) === true){
 
 <section class="card mb-3">
 	<header class="card-header text-center">
-		Ubacivanje 2000 proizvoljnih recepata u bazu, u svrhe testiranja ponašanja sajta u produkciji		
+		Ubacivanje 10000 proizvoljnih recepata u bazu, u svrhe testiranja ponašanja sajta u produkciji		
 	</header>
 	<div class="card-block text-center">
 		<form action="<?php echo ROOT_URL; ?>dashboard" name="testDB" method="POST">

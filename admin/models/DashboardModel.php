@@ -120,7 +120,7 @@ class DashboardModel extends Model{
 
 				}
 
-				Messages::setMsg('Uspešno ubačeno 2000 novih recepata! <br>Id poslednjeg recepta u bazi sada je: '. $lastId, 'success');
+				Messages::setMsg('Uspešno ubačeno 10000 novih recepata! <br>Id poslednjeg recepta u bazi sada je: '. $lastId, 'success');
 			}
 			return;
 

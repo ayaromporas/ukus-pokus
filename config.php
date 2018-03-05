@@ -9,4 +9,4 @@ define("DB_NAME", "ukuspokus");
 // Define URL
 define("ROOT_PATH",  "/ukus-pokus/");
 define("ROOT_URL", "http://localhost/ukus-pokus/");
-
+define("HOME", "http://localhost/ukus-pokus/");

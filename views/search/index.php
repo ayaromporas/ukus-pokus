@@ -1,387 +1,695 @@
+<?php 
 
-<!-- script za Ajax select2-->
-      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.js"></script>
-<!-- end script za Ajax select2-->
+$ingredients = $viewmodel[0];  //spisak namirnica za punjenje select polja
+$categoriesAll = $viewmodel[1];  //spisak kategorija za punjenje checkboxova
 
-<!-- POCETAK STRANE -->
-<div class="container-fluid main">
+$recipesPop = $viewmodel[2];  //najpopularniji recepti
+$recipesLatest = $viewmodel[3];  //najnoviji recepti
+$photosLatest = $viewmodel[4];  //naslovne fotke za poslednje recepte
+$photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
+?>
 
-	  <div class="row"><!-- Row za naslov -->
-	    <div class="col-12 text-center brown">
-	      <br>
-	      <h2>Napredna pretraga</h2><br><br>
-	     </div>
-	  </div><!-- End row naslov-->
-  
-<form method="post"> <!-- Forma za pretragu po namirnicama - select polje --> 
-<div class="row text-center"><!-- Row select polja za pretragu po namirnicama -->
-          <div class="col-7 offset-2 "  >
 
+
+<!-- pocetak strane -->
+<div class="main">
+    <div class="container bestRecipes">
+          <br>
+              <div class="col"><hr></div>
+              <div class="col"><h2 class="text-center display-4">Napredna pretraga </h2></div>
+              <div class="col"><hr></div>
+          <br>
           
-            <select class="form-control form-control-lg custom-select" multiple style="width: 100%" placeholder="U kući imam..." aria-label="Pretraga..." name="pretraga" id='mySelect2'>
+          <!-- main row za celu stranu-->
+          <div class="row">
+            <div class="col-md-4"><!-- kolona u kojoj se nalaze sve pretrage-->
 
-             <?php
-               // Izlistavanje sastojaka - za unos u pretragu
-               foreach ($viewmodel as $item) {
-                  echo '<option value="' . $item['ingredient_id'] . '">' .
-                  $item['ingredient_name'] . '</option>';
-                } 
-             ?>
 
-              </select> 
-        
-     </div><!-- kraj reda za select polje -->
-     <div class="col-2"><!-- Dugme za reset -->
-          <a id="reset" class="btn btn-success" data-toggle="button" aria-pressed="false">Resetuj sve filtere</a>
-     </div><!-- kraj dugme za reset -->
-</div>
+              <h5 class="search-title">Odaberite sastojke &nbsp;&nbsp;&nbsp;
+                    <a data-toggle="collapse" href="#naprednaPretraga1" role="button" aria-expanded="true" aria-controls="naprednaPretraga1"><i class="fas fa-angle-down"></i></a>
+               </h5>          
+                      <div id="naprednaPretraga1" class="collapse.show">
+                        <div class="card card-body search-card px-0 py-1 m-0">
+                            <form>
+                                <select class="form-control form-control-lg custom-select" class="form-control"multiple style="width: 100%" placeholder="U kući imam..." multiple="multiple"  id="search-ingr">
+                                  <?php
+                                    // Izlistavanje sastojaka - za unos u pretragu
+                                    foreach ($ingredients as $ingredient) {
+                                        echo '<option value="' . $ingredient['ingredient_id'] . '">' . $ingredient['ingredient_name'] . '</option>';
+                                    }
+                                    ?>
+                              </select> 
+                          </form>
+                          <small class="text-left">Unesite prva dva slova namirnice, a zatim je izaberite iz padajućeg menija.</small>                
+                        </div>
+                      </div>
+              <hr> <h5 class="search-title">Pretraga po naslovu &nbsp;&nbsp;&nbsp;
+                    <a data-toggle="collapse" href="#naprednaPretraga2" role="button" aria-expanded="true" aria-controls="naprednaPretraga2"><i class="fas fa-angle-down"></i></a>
+               </h5>           
+                      <div class="collapse.show" id="naprednaPretraga2">
+                        <div class="card card-body search-card px-0 py-1 m-0">
+                            <form>
+                                <input type="text" class="form-control" id="search-keywords" name="search-keywords" placeholder='Npr. "sos", "pita"... '>
+                          </form>
+                          <small class="text-left">Unesite reči koje se mogu nalaziti u naslovu recepta.</small>  <br>  
+                          <div id="keywords-warning"></div>           
+                        </div>
+                      </div>
+              <hr> <h5 class="search-title">Pretraga po rejtingu &nbsp;&nbsp;&nbsp;
+                    <a data-toggle="collapse" href="#naprednaPretraga3" role="button" aria-expanded="true" aria-controls="naprednaPretraga3"><i class="fas fa-angle-down"></i></a>
+               </h5>           
+                      <div class="collapse.show" id="naprednaPretraga3">
+                        <div class="card card-body search-card px-0 py-1 m-0">
 
-   <div class="row">
-   	<div class="col-7 offset-2 text-center">
-   		<small>Unesite prva dva slova namirnice, a zatim je izaberite iz padajućeg menija.</small>
-   	</div>
-   </div><br><br>
-    
-   <!-- Div napredne pretrage -->
-      <div class="row">
-    	<div class="col-12">
-    	<div class="card card-body ">
-    		<br>
-    		<p><strong>Pretraga po kategorijama</strong></p>
-    		<div class="row">    			
-    			<div class="col-3 justify-content-left">
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="star5" value="5" name="rating">
+                            <label class="custom-control-label" for="star5">5 zvezdica</label>
+                          </div>
 
-    			<?php
-    			$n = count($catsAll);
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="star4" value="4" name="rating">
+                            <label class="custom-control-label" for="star4">4 zvezdice</label>
+                          </div>
 
-    			foreach ($catsAll as $kat) {
-    				$catId = $kat['cat_id'];
-	    			$catName = $kat['cat_name'];
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="star3" value="3" name="rating">
+                            <label class="custom-control-label" for="star3">3 zvezdice</label>
+                          </div>
 
-    				if(is_int($catId/5)){    					
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="star2" value="2" name="rating">
+                            <label class="custom-control-label" for="star2">2 zvezdice</label>
+                          </div>
 
-	    				echo '<div class="check-rejting">';
-	    				echo '<label class="custom-control custom-checkbox">';
-	    				echo '<input type="checkbox" id="'.$catId .'" class="custom-control-input" value="'.$catId.'" name="kategorije">';
-	    				echo '<span class="custom-control-indicator"></span>';
-	    				echo '<span class="custom-control-description">'.$catName.'</span>';
-	    				echo '</label></div></div>';	
-	    				echo '<div class="col-3 justify-content-left">';    				
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="star1" value="1" name="rating">
+                            <label class="custom-control-label" for="star1">1 zvezdica</label>
+                          </div>
 
-    				}else {
-    					$catId = $kat['cat_id'];
-	    				$catName = $kat['cat_name'];
-	    				echo '<div class="check-rejting">';
-	    				echo '<label class="custom-control custom-checkbox">';
-	    				echo '<input type="checkbox" id="kat'.$catId .'" class="custom-control-input" value="'.$catId.'" name="kategorije">';
-	    				echo '<span class="custom-control-indicator"></span>';
-	    				echo '<span class="custom-control-description">'.$catName.'</span>';
-	    				echo '</label></div>';
+                        </div>                
+                      </div>
 
-    				}
-    				//echo $catId;
-    			}
-    			?>
-    			
-    			</div>
-    		</div>
-    		<br>
-    		<hr>
-    		<br>
-    		<p><strong>Pretraga po rejtingu</strong></p>
-    		<div class="d-flex justify-content-left">
-    			<div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="5stars" class="custom-control-input" value="5" name="rejting">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 5 zvezdica</span>
-			</label>
-    			</div>
+            <hr> <h5 class="search-title">Vreme pripreme &nbsp;&nbsp;&nbsp;
+                    <a data-toggle="collapse" href="#naprednaPretraga4" role="button" aria-expanded="true" aria-controls="naprednaPretraga4"><i class="fas fa-angle-down"></i></a>
+               </h5>           
+                      <div class="collapse.show" id="naprednaPretraga4">
+                        <div class="card card-body search-card px-0 py-1 m-0">
 
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="4stars" class="custom-control-input" value="4" name="rejting">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 4 zvezdice</span>
-			</label>
-    			</div>
-    			
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="3stars" class="custom-control-input" value="3" name="rejting">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 3 zvezdice</span>
-			</label>
-    			</div>
-    			
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="2stars" class="custom-control-input" value="2" name="rejting">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 2 zvezdice</span>
-			</label>
-    			</div>
-    			
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="1stars" class="custom-control-input" value="1" name="rejting">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 1 zvezdica</span>
-			</label>
-    			</div>
-    
-    		</div>
-    		<br>
-    		<hr>
-    		<br>
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="BETWEEN 0 AND 14" value="BETWEEN 0 AND 14" name="preptime">
+                            <label class="custom-control-label" for="BETWEEN 0 AND 14">manje od 15 min</label>
+                          </div>
 
-    		<p><strong>Pretraga po dužini pripreme</strong></p>
-    		<div class="d-flex justify-content-left">
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="BETWEEN 15 AND 29" value="BETWEEN 15 AND 29" name="preptime">
+                            <label class="custom-control-label" for="BETWEEN 15 AND 29">15 - 30 min</label>
+                          </div>
 
-    			<div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="15min" class="custom-control-input" value="15" name="vreme" >
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> manje od 15 min</span>
-			</label>
-    			</div>
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="BETWEEN 30 AND 44" value="BETWEEN 30 AND 44" name="preptime">
+                            <label class="custom-control-label" for="BETWEEN 30 AND 44">30 - 45 min</label>
+                          </div>
 
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="15-30" class="custom-control-input" value="30" name="vreme">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 15 - 30 min</span>
-			</label>
-    			</div>
-    			
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="30-45" class="custom-control-input" value="45" name="vreme">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 30 - 45 min</span>
-			</label>
-    			</div>
-    			
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="45-60" class="custom-control-input" value="60" name="vreme">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 45 - 60 min</span>
-			</label>
-    			</div>
-    			
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="60-120" class="custom-control-input" value="120" name="vreme">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 60 - 120 min</span>
-			</label>
-    			</div>
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="BETWEEN 45 AND 59" value="BETWEEN 45 AND 59" name="preptime">
+                            <label class="custom-control-label" for="BETWEEN 45 AND 59">45 - 60 min</label>
+                          </div>
 
-    		</div>
-    		<br>
-    		<hr>
-    		<br>
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="BETWEEN 60 AND 119" value="BETWEEN 60 AND 119" name="preptime">
+                            <label class="custom-control-label" for="BETWEEN 60 AND 119">60 - 120 min</label>
+                          </div>
 
-    		<p><strong>Pretraga po broju isprljanih posuda</strong></p>
-    		<div class="d-flex justify-content-left">
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="BETWEEN 120 AND 600" value="BETWEEN 120 AND 600" name="preptime">
+                            <label class="custom-control-label" for="BETWEEN 120 AND 600">više od 120 min</label>
+                          </div>
+                          
+                        </div>                
+                      </div>
 
-    			<div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="1posuda" class="custom-control-input" value="1" name="posude">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> samo 1 posuda</span>
-			</label>
-    			</div>
+            <hr> <h5 class="search-title">Koliko prljavih sudova? &nbsp;&nbsp;&nbsp;
+                    <a data-toggle="collapse" href="#naprednaPretraga5" role="button" aria-expanded="true" aria-controls="naprednaPretraga5"><i class="fas fa-angle-down"></i></a>
+               </h5>           
+                      <div class="collapse.show" id="naprednaPretraga5">
+                        <div class="card card-body search-card px-0 py-1 m-0">
 
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="2posude" class="custom-control-input" value="2" name="posude">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 2 posude</span>
-			</label>
-    			</div>
-    			
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="3posude" class="custom-control-input" value="3" name="posude">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 3 posude</span>
-			</label>
-    			</div>
-    			
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="4posude" class="custom-control-input" value="4" name="posude">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 4 posude</span>
-			</label>
-    			</div>
-    			
-    			 <div class="check-rejting">
-    			<label class="custom-control custom-checkbox">
-			  <input type="checkbox" id="5posuda" class="custom-control-input" value="5" name="posude">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description"> 5 i više posuda</span>
-			</label>
-    			</div>
-    		</div>
-    		<br>
-   	  </div>
-     </div> 
-  </div><!-- Kraj diva za naprednu pretragu -->
-</form>
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="dish1" value="1" name="dishes">
+                            <label class="custom-control-label" for="dish1">1 posuda</label>
+                          </div>
 
-     <!-- Prikaz rezultata Ajax pretrage ako ih ima-->
-     <div id="result">
-     </div> <!-- Kraj prikaza rezultata pretrage -->
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="dish2" value="2" name="dishes">
+                            <label class="custom-control-label" for="dish2">2 posude</label>
+                          </div>
 
-      
-</div><!-- kraj main -->
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="dish3" value="3" name="dishes">
+                            <label class="custom-control-label" for="dish3">3 posude</label>
+                          </div>
 
-<!-- KRAJ STRANE -->
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="dish4" value="4" name="dishes">
+                            <label class="custom-control-label" for="dish4">4 posude</label>
+                          </div>
 
-<!-- jQuery for search field -->
+                          <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="dish5" value="5" name="dishes">
+                            <label class="custom-control-label" for="dish5">5 i više posuda</label>
+                          </div>
+                         
+                        </div>                
+                      </div>       
+     
+              <hr> <h5 class="search-title">Odaberite kategorije &nbsp;&nbsp;&nbsp;
+                    <a data-toggle="collapse" href="#naprednaPretraga6" role="button" aria-expanded="true" aria-controls="naprednaPretraga6"><i class="fas fa-angle-down"></i></a>
+               </h5>           
+                      <div class="collapse.show" id="naprednaPretraga6">
+                        <div class="card card-body search-card px-0 py-1 m-0">
+
+			<?php 
+			foreach ($categoriesAll as $category) {
+			?>
+		                          <div class="custom-control custom-checkbox">
+		                            <input type="checkbox" class="custom-control-input" id="cat<?php echo $category['cat_id']; ?>" value="<?php echo $category['cat_id']; ?>" name="cat">
+		                            <label class="custom-control-label" for="cat<?php echo $category['cat_id']; ?>"><?php echo $category['cat_name']; ?></label>
+		                          </div>
+			 <?php 
+			}
+			?>                        
+                        </div>                
+                      </div>      
+                      <br><br>
+
+            </div>
+            <div class="col-md-8"><!-- kolona u kojoj se nalaze svi rezultati-->
+
+	     <!-- Prikaz rezultata Ajax pretrage ako ih ima-->
+	     <div id="result">	
+	     </div> <!-- Kraj prikaza rezultata pretrage -->
+	
+	     <!-- Najpopularniji recepti, poslednjih 6 -->
+<section id="recipesPop">      
+       <div class="bestRecipes">
+         <div class="container">
+              <div class="col"></div>
+              <div class="col"><h2 class="text-center greentitle">Najbolje ocenjeni</h2></div>
+              <div class="col"></div>
+            <br>
+
+              <div class="row">
+ 
+                <?php  for ($i = 0; $i < 6; $i++) : ?>
+
+                <?php 
+
+                  $recipeRating = $recipesPop[$i]['avg_rating']. "";  
+                  $nFullStars = $recipeRating[0]; 
+                  $halfOrEmptyStar = $recipeRating[2]; 
+ 
+                 ?>
+                        
+                      <div class="col-md-4">
+                        <div class="card card-recipes">
+                          <div class="double"><a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipesPop[$i]['recipe_id']; ?>/<?php echo $recipesPop[$i]['recipe_permalink']; ?>"><h5 class="card-title text-center"><?php echo $recipesPop[$i]['recipe_title']; ?></h5></a></div>
+                          <a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipesPop[$i]['recipe_id']; ?>/<?php echo $recipesPop[$i]['recipe_permalink']; ?>">
+                            <img class="card-img-top" src="assets/img/<?php echo $photosPop[$i]['photo_link']; ?>" alt="<?php echo $photosPop[$i]['photo_alt']; ?>">
+                          </a>
+
+                          <p>
+			<?php
+
+			if ($recipesPop[$i]['avg_rating'] < 5.0) {
+			  for ($e = 0; $e < $nFullStars; $e++) {
+			    echo '<img src="assets/img/zv-pu.png" alt="rejting" class="smallImg">';
+			  }
+			  if ($halfOrEmptyStar < 5) {
+			    echo '<img src="assets/img/zv-pr.png" alt="rejting" class="smallImg">';
+			  }elseif ($halfOrEmptyStar >= 5) {
+			    echo '<img src="assets/img/zv-po.png" alt="rejting" class="smallImg">';
+			  }
+			  for ($e = 0; $e < (4-$nFullStars); $e++) {
+			    echo '<img src="assets/img/zv-pr.png" alt="rejting" class="smallImg">';
+			  }
+
+			}elseif ($recipesPop[$i]['avg_rating'] == 5.0) {
+			  for ($e = 0; $e < 5; $e++) {
+			    echo '<img src="assets/img/zv-pu.png" alt="rejting" class="smallImg">';
+			  }
+			}
+			?>
+
+                             &nbsp; <?php echo $recipesPop[$i]['avg_rating']; ?> &nbsp; (<?php echo $recipesPop[$i]['no_votes']; ?> &nbsp; glasova)<br>
+                           <img src="assets/img/sat.png" alt="vreme pripreme" class="smallImg"> &nbsp; <?php echo $recipesPop[$i]['prep_time']; ?> &nbsp; min<br>
+                           <img src="assets/img/posuda.png" alt="posuda" class="smallImg"> &nbsp; <?php echo $recipesPop[$i]['dirty_dishes']; ?> &nbsp; kom prljavog posuđa
+                         </p>
+                        </div>
+                       </div>
+
+                <?php endfor; ?>
+
+           </div><!--kraj row -->
+         </div>
+       </div>
+     </section> <!-- kraj najpopularniji recepti -->
+
+
+     <!-- Najnoviji recepti, poslednjih 6 -->
+     <section id="recipesLatest">      
+       <div class="bestRecipes">
+         <div class="container">
+            <br>
+              <div class="col"></div>
+              <div class="col"><h2 class="text-center greentitle">Najnoviji recepti</h2></div>
+              <div class="col"></div>
+            <br>
+           <div class="row">
+
+                <?php  for ($i = 0; $i < 6; $i++) : ?>
+
+                <?php 
+
+                  $recipeRating = $recipesPop[$i]['avg_rating']. "";  
+                  $nFullStars = $recipeRating[0]; 
+                  $halfOrEmptyStar = $recipeRating[2]; 
+ 
+                 ?>
+                       
+                      <div class="col-md-4">
+                        <div class="card  card-recipes">
+                          <div class="double"><a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipesLatest[$i]['recipe_id']; ?>/<?php echo $recipesLatest[$i]['recipe_permalink']; ?>">
+                            <h5 class="card-title text-center"><?php echo $recipesLatest[$i]['recipe_title']; ?></h5>
+                          </a></div>
+                          <a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipesLatest[$i]['recipe_id']; ?>/<?php echo $recipesLatest[$i]['recipe_permalink']; ?>">
+                            <img class="card-img-top" src="assets/img/<?php echo $photosLatest[$i]['photo_link']; ?>" alt="<?php echo $photosLatest[$i]['photo_alt']; ?>">
+                          </a>
+
+                          <p>
+			<?php
+
+			if ($recipesLatest[$i]['avg_rating'] < 5.0) {
+			  for ($e = 0; $e < $nFullStars; $e++) {
+			    echo '<img src="assets/img/zv-pu.png" alt="rejting" class="smallImg">';
+			  }
+			  if ($halfOrEmptyStar < 5) {
+			    echo '<img src="assets/img/zv-pr.png" alt="rejting" class="smallImg">';
+			  }elseif ($halfOrEmptyStar >= 5) {
+			    echo '<img src="assets/img/zv-po.png" alt="rejting" class="smallImg">';
+			  }
+			  for ($e = 0; $e < (4-$nFullStars); $e++) {
+			    echo '<img src="assets/img/zv-pr.png" alt="rejting" class="smallImg">';
+			  }
+
+			}elseif ($recipesLatest[$i]['avg_rating'] == 5.0) {
+			  for ($e = 0; $e < 5; $e++) {
+			    echo '<img src="assets/img/zv-pu.png" alt="rejting" class="smallImg">';
+			  }
+			}
+			?>
+
+                            &nbsp; <?php echo $recipesLatest[$i]['avg_rating']; ?> &nbsp; (<?php echo $recipesLatest[$i]['no_votes']; ?> &nbsp; glasova)<br>
+                           <img src="assets/img/sat.png" alt="vreme pripreme" class="smallImg"> &nbsp; <?php echo $recipesLatest[$i]['prep_time']; ?> &nbsp; min<br>
+                           <img src="assets/img/posuda.png" alt="posuda" class="smallImg"> &nbsp; <?php echo $recipesLatest[$i]['dirty_dishes']; ?> &nbsp; kom prljavog posuđa</p>
+                        </div>
+                       </div>
+
+                <?php endfor; ?>
+
+           </div><!--kraj row -->
+            <br>
+         </div>
+       </div>
+     </section> <!-- kraj najnoviji recepti -->
+
+            </div>
+
+          </div> <!-- kraj main row-->
+
+    </div><!-- kraj container --> 
+</div><!-- kraj main -->    
+
+
+
+
+<!-- jQuery for search  -->
+
 <script type="text/javascript">
 
-//zadrzavanje vrednosti nakon dugmeta Back
-$(document).ready(function(){  
+  var select_val;  
+  var keyword = "";
+  var rating = "";
+  var preptime = "";
+  var dishes = "";
+  var cat = "";
+  var page;
 
-    //skupljanje vrednosti iz selecta
-    select_val = $("select").val();
-    if(select_val ==null || select_val ==""){  
-            select_val = [];         
-           console.log(select_val);
-    }
-
-    //skupljanje vrednosti iz posude    
-      $("input[name='posude']:checked").each(function(){
-        posude =[];
-                posude.push($(this).val());
-      });
-
-      //skupljanje vrednosti iz vreme       
-      $("input[name='vreme']:checked").each(function(){
-        vreme =[];
-                vreme.push($(this).val());
-      });
-
-      //skupljanje vrednsoti iz kategorije      
-      $("input[name='kategorije']:checked").each(function(){
-        kategorije =[];
-                kategorije.push($(this).val());
-      });
-
-      //skupljanje vrednosti iz rejtinga      
-      $("input[name='rejting']:checked").each(function(){
-        rejting =[];
-                rejting.push($(this).val());
-      });
-      console.log(select_val,posude,vreme,kategorije, rejting);
-       return ajax_call(select_val, posude, vreme, kategorije, rejting); 
-
+//select polje, osnovni kod 
+$("select").select2({            
+  minimumInputLength: 1,
+  placeholder: 'Sastojci...',
+  language: {
+       inputTooShort: function () {
+       return 'Krenite da kucate...';
+       },
+      noResults: function () {
+       return 'Nije pronađen nijedan rezultat';
+      },
+     }
 });
 
-
-var select_val;  
-var posude;
-var kategorije;
-var vreme;
-var rejting;
-
-
-
-
-$("select").select2({             
-      minimumInputLength: 1,
-      placeholder: 'Unesite namirnice koje želite da upotrebite...',
-      language: {
-            inputTooShort: function () {
-                   return 'Krenite da kucate...';
-            },
-            noResults: function () {
-                   return 'Nije pronađen nijedan rezultat';
-            },
-      }
-});
-
-// Slanje odabranih namirnica
+//select polje kad se cekira neka namirnica
 $("select").on("select2:select", function (evt) {
-       select_val = $(evt.currentTarget).val();  
-       return ajax_call(select_val, posude, vreme, kategorije, rejting);       
+  
+      var select_val = $(evt.currentTarget).val();
+
+      var keyword = $("#search-keywords").val();
+      var x = keyword.length;
+      if((x < 3) && (x > 0)){
+	 	$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Potrebno je uneti 3 i više slova' + "</div>");
+	 	$("#result").text ("");
+		var keyword = "";
+      }else{
+		$("#keywords-warning").text ("");	   	
+		var select_val = $("select").val();
+		var keyword = $("#search-keywords").val();
+		var rating = [];
+		$("[name='rating']:checked").each(function(){
+	                rating.push($(this).val());
+	            });
+		var preptime = [];
+		$("[name='preptime']:checked").each(function(){
+	                preptime.push($(this).val());
+	            });
+		var dishes = [];
+		$("[name='dishes']:checked").each(function(){
+	                dishes.push($(this).val());
+	            });
+		var cat = [];
+		$("[name='cat']:checked").each(function(){
+	                cat.push($(this).val());
+	            });
+		console.log(select_val, keyword, rating, preptime, dishes, cat, page);
+		return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
+       }
+
 });
 
 
-// Ponistavanje odabranih namirnica
+//select polje kad se odcekira namirnica
 $("select").on("select2:unselect", function (evt) {
-       select_val = $(evt.currentTarget).val();  
+      
+      var select_val = $(evt.currentTarget).val(); 
 
-        if(select_val ==null || select_val ==""){
-           select_val = [];
-           console.log(select_val);
-        }
-          return ajax_call(select_val, posude, vreme, kategorije, rejting);
+      var keyword = $("#search-keywords").val();
+      var x = keyword.length;
+      if((x < 3) && (x > 0)){
+	 	$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Potrebno je uneti 3 i više slova' + "</div>");
+	 	$("#result").text ("");
+		var keyword = "";
+      }else{
+		$("#keywords-warning").text ("");	   	
+		var select_val = $("select").val();
+		var keyword = $("#search-keywords").val();
+		var rating = [];
+		$("[name='rating']:checked").each(function(){
+	                rating.push($(this).val());
+	            });
+		var preptime = [];
+		$("[name='preptime']:checked").each(function(){
+	                preptime.push($(this).val());
+	            });
+		var dishes = [];
+		$("[name='dishes']:checked").each(function(){
+	                dishes.push($(this).val());
+	            });
+		var cat = [];
+		$("[name='cat']:checked").each(function(){
+	                cat.push($(this).val());
+	            });
+		console.log(select_val, keyword, rating, preptime, dishes, cat, page);
+		return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
+       }
+ });
+
+
+//polje za pretragu po kljucnim recima u naslovu recepta
+$("#search-keywords").keyup(function(){
+	var keyword = $(this).val();
+
+             console.log(select_val, keyword, rating, preptime, dishes, cat, page);
+             //console.log(jQuery.type(keyword));
+	var x = keyword.length;
+	if((x < 3) && (x > 0)){
+	 	$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Potrebno je uneti 3 i više slova' + "</div>");
+	 	$("#result").text ("");
+		var keyword = "";
+	}else{
+		$("#keywords-warning").text ("");	  
+		var select_val = $("select").val();
+		var keyword = $(this).val();
+		var rating = [];
+		$("[name='rating']:checked").each(function(){
+	                rating.push($(this).val());
+	            });
+		var preptime = [];
+		$("[name='preptime']:checked").each(function(){
+	                preptime.push($(this).val());
+	            });
+		var dishes = [];
+		$("[name='dishes']:checked").each(function(){
+	                dishes.push($(this).val());
+	            });
+		var cat = [];
+		$("[name='cat']:checked").each(function(){
+	                cat.push($(this).val());
+	            });
+		console.log(select_val, keyword, rating, preptime, dishes, cat, page);
+		return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
+	 }
+
 });
 
-// Slanje izabranih dugmica za broj posuda
-$("input[name='posude']").click(function(){
-      posude =[];
-      $("input[name='posude']:checked").each(function(){
-                posude.push($(this).val());
-      });
-      console.log(posude);
-       return ajax_call(select_val, posude, vreme, kategorije, rejting);            
+//rating checkboxovi
+$("[name='rating']").click(function(){
+
+	var rating = [];
+	$("[name='rating']:checked").each(function(){
+                rating.push($(this).val());
+            });
+
+	var keyword = $("#search-keywords").val();
+      	var x = keyword.length;
+	      if((x < 3) && (x > 0)){
+		 	$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Potrebno je uneti 3 i više slova' + "</div>");
+	 		$("#result").text ("");
+			var keyword = "";
+	      }else{
+			$("#keywords-warning").text ("");	    
+		 	
+			var select_val = $("select").val();
+			var keyword = $("#search-keywords").val();
+			var preptime = [];
+			$("[name='preptime']:checked").each(function(){
+		                preptime.push($(this).val());
+		            });
+			var dishes = [];
+			$("[name='dishes']:checked").each(function(){
+		                dishes.push($(this).val());
+		            });
+			var cat = [];
+			$("[name='cat']:checked").each(function(){
+		                cat.push($(this).val());
+		            });
+			console.log(select_val, keyword, rating, preptime, dishes, cat, page);
+			return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
+	       }
+
 });
 
-// Slanje izabranih dugmica za vreme pripreme
-$("input[name='vreme']").click(function(){
-      vreme =[];
-      $("input[name='vreme']:checked").each(function(){
-                vreme.push($(this).val());
-      });
-      console.log(vreme);
-       return ajax_call(select_val, posude, vreme, kategorije, rejting);           
+//preptime checkboxovi
+$("[name='preptime']").click(function(){
+
+	var preptime = [];
+	$("[name='preptime']:checked").each(function(){
+                preptime.push($(this).val());
+            });
+
+	var keyword = $("#search-keywords").val();
+      	var x = keyword.length;
+	      if((x < 3) && (x > 0)){
+		 	$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Potrebno je uneti 3 i više slova' + "</div>");
+	 		$("#result").text ("");
+			var keyword = "";
+	      }else{
+			$("#keywords-warning").text ("");	    
+		 	
+			var select_val = $("select").val();
+			var keyword = $("#search-keywords").val();
+			var rating = [];
+			$("[name='rating']:checked").each(function(){
+		                rating.push($(this).val());
+		            });
+			var dishes = [];
+			$("[name='dishes']:checked").each(function(){
+		                dishes.push($(this).val());
+		            });
+			var cat = [];
+			$("[name='cat']:checked").each(function(){
+		                cat.push($(this).val());
+		            });
+			console.log(select_val, keyword, rating, preptime, dishes, cat, page);
+			return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
+	       }
 });
 
-// Slanje izabranih dugmica za kategorije
-$("input[name='kategorije']").click(function(){
-      kategorije =[];
-      $("input[name='kategorije']:checked").each(function(){
-                kategorije.push($(this).val());
-      });
-      console.log(kategorije);
-       return ajax_call(select_val, posude, vreme, kategorije, rejting);            
+//dishes checkboxovi
+$("[name='dishes']").click(function(){
+
+	var dishes = [];
+	$("[name='dishes']:checked").each(function(){
+                dishes.push($(this).val());
+            });
+
+	var keyword = $("#search-keywords").val();
+      	var x = keyword.length;
+	      if((x < 3) && (x > 0)){
+		 	$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Potrebno je uneti 3 i više slova' + "</div>");
+	 		$("#result").text ("");
+			var keyword = "";
+	      }else{
+			$("#keywords-warning").text ("");	  		 	
+			var select_val = $("select").val();
+			var keyword = $("#search-keywords").val();
+			var rating = [];
+			$("[name='rating']:checked").each(function(){
+		                rating.push($(this).val());
+		            });
+			var preptime = [];
+			$("[name='preptime']:checked").each(function(){
+		                preptime.push($(this).val());
+		            });
+			var cat = [];
+			$("[name='cat']:checked").each(function(){
+		                cat.push($(this).val());
+		            });
+			console.log(select_val, keyword, rating, preptime, dishes, cat, page);
+			return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
+	       }
 });
 
-// Slanje izabranih dugmica za rejting
-$("input[name='rejting']").click(function(){
-      rejting =[];
-      $("input[name='rejting']:checked").each(function(){
-                rejting.push($(this).val());
-      });
-      console.log(rejting);
-       return ajax_call(select_val, posude, vreme, kategorije, rejting);            
+//cat checkboxovi
+$("[name='cat']").click(function(){
+
+	var cat = [];
+	$("[name='cat']:checked").each(function(){
+                cat.push($(this).val());
+            });
+
+	var keyword = $("#search-keywords").val();
+      	var x = keyword.length;
+	      if((x < 3) && (x > 0)){
+		 	$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Potrebno je uneti 3 i više slova' + "</div>");
+	 		$("#result").text ("");
+			var keyword = "";
+	      }else{
+			$("#keywords-warning").text ("");	  
+		 	
+			var select_val = $("select").val();
+			var keyword = $("#search-keywords").val();
+			var rating = [];
+			$("[name='rating']:checked").each(function(){
+		                rating.push($(this).val());
+		            });
+			var preptime = [];
+			$("[name='preptime']:checked").each(function(){
+		                preptime.push($(this).val());
+		            });
+			var dishes = [];
+			$("[name='dishes']:checked").each(function(){
+		                dishes.push($(this).val());
+		            });
+			console.log(select_val, keyword, rating, preptime, dishes, cat, page);
+			return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
+	       }
 });
 
 
-//Poziv ajaxa
-function ajax_call() {             
-       $.post("assets/ajax2.php", {data: select_val, posude: posude, vreme: vreme, kategorije: kategorije, rejting: rejting}, function(result){
-            $("div#result").html(result);
-       });
+
+
+//ajax funkcija
+function ajax_call(select_val, keyword, rating, preptime, dishes, cat, page) {  
+	if (    ((select_val == null) || (select_val == "") || (select_val == undefined)) && ((keyword == "") || (keyword == undefined) || (keyword == null)) && ((rating == "") || (rating == null) || (rating == undefined)) && ((preptime == "") || (preptime == null) || (preptime == undefined)) && ((dishes == "") || (dishes == null) || (dishes == undefined)) && ((cat == "") || (cat == null) || (cat == undefined))  ) {
+		$("#result").text ("");
+	}else{
+		$.post("<?php echo ROOT_URL; ?>assets/ajax2.php", {data: select_val, keyword: keyword, rating: rating, preptime: preptime, dishes: dishes, cat:cat, page:page}, function(result){
+            			$("#result").html(result);
+    		});
+	}         
+    
 }
 
+//paginacija
+function pagination(page){
+      var page = parseInt(page);
 
-// Dugme za reset
-$('#reset').click(function() {
-    location.reload();
+	var select_val = $("select").val();
+	var keyword = $("#search-keywords").val();
+	var rating = [];
+	$("[name='rating']:checked").each(function(){
+	            rating.push($(this).val());
+	        });
+	var preptime = [];
+	$("[name='preptime']:checked").each(function(){
+	            preptime.push($(this).val());
+	        });
+	var dishes = [];
+	$("[name='dishes']:checked").each(function(){
+	            dishes.push($(this).val());
+	        });
+	var cat = [];
+	$("[name='cat']:checked").each(function(){
+	            cat.push($(this).val());
+	        });
+
+      return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
+}     
+
+// //zadrzavanje vrednosti nakon dugmeta Back
+$(document).ready(function(){
+
+	var keyword = $("#search-keywords").val();
+      	var x = keyword.length;
+	      if((x < 3) && (x > 0)){
+		 	$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Potrebno je uneti 3 i više slova' + "</div>");
+	 		$("#result").text ("");
+			var keyword = "";
+	      }else{
+			$("#keywords-warning").text ("");	   
+			var select_val = $("select").val();
+			var keyword = $("#search-keywords").val();
+			var rating = [];
+			$("[name='rating']:checked").each(function(){
+		                rating.push($(this).val());
+		            });
+			var preptime = [];
+			$("[name='preptime']:checked").each(function(){
+		                preptime.push($(this).val());
+		            });
+			var dishes = [];
+			$("[name='dishes']:checked").each(function(){
+		                dishes.push($(this).val());
+		            });
+			var cat = [];
+			$("[name='cat']:checked").each(function(){
+		                cat.push($(this).val());
+		            });
+			console.log(select_val, keyword, rating, preptime, dishes, cat, page);
+			return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
+	       }    
 });
 
 
-
-</script>
-
-
+ </script>
 
 

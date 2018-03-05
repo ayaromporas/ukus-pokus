@@ -1,27 +1,41 @@
 <?php
 class Users extends Controller{
-	protected function register(){
+
+	protected function Index(){
 		$viewmodel = new UserModel();
-		$this->returnView($viewmodel->register(), true);
+		$this->returnView($viewmodel->Index(), true);
 	}
 
-	protected function login(){
-		$viewmodel = new UserModel();
-		$this->returnView($viewmodel->login(), true);
+	protected function Insert(){
+		$viewmodel = new UnitsModel();
+		$this->ReturnView($viewmodel->Insert(), true);
 	}
-	protected function viev(){
+
+	protected function Register(){
 		$viewmodel = new UserModel();
-		$this->returnView($viewmodel->viev(), true);
+		$this->returnView($viewmodel->Register(), true);
 	}
-	protected function logout(){
-		unset($_SESSION['is_logged_in']);
-		unset($_SESSION['user_data']);
+
+	protected function Login(){
+		$viewmodel = new UserModel();
+		$this->returnView($viewmodel->Login(), true);
+	}
+	protected function View(){
+		$viewmodel = new UserModel();
+		$this->returnView($viewmodel->View(), true);
+	}
+
+	protected function Logout(){
+		unset($_SESSION['logged']);
+		unset($_SESSION['username']);
+		unset($_SESSION['user_name']);
 		session_destroy();
 		// Redirect
 		header('Location: '.ROOT_URL);
 	}
-	protected function edit(){
+
+	protected function Edit(){
 		$viewmodel = new UserModel();
-		$this->returnView($viewmodel->edit(), true);
+		$this->returnView($viewmodel->Edit(), true);
 	}
 }

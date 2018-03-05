@@ -25,13 +25,13 @@ $x = 0;
         <h1 class="display-4">Brzi i ukusni recepti</h1>
         <h1>za svaki dan i posebne prilike</h1>
         <br>
-        <h2>Pretraga po namirnicama</h2>  
+        <h4>Pretraga po namirnicama</h4>  
 
       </div>
    </div>
 
      <!-- Pretraga -->
-      <div class="row text-center pretraga" id="cover2"><!-- pretraga -->
+      <div class="row text-center" id="cover2"><!-- pretraga -->
         <div class="col-sm-7 offset-sm-2 text-center" > <!-- polje za pretragu -->
           <form>
             <select class="form-control form-control-lg custom-select" multiple style="width: 100%" placeholder="U kući imam..." multiple="multiple">
@@ -62,7 +62,7 @@ $x = 0;
       <div class="collapse" id="dodatneOpcije"> 
           <div class="card">
            <div class="card-body">
-            <h3 class="card-title text-center">Dodatne opcije</h3>
+            <h3 class="card-title text-center green">Dodatne opcije</h3>
       
           <div class="row">
             <div class="col-md-3 col-sm-6">
@@ -137,9 +137,9 @@ $x = 0;
        <div class="bestRecipes">
          <div class="container">
             <br>
-              <div class="col"><hr></div>
-              <div class="col"><h2 class="text-center">Najpopularniji recepti</h2></div>
-              <div class="col"><hr></div>
+              <div class="col"></div>
+              <div class="col"><h2 class="text-center greentitle">Najbolje ocenjeni</h2></div>
+              <div class="col"></div>
             <br>
 
               <div class="row">
@@ -155,7 +155,7 @@ $x = 0;
                  ?>
                         
                       <div class="col-md-4">
-                        <div class="card">
+                        <div class="card card-recipes">
                           <div class="double"><a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipesPop[$i]['recipe_id']; ?>/<?php echo $recipesPop[$i]['recipe_permalink']; ?>"><h5 class="card-title text-center"><?php echo $recipesPop[$i]['recipe_title']; ?></h5></a></div>
                           <a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipesPop[$i]['recipe_id']; ?>/<?php echo $recipesPop[$i]['recipe_permalink']; ?>">
                             <img class="card-img-top" src="assets/img/<?php echo $photosPop[$i]['photo_link']; ?>" alt="<?php echo $photosPop[$i]['photo_alt']; ?>">
@@ -204,9 +204,9 @@ if ($recipesPop[$i]['avg_rating'] < 5.0) {
        <div class="bestRecipes">
          <div class="container">
             <br>
-              <div class="col"><hr></div>
-              <div class="col"><h2 class="text-center">Najnoviji recepti</h2></div>
-              <div class="col"><hr></div>
+              <div class="col"></div>
+              <div class="col"><h2 class="text-center greentitle">Najnoviji recepti</h2></div>
+              <div class="col"></div>
             <br>
            <div class="row">
 
@@ -221,7 +221,7 @@ if ($recipesPop[$i]['avg_rating'] < 5.0) {
                  ?>
                        
                       <div class="col-md-4">
-                        <div class="card">
+                        <div class="card  card-recipes">
                           <div class="double"><a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipesLatest[$i]['recipe_id']; ?>/<?php echo $recipesLatest[$i]['recipe_permalink']; ?>">
                             <h5 class="card-title text-center"><?php echo $recipesLatest[$i]['recipe_title']; ?></h5>
                           </a></div>
@@ -344,14 +344,12 @@ function pagination(page){
                 checkbox.push($(this).val());
         });  
 
-     console.log(page + select_val + checkbox);
      return ajax_call(select_val, checkbox, page); 
-           
 }
 
 //ajax funkcija
  function ajax_call(select_val, checkbox, page) {             
-    $.post("assets/ajax.php", {data: select_val , cat: checkbox, page: page}, function(result){
+    $.post("<?php echo ROOT_URL; ?>assets/ajax.php", {data: select_val , cat: checkbox, page: page}, function(result){
             $("div#result").html(result);
     });
     return select_val = [];

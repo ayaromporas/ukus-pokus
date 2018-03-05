@@ -30,7 +30,7 @@
                 <?php endforeach; ?>
 
           </div>
-
+<br><br>
     </div><!-- kraj container -->	
 </div><!-- kraj main -->	
 

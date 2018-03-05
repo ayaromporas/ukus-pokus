@@ -52,22 +52,6 @@ abstract class Model {
 		return $this->stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
-	protected $querystring;
-	protected $tablename;
-	protected $rows;
-	
-	public function allRows($tablename, $querystring = ""){
-		$this->query("SELECT * FROM $tablename WHERE (status = 1) $querystring");
-		$rows = $this->resultSet();
-		return $rows;
-	}
-
-	public function singleRow($tablename,$querystring){
-		$this->query("SELECT * FROM $tablename WHERE (status = 1) AND ($querystring)");
-		$row = $this->single();
-		return $row;
-	}
-
 
 	public function convertExtendedToNormal($string) {
 
@@ -148,6 +132,13 @@ abstract class Model {
 		 $string = preg_replace("/[^\x9\xA\xD\x20-\x7F]/u", "", $string);
 
 		return $string;
+	}
+
+	public function sanitize($string){     //preoveriti sa nekim oko sanitacije ulaznih stringova za user input comment
+		$a = trim($string);
+		$b = htmlspecialchars($a);
+		$c = htmlentities($b);
+		return $c;
 	}
 
 }

@@ -1,43 +1,61 @@
 <?php
 class CategoriesModel extends Model{
+
 	public function Index(){
 
-		if(isset($_POST['submit'])){
-			$post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-			if ($post['cat_name'] == '') {
-				Messages::setMsg('Potrebno je popuniti polje name', 'error');
-			}else{
-			// Insert into MySQL
-			$this->query('INSERT INTO categories (cat_name, status) VALUES (:name, :status)');
-			$this->bind(':name', $_POST['cat_name']);
-			$this->bind(':status', 1);
-			$this->execute();
-			
-			// Redirect
-			header('Location: '.ROOT_URL.'categories');
+		$this->query('SELECT * FROM categories ORDER BY cat_name ASC');
+		$categories = $this->resultSet();
 
-			}
-	
-		}elseif(isset($_POST['delete'])){
-			$this->query('UPDATE categories SET status = :status WHERE cat_id = :id');
-			$this->bind(':id', $_POST['delete']);
-			$this->bind(':status', 0);
-			$this->execute();
-			// Redirect	
-			header('Location: '.ROOT_URL.'categories');
+		$resultArray = array($categories);
 
-		}elseif(isset($_POST['activate'])){
-			$this->query('UPDATE categories SET status = :status WHERE cat_id = :id');
-			$this->bind(':id', $_POST['activate']);
-			$this->bind(':status', 1);
-			$this->execute();
-			// Redirect	
-			header('Location: '.ROOT_URL.'categories');
+		return $resultArray;
 
-		}
-			$this->query('SELECT * FROM categories ORDER BY categories . status DESC'); // WHERE status >= 1
-			$rows = $this->resultSet();
-			return $rows;
-	
 	}
+
+	public function Insert(){
+
+		if(isset($_POST['submit'])){
+
+			$postArray = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+			if (($postArray['catname'] && $postArray['catpermalink'] && $postArray['catphoto'] && $postArray['catdescription'] ) != "" ){
+				
+			
+				$catname = $postArray['catname'];
+				$catpermalink = $postArray['catpermalink'];
+				$catphoto = $postArray['catphoto'];
+				$catdescription = $postArray['catdescription'];
+
+				$this->query("SELECT cat_name FROM categories WHERE cat_name = '{$catname}' ");
+				$result = $this->resultSet();
+
+				if (count($result) > 0) {
+
+					Messages::setMsg('Takva kategorija već postoji!', 'error');
+					return;
+
+				}else{
+
+					$this->query('INSERT INTO categories (cat_name, cat_permalink, cat_photo, cat_description) VALUES (:cat_name, :cat_permalink, :cat_photo, :cat_description)');
+					$this->bind(':cat_name', $catname);
+					$this->bind(':cat_permalink', $catpermalink);
+					$this->bind(':cat_photo', $catphoto);
+					$this->bind(':cat_description', $catdescription);
+					$this->execute();
+
+					$lastId = $this->lastInsertId();
+
+
+					Messages::setMsg('Uspešno ubačena nova kategorija! <br>Id poslednje kategorije u bazi sada je: '. $lastId, 'success');
+				}
+			}else{
+				Messages::setMsg('Sva polja moraju biti popunjena', 'error');
+			}
+		}
+
+		return;
+
+	}
+
+
 }

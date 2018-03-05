@@ -1,20 +1,21 @@
 <?php
 class Recipes extends Controller{
+
 	protected function Index(){
 		$viewmodel = new RecipesModel();
 		$this->returnView($viewmodel->Index(), true);
 	}
-	protected function insert(){
+	protected function Insert(){
 		$viewmodel = new RecipesModel();
-		$this->returnView($viewmodel->insert(), true);
+		$this->returnView($viewmodel->Insert(), true);
 	}
-	protected function view(){
+	protected function View(){
 		$viewmodel = new RecipesModel();
-		$this->returnView($viewmodel->view(), true);
+		$this->returnView($viewmodel->View(), true);
 	}
-	protected function edit(){
+	protected function Edit(){
 		$viewmodel = new RecipesModel();
-		$this->returnView($viewmodel->edit(), true);
+		$this->returnView($viewmodel->Edit(), true);
 	}
 	
 }

@@ -1,0 +1,526 @@
+@import url('https://fonts.googleapis.com/css?family=Caveat|Itim|Encode+Sans:400,700|Encode+Sans+Condensed:400,700|Kalam|Patrick+Hand|Patrick+Hand+SC|Pangolin|Berkshire+Swash|Caveat+Brush|Shadows+Into+Light+Two|Tillana|Montserrat|Open+Sans+Condensed:300|Raleway|Source+Sans+Pro|Baloo|Cherry+Swash|Corben|Kelly+Slab|Modak|Mogra|Oregano|Ribeye+Marrow|Sacramento|Allura|Amatic+SC|Courgette|Dancing+Script|Didact+Gothic|Dosis|Englebert|Forum|Glass+Antiqua|Grand+Hotel:|Great+Vibes|Kalam|Kaushan+Script|Life+Savers|Limelight|Marck+Script|Mukta+Malar|News+Cycle|Nunito|Pacifico|Patrick+Hand|Playball|Poiret+One|Rajdhani|Varela+Round');
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400);
+@import url('https://fonts.googleapis.com/css?family=Grand+Hotel&subset=latin-ext');
+@font-face {
+	font-family: "Summer";
+	src: url("fonts/Summer Font Regular.otf") format("opentype");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Summer Bold";
+	src: url("fonts/Summer Font Bold.otf") format("opentype");
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Crushine Brush Script";
+	src: url("fonts/Crushine Brush Script.otf") format("opentype");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Braxton";
+             src: url("fonts/Braxton.otf") format("opentype");
+             font-weight: normal;
+	font-style: normal;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+    background: #fff url('bgr.png') repeat;
+    background-attachment: scroll;
+    background-position: left-top;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: 'Encode Sans', sans-serif !important;
+}
+
+
+/* Braon pruga na vrhu */
+.beige {
+    background-color: #8c7c5f;
+}
+
+div.beige {
+  height: 30px;
+  width: 100%;
+}
+
+/* Ikonice za DM */
+img.soc{
+    height: 20px;
+    width: 20px;
+    margin: 3px 15px 3px 0;
+}
+/* kraj braon pruga */
+
+
+/* ********** Navigacija glavna *********** */
+ .navbar {
+   background-color: #fff;
+  font-family: "Summer Bold";
+  font-weight: bold;
+  border-bottom: 3px solid #70b54a;
+  text-rendering: normal;
+ }
+ #navbarsUkusPokus {
+   justify-content: flex-end;	
+ }
+ /* Hamburger ikonica */
+span.navbar-toggler-icon {
+  height: 35px;
+  width: 35px;
+}
+img.menu {
+  height: 35px;
+  width: 35px;
+  margin: 0;
+  padding: 0;
+}
+/* kraj hamburger */
+
+ /* Logo visina */
+img.main-logo {
+  height: 80px;
+}
+
+/* Linkovi u glavnoj navigaciji */
+a.nav-link:link, a.nav-link:visited {
+	color: #59b956;
+	font-size: 2.5rem;
+}
+a.nav-link:hover, a.nav-link:active {
+	color: #59b956;
+	font-size: 2.5rem;
+}
+
+/* Animacija ispod linkova */
+a.nav-link.animated {
+  padding-bottom: 3px;
+  padding-right: 20px !important;
+}
+a.animated{
+    color:#59b956;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 2px;
+}
+a.animated:after {
+    width: 0%;
+    height: 2px;
+    background: #59b956;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    -webkit-transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -ms-transition: all .25s ease-in-out;
+    -o-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+}
+a.animated:hover {
+    color: #59b956;
+}
+a.animated:hover:after {
+   width: 100%;
+}
+/* Kraj navigacija */
+
+
+/*Cover i polje za pretragu*/
+#cover {
+	background: #333 url('bgr2.jpg') no-repeat;
+	background-size: cover;
+      background-position: top;
+	color: #fff;
+	text-align: center;
+	display: flex;
+	align-items: center;
+}
+
+#cover1 {
+	padding-top: 4rem;
+
+}
+#cover2 {
+	margin-bottom: 2rem;
+}
+
+#cover-caption {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	background: rgba(0,0,0,0.1);
+	background: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,0,0,0.1)), color-stop(100%, rgba(0,0,0,0.7)));
+	background: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+	background: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+	background: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+	background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+}
+
+#cover h1  {
+	font-family: "Pacifico", cursive;
+}
+#cover h4 {
+	font-family: 'Encode Sans', sans-serif;
+}
+
+/*Main div bela pozadina strane*/
+@media screen and (max-width: 768px){
+   .main{
+          background-color: #fff;
+          margin: 1rem 2rem !important;
+          box-shadow: 0 0 10px #c2c2c2;
+          min-height: 200px;
+    }
+}
+@media screen and (min-width: 769px){
+   .main{
+          background-color: #fff;
+          margin: 3rem 5rem !important;
+          box-shadow: 0 0 10px #c2c2c2;
+          min-height: 200px;
+    }
+}
+/*kraj main*/
+
+img.smallImg {
+	height: 20px !important;
+}
+
+.double {
+  min-height: 4rem;
+}
+
+/*  Polje za unos namirnica  */
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #28a745 !important;
+    color: white;
+    border: 1px solid #8BCE6D !important;
+    border-radius: 3px;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #28a745 !important;
+  color: white; 
+}
+  .select2-container--classic .select2-results__option--highlighted[aria-selected] {
+  background-color: #28a745 !important;
+  color: white; 
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+     color: #fff !important;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 4px !important;
+}
+.select2-container--default .select2-selection--multiple {
+	border: 1px solid #28a745 !important;
+	border-radius: 4px;
+}
+/*  kraj select2  */
+
+
+#dodatneOpcije > div.card {
+	border: none;
+	padding: .7rem;
+}
+
+#dodatneOpcije div.card-body {
+	padding: 1rem 2rem 2rem 2rem;
+	margin: 1rem;
+	border-radius: 5px;
+	border: 1px solid #C5B69A;
+}
+
+#dodatneOpcije h3 {
+	font-family: "Grand Hotel", cursive;
+  /*font-style: italic;*/
+}
+
+/*checkboxes u dodatne opcije i naprednoj pretrazi */
+.custom-checkbox .custom-control-label::before {
+	/*background-color: #AEF7BF !important;*/
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+	background-color: #28a745 !important;
+}
+
+.bestRecipes h2, .bestRecipes h1, .bestRecipes h3 {
+	/*font-family: "Pacifico", cursive;*/
+	font-family: "Grand Hotel", cursive;
+}
+
+.bestRecipes h2 {
+  /*font-size: 2.5rem;*/
+}
+
+/*slika u receptima na pocetnoj */
+.card-img-top {
+	padding-bottom: .6rem;
+}
+/*linkovi u recpetima na pocetnoj*/
+.bestRecipes a:link, .bestRecipes a:visited {
+	text-decoration: none;
+	color: #2D2D2D;
+	font-weight: bold;
+}
+.bestRecipes a:hover, .bestRecipes a:active {
+	text-decoration: none;
+	color: #28a745;
+	font-weight: bold;
+}
+.bestRecipes h5 {
+	font-family: 'Encode Sans Condensed', sans-serif !important;
+	font-weight: bold;
+}
+
+
+
+div.card.card-recipes {
+  border: none;
+  margin-bottom: 1.5rem !important;
+}
+.card-comments h6 {
+  font-size: .8rem;
+}
+
+#result h2 {
+     font-family: "Grand Hotel", cursive;
+       /*font-style: italic;*/
+}
+
+#result span {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/*paginacija home */
+.page-item.active .page-link {
+  background-color: #28a745;
+  color: #fff !important;
+  border: 1px solid #dee2e6;
+}
+@media screen and (max-width: 768px) {
+     #paginationHome, #paginationSearch, #paginationCat {
+          
+     }
+
+     .bestRecipes h5, h5.card-title.text-center {
+      font-size: 1.1rem !important;
+    }
+
+    .recipesCat {
+     
+       transform: scale(0.7);
+    }
+
+    .greentitle {
+   
+          padding-top: 3% !important;
+          padding-bottom: 3% !important;
+          }
+}
+
+
+/*kategorije sve*/
+div.card.box-shadow {
+  margin-bottom: 2rem;
+}
+
+/*Aja klase razno*/
+.text-shadow {
+      text-shadow: 0 0 6px #534134;
+}
+.text-shadow-white {
+      text-shadow: 0 0 6px rgba(255,255,255,0.2);
+}
+.box-shadow {
+    box-shadow: 0 0 6px #ddd;
+}
+.white {
+	color: #fff;
+}
+
+.green {
+    color: #28a745;
+}
+
+.greentitle {
+background-color: #28a745;
+color: #fff;
+padding-top: 1.2%;
+padding-bottom: 1.2%;
+}
+
+.cursive {
+  font-family: "Pacifico", cursive;
+}
+
+
+/* notebook bgr */
+.notebook {
+  border: 2px solid #ba8c54;
+  border-radius: 0.40rem;
+  background: #FCF9DA;
+  background: -webkit-linear-gradient(top, #DFE8EC 0%, #FCF9DA 8%) 0 50px;
+  background: -moz-linear-gradient(top, #DFE8EC 0%, #FCF9DA 8%) 0 50px;
+  background: linear-gradient(top, #DFE8EC 0%, #FCF9DA 8%) 0 50px;
+  -webkit-background-size: 100% 40px;
+  -moz-background-size: 100% 40px;
+  -ms-background-size: 100% 40px;
+  background-size: 100% 40px;
+  padding: 2rem 4.5rem;
+}
+
+.subtitlesRec {
+    color: #28a745;
+    text-decoration: underline;
+    font-family: "Grand Hotel", cursive;
+}
+/* sastojci tabela */
+ .ingredients-table > thead, tbody, tr, td {
+  border-top: none !important;
+  padding: .3rem !important;
+ }
+@media screen and (max-width: 576px) {
+  .ingredients-table {
+    font-size: 0.6rem;
+    font-weight: bold;
+  }
+
+  .notebook {
+     padding: 2rem;
+  }
+}
+
+.ingredients-table {
+      font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* skriveno polje za pecanje botova */
+#honeypot {
+  display: none;
+}
+
+
+/* zvezdice za rating */
+.cont{
+  max-width: 300px;
+  text-align: center;
+  padding: 0;
+  background: #fff;
+  color: #EEE;
+  /*border: thin solid #444;*/
+  overflow: hidden;
+  display: inline-block;
+}
+
+div.stars{
+  max-width: 280px;
+  display: inline-block;
+}
+input.star{
+  display: none;
+}
+label.star {
+  float: right;
+  padding: 0 0.5rem;
+  font-size: 2rem;
+  color: #8B8B8B;
+  transition: all .2s;
+}
+input.star:checked ~ label.star:before {
+  content:'\f005';
+  color: #FD4;
+  transition: all .25s;
+}
+input.star-5:checked ~ label.star:before {
+  content:'\f005';
+  color: #FE7;
+  text-shadow: 0 0 20px #952;
+    transition: all .25s;
+}
+input.star-1:checked ~ label.star:before {
+    content:'\f005';
+  color: #F62;
+    transition: all .25s;
+}
+label.star:hover{
+  transform: rotate(-15deg) scale(1.3);
+}
+label.star:before{
+  content:'\f006';
+  font-family: FontAwesome;
+}
+/* kraj zvezdica za rating */
+
+
+/*napredna pretraga */
+h5.search-title{
+  font-family: "Encode Sans", sans-serif;
+  font-weight: normal !important;
+}
+.fa-angle-down {
+      color: #28a745;
+}
+.search-card {
+  border: none;
+
+}
+input#search-keywords.form-control {
+  border: 1px solid #28a745 !important;
+}
+
+input#search-keywords.form-control:focus {
+  border: 1px solid #28a745 !important;
+  box-shadow: none !important;
+}
+
+.rating-stars {
+    text-align: left !important;
+}
+@media screen and (max-width: 576px) {
+    .rating-stars {
+        text-align: center!important;
+    }
+}
+
+
+
+
+
+
+
+
+/*Footer*/
+#footer-main {
+    background-color: #8c7c5f;
+    position: relative;
+     width:100%;
+     bottom: 0px !important;
+
+
+}
+footer a.nav-link:link, footer a.nav-link:visited {
+  color: #fff;
+  font-size: 0.9rem;
+}
+footer a.nav-link:hover, footer a.nav-link:active {
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+/*kraj footer*/
+

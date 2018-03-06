@@ -211,7 +211,7 @@ $numberComments = count($comments);
 <section id="paginationHome">
 <br>
 <nav aria-label="pagination">
-<ul class="pagination justify-content-center pointerClass">
+<ul class="pagination justify-content-center">
 
 <?php if ($numberComments > 0){  //iscrtavanje paginacije
 

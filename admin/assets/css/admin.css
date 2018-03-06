@@ -176,3 +176,8 @@ a#logged:hover, a#logged:active {
 img.imgrec {
 	width: 100% !important;
 }
+
+/* poiner pri hoveru iznad elementa */
+.pointerClass{
+cursor: pointer !important;
+}

@@ -12,7 +12,7 @@ if (($superadmin || $admin || $editor) === true) {
 			</div>
 
 			<div class="tbl-cell tbl-cell-action-bordered">
-				<select id='select' class="custom-select">
+				<select id='select' class="custom-select pointerClass">
 					<option value="12">12</option>
 					<option value="24">24</option>
 					<option value="48">48</option>

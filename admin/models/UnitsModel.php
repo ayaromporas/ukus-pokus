@@ -3,7 +3,7 @@ class UnitsModel extends Model{
 
 	public function Index(){
 
-		$this->query('SELECT * FROM units ORDER BY unit_name ASC LIMIT 10');
+		$this->query('SELECT * FROM units ORDER BY unit_name LIMIT 10');
 		$units = $this->resultSet();
 
 		$resultArray = array($units);
@@ -51,7 +51,4 @@ class UnitsModel extends Model{
 		} // kraj if post
 
 	} // kraj insert
-
-
-
 }

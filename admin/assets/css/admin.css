@@ -143,3 +143,16 @@ a#logged:hover, a#logged:active {
 img.imgrec {
 	width: 100% !important;
 }
+
+select.form-control {
+	min-width: 80px !important;
+}
+
+#keywords-warning {
+	max-width: 80% !important;
+	justify-content: center !important;
+}
+
+.pagination {
+	cursor: pointer;
+}

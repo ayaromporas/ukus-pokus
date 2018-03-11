@@ -6,7 +6,7 @@ if(($superadmin || $admin || $editor) === true){
 <!-- JS biblioteke -->
   <script src="<?php echo ROOT_URL; ?>assets/js/lib/jquery/jquery-3.2.1.min.js"></script>
 
-<section class="box-typical">
+<section class="box-typical mb-0" >
 	<header class="box-typical-header">
 		<div class="tbl-row">			 
 			<div class="tbl-cell tbl-cell-title text-center">			
@@ -56,7 +56,6 @@ if(($superadmin || $admin || $editor) === true){
           </ul>
    </nav>
 </section>
-
 
 
 <script type="text/javascript">
@@ -146,7 +145,24 @@ return ajax_call(keyword, number, page);
 }
 
 $( document ).ready(function() {
-    return ajax_call(keyword, number, page);
+	 var keyword = $("#search-keywords").val();
+	var x = keyword.length;
+	if((x > 0) && (x < 2)){
+		$("#units-index").text ("");
+		var keyword = "";
+		$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Potrebno je uneti 2 i više slova' + "</div>");
+	}else if(x > 10){
+		$("#units-index").text ("");
+		var keyword = "";
+		$("#keywords-warning").html ('<div class="alert alert-warning alert-dismissible fade show" role="alert">' + 'Ne možete uneti više od 10 slova' + "</div>");
+	}else{
+		var number = $( "#numberitems1 option:selected" ).val();
+		var keyword = $("#search-keywords").val();
+		$("#keywords-warning").text ("");
+		//console.log(keyword + number + page);
+		
+	}
+return ajax_call(keyword, number, page);
 });
 </script>
 

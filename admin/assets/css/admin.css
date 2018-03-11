@@ -148,7 +148,7 @@ select.form-control {
 	min-width: 80px !important;
 }
 
-#keywords-warning {
+#keywords-warning, .keywords-warning {
 	max-width: 80% !important;
 	justify-content: center !important;
 }

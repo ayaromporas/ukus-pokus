@@ -47,7 +47,7 @@ $limit = $number; // broj komada po strani
 //echo $numberResults;
 
 if($numberResults == 0){
-	echo " nema rezultata";
+	echo '<div class="alert alert-warning alert-dismissible fade show keywords-warning mx-auto mt-3" role="alert">Nema takve jedinice mere u bazi.</div>';
 	return;
 }else{
 

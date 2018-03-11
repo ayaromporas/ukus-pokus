@@ -8,10 +8,8 @@ if (($superadmin || $admin || $editor) === true) {
 <section class="box-typical">
 	<header class="box-typical-header">
 		<div class="tbl-row">
-			<div class="tbl-cell tbl-cell-title ">
-				<h3><i class="font-icon aquamarine fas fa-search"></i>&nbsp; &nbsp; Pretraga komentara po nazivu recepta &nbsp; &nbsp;<span class="label label-pill"></span></h3>
-			</div>
-			<div class="tbl-cell tbl-cell-title">
+			<div class="tbl-cell tbl-cell-title text-right">
+				<h3><i class="font-icon aquamarine fas fa-align-right"></i>&nbsp; &nbsp; Broj komentara na strani &nbsp; &nbsp;<span class="label label-pill"></span></h3>
 			</div>
 			<div class="tbl-cell tbl-cell-action-bordered">
 				<select id='select' class="custom-select pointerClass">

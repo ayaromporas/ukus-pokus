@@ -93,8 +93,8 @@ if($numberResults == 0){
 	<td class="text-center"><span class="label label-pill"><?php echo $id; ?></span></td>
 	<td class="text-center"><?php echo $name; ?></td>
 	<td class="text-center"><button type="button" class="btn btn-rounded <?php echo $color; ?> btn-sm"><?php echo $status; ?></button></td>
-	<td class="text-center table-icon-cell"><i class="font-icon fas fa-edit"></i></td>
-	<td class="text-center table-icon-cell"><i class="font-icon fas fa-trash"></i></td>
+	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>units/edit/<?php echo $id; ?>"><i class="font-icon fas fa-edit"></i></a></td>
+	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>units/delete/<?php echo $id; ?>"><i class="font-icon fas fa-trash"></i></a></td>
 
 </tr>
 

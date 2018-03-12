@@ -21,6 +21,10 @@
 .aquamarine { color: #21a788; }
 
 
+a, a:focus, a:hover {
+	color: #919fa9;
+}
+
 #show-hide-sidebar-toggle, #hamburgerhead {
 	margin: 0 ;
 }
@@ -156,3 +160,9 @@ select.form-control {
 .pagination {
 	cursor: pointer;
 }
+
+a i {
+	color: #919fa9;
+}
+
+

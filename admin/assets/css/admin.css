@@ -181,3 +181,8 @@ img.imgrec {
 .pointerClass{
 cursor: pointer !important;
 }
+
+/* non-bold */
+.nonBold{
+font-weight: normal !important;
+	}

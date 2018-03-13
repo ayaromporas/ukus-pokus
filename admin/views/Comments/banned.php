@@ -5,22 +5,26 @@ if (($superadmin || $admin || $editor) === true) {
 
 
 ?>
-<section class="box-typical">
-	<header class="box-typical-header">
-		<div class="tbl-row">
-			<div class="tbl-cell tbl-cell-title text-right">
-				<h3><i class="font-icon aquamarine fas fa-align-right"></i>&nbsp; &nbsp; Broj komentara na strani &nbsp; &nbsp;<span class="label label-pill"></span></h3>
+	<section class="box-typical">
+		<header class="box-typical-header">
+			<div class="tbl-row">
+				<div class="tbl-cell tbl-cell-title text-right">
+					<h3><i class="font-icon text-danger fas fa-comments"></i>&nbsp; &nbsp;Zabranjeni komentari &nbsp; &nbsp;<span class="label label-pill" id="numberComm"></span></h3>
+
+				</div>
+				<div class="tbl-cell tbl-cell-title text-right">
+					<h3 class="nonBold">&nbsp; &nbsp; Broj komentara na strani &nbsp; &nbsp;<span class="label label-pill"></span></h3>
+				</div>
+				<div class="tbl-cell tbl-cell-action-bordered">
+					<select id='select' class="custom-select pointerClass">
+						<option value="12">12</option>
+						<option value="24">24</option>
+					</select>
+				</div>
 			</div>
-			<div class="tbl-cell tbl-cell-action-bordered">
-				<select id='select' class="custom-select pointerClass">
-					<option value="12">12</option>
-					<option value="24">24</option>
-					<option value="48">48</option>
-				</select>
-			</div>
-		</div>
-	</header>
-</section>
+		</header>
+	</section>
+
 
 
 
@@ -66,11 +70,34 @@ function pagination(pagination){
       return ajax_call(pages, choice, id, page);
  }
 
+//ispis broja komentara
+ function numberCommentsWrt(){
+	 var ourRequest = new XMLHttpRequest();
+	 	ourRequest.open('GET','<?php echo ROOT_URL; ?>assets/results.json');
+	 	ourRequest.onload = function() {
+	  		if (ourRequest.status >= 200 && ourRequest.status < 400) {
+	 			var ourData = JSON.parse(ourRequest.responseText);
+	 			// alert(ourData.name);
+				document.getElementById("numberComm").innerHTML=ourData.count;
+	 		} else {
+	 			alert('Connected to the server but returned an error');
+	 		}
+
+ }
+ ourRequest.onerror = function () {
+ 			alert('Connection error!');
+ 		}
+ 	ourRequest.send();
+
+}
+
+
 //ajax funkcija
   function ajax_call(pages, choicee, id, page) {
     $.post("../../admin/assets/ajaxCommentsBanned.php", {onPageComm: pages , approvedChoice: choicee, recId: id, onPage : page}, function(result){
 			// alert('success');
             $("div#result").html(result);
+						numberCommentsWrt();
 });
 			choice ="";
 		// alert(choice);

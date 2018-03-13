@@ -32,16 +32,6 @@ if(isset($_POST['approvedChoice']) && $_POST['approvedChoice']!==null && $_POST[
    $numberComments = count($comments);
 
 	 ?>
-   <section class="box-typical">
-    <header class="box-typical-header">
-      <div class="tbl-row">
-        <div class="tbl-cell tbl-cell-title text-center">
-          <h3><i class="font-icon text-danger fas fa-comments"></i>&nbsp; &nbsp;Zabranjeni komentari &nbsp; &nbsp;<span class="label label-pill"> <?php echo $numberComments ?></span></h3>
-        </div>
-      </div>
-    </header>
-   </section>
-
 	 <div  class="cards-grid" data-columns>
 	 <?php
 
@@ -103,9 +93,12 @@ if(isset($_POST['approvedChoice']) && $_POST['approvedChoice']!==null && $_POST[
    ?> <!-- Kraj ispisa pronadjenih recepata petljom -->
    </div><!--.card-grid-->
 
-
    <?php
 
+   $countCommentsArray = array('count' => $numberComments);
+   $fp = fopen('results.json', 'w');
+   fwrite($fp, json_encode($countCommentsArray, JSON_PRETTY_PRINT));   //here it will print the array pretty
+   fclose($fp);
 
   } else {
 
@@ -116,16 +109,6 @@ $numberComments = count($comments);
 
 
 ?>
-
-<section class="box-typical">
-	<header class="box-typical-header">
-		<div class="tbl-row">
-			<div class="tbl-cell tbl-cell-title text-center">
-				<h3><i class="font-icon text-danger fas fa-comments"></i>&nbsp; &nbsp; Zabranjeni komentari &nbsp; &nbsp;<span class="label label-pill"> <?php echo $numberComments ?></span></h3>
-			</div>
-		</div>
-	</header>
-</section>
 
 <div  class="cards-grid" data-columns>
 <?php
@@ -190,6 +173,11 @@ $commentTime = date_format($commentTime, "d.m.Y g:i a");
 
 
 <?php
+
+$countCommentsArray = array('count' => $numberComments);
+$fp = fopen('results.json', 'w');
+fwrite($fp, json_encode($countCommentsArray, JSON_PRETTY_PRINT));   //here it will print the array pretty
+fclose($fp);
 
 }
 ?>

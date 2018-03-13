@@ -105,7 +105,7 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
 <body class="with-side-menu" >
 
 
-  <header class="site-header "><!-- invisible for dev -->
+  <header class="site-header"><!-- invisible for dev -->
       <div class="container-fluid">
 
         <!-- LOGO -->
@@ -177,7 +177,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
 ?>
 
 <div class="mobile-menu-left-overlay"></div>
-  <nav class="side-menu "><!-- invisible for dev -->
+  <nav class="side-menu"><!-- invisible for dev -->
       <ul class="side-menu-list">
           <li class="indigo with-sub">
               <span>
@@ -614,7 +614,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
     });
   </script>
 
-  
+  <script src="<?php echo ROOT_URL; ?>assets/js/lib/bootstrap-select/bootstrap-select.min.js"></script>
   <script src="<?php echo ROOT_URL; ?>assets/js/lib/select2/select2.full.min.js"></script>
   <script src="<?php echo ROOT_URL; ?>assets/js/lib/peity/jquery.peity.min.js"></script>
   <script src="<?php echo ROOT_URL; ?>assets/js/lib/table-edit/jquery.tabledit.min.js"></script>

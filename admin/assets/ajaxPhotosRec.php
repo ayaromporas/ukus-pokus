@@ -1,5 +1,5 @@
 <?php 
-/* javlja se na search stranici, radi naprednu pretragu */
+/* javlja se na insert recipe stranici, radi prikaz slika na pretragu, za unos u recept */
 
 include ('../config.php');
 include ('../classes/Database.php');
@@ -12,14 +12,6 @@ $limit = 6;
 $page = 1;
 $query = "";
 
-
-
-
-// if(isset($_POST['page']) ){
-// 	$page = $_POST['page'];
-// 	// echo "Promenljiva page: ";
-// 	// var_dump($page);
-// }
 
 if (isset($_POST['keyword']) && is_string($_POST['keyword']) ) {
 

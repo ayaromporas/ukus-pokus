@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/select2-bootstrap4.min.css">
 
     <!-- Font awesome -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script defer src="<?php echo ROOT_URL; ?>assets/js/all.js"></script>
 
         <!-- Custom styles for this template -->
     <link href="<?php echo ROOT_URL; ?>assets/css/starter-template.css" rel="stylesheet">

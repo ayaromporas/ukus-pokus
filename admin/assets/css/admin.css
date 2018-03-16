@@ -21,6 +21,10 @@
 .aquamarine { color: #21a788; }
 
 
+a, a:focus, a:hover {
+	color: #919fa9;
+}
+
 #show-hide-sidebar-toggle, #hamburgerhead {
 	margin: 0 ;
 }
@@ -128,39 +132,6 @@ a#logged:hover, a#logged:active {
 }
 
 
-/*
-.photoinsert1 div.note-btn-group.btn-group.note-style {
-	display: none;
-}
-.photoinsert1 div.note-btn-group.btn-group.note-font {
-	display: none;
-}
-.photoinsert1 div.note-btn-group.btn-group.note-fontname {
-	display: none;
-}
-.photoinsert1 div.note-btn-group.btn-group.note-color {
-	display: none;
-}
-.photoinsert1 div.note-btn-group.btn-group.note-para {
-	display: none;
-}
-.photoinsert1 div.note-btn-group.btn-group.note-table {
-	display: none;
-}
-.photoinsert1 div.note-btn-group.btn-group.note-view {
-	display: none;
-}
-.photoinsert1 i.note-icon-video {
-	display: none;
-}
-.photoinsert1 i.note-icon-link {
-	display: none;
-}
-.photoinsert1 div.note-toolbar.panel-heading {
-	text-align: center;
-}
-*/
-
 .addfields {
 	cursor: pointer;
 }
@@ -177,6 +148,23 @@ img.imgrec {
 	width: 100% !important;
 }
 
+select.form-control {
+	min-width: 80px !important;
+}
+
+#keywords-warning, .keywords-warning {
+	max-width: 80% !important;
+	justify-content: center !important;
+}
+
+.pagination {
+	cursor: pointer;
+}
+
+a i {
+	color: #919fa9;
+}
+
 /* poiner pri hoveru iznad elementa */
 .pointerClass{
 cursor: pointer !important;
@@ -185,4 +173,6 @@ cursor: pointer !important;
 /* non-bold */
 .nonBold{
 font-weight: lighter !important;
-	}
+}
+
+

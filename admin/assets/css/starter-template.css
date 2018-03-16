@@ -69,7 +69,7 @@ img.soc{
   text-rendering: normal;
  }
  #navbarsUkusPokus {
-   justify-content: flex-end;
+   justify-content: flex-end;	
  }
  /* Hamburger ikonica */
 span.navbar-toggler-icon {
@@ -211,11 +211,11 @@ img.smallImg {
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
   background-color: #28a745 !important;
-  color: white;
+  color: white; 
 }
   .select2-container--classic .select2-results__option--highlighted[aria-selected] {
   background-color: #28a745 !important;
-  color: white;
+  color: white; 
 }
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
      color: #fff !important;
@@ -313,7 +313,7 @@ div.card.card-recipes {
 }
 @media screen and (max-width: 768px) {
      #paginationHome, #paginationSearch, #paginationCat {
-
+          
      }
 
      .bestRecipes h5, h5.card-title.text-center {
@@ -321,12 +321,12 @@ div.card.card-recipes {
     }
 
     .recipesCat {
-
+     
        transform: scale(0.7);
     }
 
     .greentitle {
-
+   
           padding-top: 3% !important;
           padding-bottom: 3% !important;
           }
@@ -498,10 +498,8 @@ input#search-keywords.form-control:focus {
 }
 
 
-/* poiner pri hoveru iznad elementa */
-.pointerClass{
-cursor:pointer !important;
-}
+
+
 
 
 
@@ -525,3 +523,4 @@ footer a.nav-link:hover, footer a.nav-link:active {
 }
 
 /*kraj footer*/
+

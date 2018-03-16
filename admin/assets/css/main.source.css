@@ -8633,11 +8633,11 @@ a.label-light-grey:hover {
   padding: 5px 10px;
 }
 .nav.nav-pills .nav-link:hover {
-  color: #00a8ff;
+  color: #28a745;
 }
 .nav.nav-pills .nav-link.active {
   color: #fff;
-  background-color: #00a8ff;
+  background-color: #28a745;
 }
 .breadcrumb {
   font-size: 1rem /*16*/;
@@ -8681,16 +8681,16 @@ a.label-light-grey:hover {
 }
 .page-link {
   border-color: #d8e2e7;
-  color: #0082c6;
+  color: #28a745;
 }
 .page-link:focus,
 .page-link:hover {
   background-color: #f6f8fa;
-  color: #0082c6;
+  color: #28a745;
 }
 .page-item.active .page-link {
-  border-color: #00a8ff !important;
-  background-color: #00a8ff !important;
+  border-color: #28a745 !important;
+  background-color: #28a745 !important;
 }
 .pager {
   font-size: 1rem;

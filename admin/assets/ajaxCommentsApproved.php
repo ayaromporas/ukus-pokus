@@ -26,7 +26,7 @@ if(isset($_POST['approvedChoice']) && $_POST['approvedChoice']!==null && $_POST[
 		$database->bind(':id', $recipeId);
 		$database->execute();
 
-		$database->query('SELECT comments.comment_id, comments.comment_name, comments.comment_email, comments.comment_text, comments.comment_time, comments.status, recipes.recipe_id, recipes.recipe_permalink, recipes.recipe_title FROM comments INNER JOIN recipes ON comments.recipe_id = recipes.recipe_id  WHERE comments.status=1 ORDER BY comments.comment_time ASC');
+		$database->query('SELECT comments.comment_id, comments.comment_name, comments.comment_email, comments.comment_text, comments.comment_time, comments.status, recipes.recipe_id, recipes.recipe_permalink, recipes.recipe_title FROM comments INNER JOIN recipes ON comments.recipe_id = recipes.recipe_id WHERE comments.status=1 ORDER BY comments.comment_time ASC');
 
 	 $comments = $database->resultSet();
    $numberComments = count($comments);

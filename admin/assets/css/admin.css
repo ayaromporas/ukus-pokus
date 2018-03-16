@@ -165,4 +165,14 @@ a i {
 	color: #919fa9;
 }
 
+/* poiner pri hoveru iznad elementa */
+.pointerClass{
+cursor: pointer !important;
+}
+
+/* non-bold */
+.nonBold{
+font-weight: lighter !important;
+}
+
 

@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 13, 2018 at 07:11 PM
--- Server version: 5.7.19
+-- Generation Time: Mar 16, 2018 at 01:34 PM
+-- Server version: 5.7.20-log
 -- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -90,9 +90,9 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 INSERT INTO `comments` (`comment_id`, `comment_name`, `comment_email`, `comment_text`, `comment_time`, `status`, `recipe_id`) VALUES
-(1, 'Aja', 'aja@aja.com', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\n', '2017-12-08 12:25:50', 1, 5),
+(1, 'Aja', 'aja@aja.com', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\n', '2017-12-08 12:25:50', 0, 5),
 (2, 'Petar', 'pepa@pepa.com', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\n', '2017-12-08 12:25:50', 2, 5),
-(3, 'Boris', 'boris@boris.com', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\n', '2017-12-08 12:27:10', 1, 5),
+(3, 'Boris', 'boris@boris.com', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\n', '2017-12-08 12:27:10', 0, 5),
 (4, 'Iva', 'iva@iva.com', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.\r\n\r\n', '2017-12-08 12:27:10', 1, 5),
 (5, 'Milan', 'milan@milan.com', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\r\n\r\n', '2017-12-08 12:27:30', 1, 5),
 (6, 'Jovana', 'jovana@jovana.com', 'Gulp is a tool that can be of great help to any web designer, but it can be intimidating for beginners. In this course you’re going to learn what Gulp is, how to set it up, and how to use it for creating an awesome front-end workflow—even as a beginner.', '2017-12-08 12:58:46', 2, 3),
@@ -100,13 +100,13 @@ INSERT INTO `comments` (`comment_id`, `comment_name`, `comment_email`, `comment_
 (8, 'Mica', 'mica@mica.com', 'Micin komentar', '2017-12-09 23:46:38', 1, 5),
 (14, 'Mile', 'mile@mile', 'Miletov komentar', '2017-12-10 01:37:52', 2, 5),
 (15, 'Aya Romporas', 'aya.romporas@gmail.com', 'Test proba 1', '2018-02-07 00:18:31', 0, 12),
-(16, 'Milos Sucura', 'interfortas.serbia@gmail.com', 'Test 2', '2018-02-07 00:19:24', 2, 12),
+(16, 'Milos Sucura', 'interfortas.serbia@gmail.com', 'Test 2', '2018-02-07 00:19:24', 1, 12),
 (17, 'Aja Romporas', 'aya.romporas@gmail.com', 'Test 3', '2018-02-07 00:20:11', 2, 12),
 (18, 'Sanja', 'sanja@gmail.com', 'Test 4', '2018-02-07 00:21:48', 2, 12),
-(19, 'Aja Romporas', 'aya.romporas@gmail.com', 'Test 5', '2018-02-07 00:24:27', 0, 12),
+(19, 'Aja Romporas', 'aya.romporas@gmail.com', 'Test 5', '2018-02-07 00:24:27', 1, 12),
 (20, 'Aja Romporas', 'aya.romporas@gmail.com', 'dfhfghf', '2018-02-07 00:56:29', 2, 12),
 (21, 'Aja Romporas', 'aya.romporas@gmail.com', 'fsdfsd', '2018-02-07 01:03:34', 1, 12),
-(22, 'Aja Romporas', 'aya.romporas@gmail.com', 'fasfsdfsd', '2018-02-07 01:03:51', 2, 12),
+(22, 'Aja Romporas', 'aya.romporas@gmail.com', 'fasfsdfsd', '2018-02-07 01:03:51', 1, 12),
 (23, 'Aja Romporas', 'aya.romporas@gmail.com', 'xfhfhfgh', '2018-02-07 01:05:30', 2, 12),
 (24, 'aja', 'aya.romporas@gmail.com', 'Test 6', '2018-02-07 01:06:35', 2, 12),
 (25, 'Ivana', 'ivsdfdfgdfgna@gmail.com', 'Test 7', '2018-02-07 01:07:30', 2, 16),
@@ -455,7 +455,7 @@ CREATE TABLE IF NOT EXISTS `recipes` (
   `recipe_permalink` varchar(255) NOT NULL,
   PRIMARY KEY (`recipe_id`),
   KEY `user_id_fk_idx` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=216059 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=226059 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `recipes`
@@ -677,7 +677,7 @@ CREATE TABLE IF NOT EXISTS `units` (
   `unit_name` varchar(255) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`unit_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `units`
@@ -717,30 +717,94 @@ INSERT INTO `units` (`unit_id`, `unit_name`, `status`) VALUES
 (32, 'čaše', 1),
 (33, 'listić', 1),
 (34, 'listića', 1),
-(35, 'list', 1),
-(36, 'lista', 1),
-(37, 'manji', 1),
-(38, 'manje', 1),
-(39, 'manja', 1),
-(40, 'manjih', 1),
-(41, 'veći', 1),
-(42, 'veće', 1),
-(43, 'veća', 1),
-(44, 'većih', 1),
-(45, 'osrednji', 1),
-(46, 'osrednja', 1),
-(47, 'osrednje', 1),
-(48, 'osrednjih', 1),
-(49, 'mali', 1),
-(50, 'mala', 1),
-(51, 'malih', 1),
-(52, 'veliki', 1),
-(53, 'velika', 1),
-(54, 'veliko', 1),
-(55, 'velikih', 1),
-(56, 'dkg', 1),
-(57, 'komadić', 1),
-(58, 'komadića', 1);
+(35, 'para', 1),
+(36, 'kolutić', 1),
+(37, 'veza', 1),
+(38, 'veze', 1),
+(39, 'list', 1),
+(40, 'lista', 1),
+(41, 'listova', 1),
+(42, 'manji', 1),
+(43, 'manja', 1),
+(44, 'manje', 1),
+(45, 'veći', 1),
+(46, 'veća', 1),
+(47, 'veće', 1),
+(48, 'manjih', 1),
+(49, 'većih', 1),
+(50, 'kčc', 1),
+(51, 'prstohvata', 1),
+(52, 'kockica', 1),
+(53, 'kockice', 1),
+(54, 'šolja', 1),
+(55, 'šolje', 1),
+(56, 'malo', 1),
+(57, 'par', 1),
+(58, 'kolutića', 1),
+(59, 'štapić', 1),
+(60, 'štapića', 1),
+(61, 'glavica', 1),
+(62, 'glavice', 1),
+(63, 'čen', 1),
+(64, 'čena', 1),
+(65, 'grančica', 1),
+(66, 'grančice', 1),
+(67, 'šnita', 1),
+(68, 'šnite', 1),
+(69, 'šoljica', 1),
+(70, 'šoljice', 1),
+(71, 'čaša', 1),
+(72, 'čaše', 1),
+(73, 'listić', 1),
+(74, 'listića', 1),
+(75, 'para', 1),
+(76, 'kolutić', 1),
+(77, 'veza', 1),
+(78, 'veze', 1),
+(79, 'list', 1),
+(80, 'lista', 1),
+(81, 'listova', 1),
+(82, 'kolutića', 1),
+(83, 'štapić', 1),
+(84, 'štapića', 1),
+(85, 'glavica', 1),
+(86, 'glavice', 1),
+(87, 'čen', 1),
+(88, 'čena', 1),
+(89, 'grančica', 1),
+(90, 'grančice', 1),
+(91, 'šnita', 1),
+(92, 'šnite', 1),
+(93, 'šoljica', 1),
+(94, 'šoljice', 1),
+(95, 'čaša', 1),
+(96, 'čaše', 1),
+(97, 'listić', 1),
+(98, 'listića', 1),
+(99, 'para', 1),
+(100, 'kolutić', 1),
+(101, 'veza', 1),
+(102, 'veze', 1),
+(103, 'list', 1),
+(104, 'lista', 1),
+(105, 'listova', 1),
+(106, 'kuglica', 1),
+(107, 'kuglice', 1),
+(108, 'mali', 1),
+(109, 'mala', 1),
+(110, 'male', 1),
+(111, 'malih', 1),
+(112, 'veliki', 1),
+(113, 'velike', 1),
+(114, 'velika', 1),
+(115, 'velikih', 1),
+(116, 'osrednji', 1),
+(117, 'osrednja', 1),
+(118, 'osrednje', 1),
+(119, 'osrednjih', 1),
+(120, 'dkg', 1),
+(121, 'komadić', 1),
+(122, 'komadića', 1);
 
 -- --------------------------------------------------------
 

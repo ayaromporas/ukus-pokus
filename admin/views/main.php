@@ -105,7 +105,7 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
 <body class="with-side-menu" >
 
 
-  <header class="site-header"><!-- invisible for dev -->
+  <header class="site-header alwaysOnTop"><!-- invisible for dev -->
       <div class="container-fluid">
 
         <!-- LOGO -->

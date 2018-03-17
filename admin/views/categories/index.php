@@ -6,7 +6,7 @@
 					<!-- JS biblioteke -->
 					  <script src="<?php echo ROOT_URL; ?>assets/js/lib/jquery/jquery-3.2.1.min.js"></script>
 
-					<section class="box-typical mb-0" >
+					<section class="box-typical mb-0 stickyHeader" >
 						<header class="box-typical-header">
 							<div class="tbl-row">
 								<div class="tbl-cell tbl-cell-title text-center">

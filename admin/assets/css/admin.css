@@ -175,4 +175,13 @@ cursor: pointer !important;
 font-weight: lighter !important;
 }
 
+.stickyHeader{
+	position: -webkit-sticky !important;
+ position: sticky !important;
+ top: 75px;
+ z-index: 999;
+}
 
+.alwaysOnTop{
+	z-index: 9999 !important;
+}

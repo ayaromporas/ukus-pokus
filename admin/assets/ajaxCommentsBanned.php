@@ -68,7 +68,7 @@ if(isset($_POST['approvedChoice']) && $_POST['approvedChoice']!==null && $_POST[
                </div>
                <div class="tbl-cell tbl-cell-photo">
                  <a onclick="aproveComment(<?php echo $commentId ?>,1)" title='Odobri'>
-                   <i class="fas fa-check-square green fa-3x"></i>
+                   <i class="fas fa-check-square green fa-2x"></i>
                  </a>
                </div>
              </div>
@@ -146,7 +146,7 @@ $commentTime = date_format($commentTime, "d.m.Y g:i a");
             </div>
             <div class="tbl-cell tbl-cell-photo">
               <a onclick="aproveComment(<?php echo $commentId ?>,1)" title='Odobri'>
-                <i class="fas fa-check-square green fa-3x"></i>
+                <i class="fas fa-check-square green fa-2x"></i>
               </a>
             </div>
           </div>

@@ -144,7 +144,7 @@ $numberComments = count($comments);
               						</div>
               						<div class="tbl-cell">
               							<p class="user-card-row-name"><a><?php echo $commentName; ?></a></p>
-              							<p class="color-blue-grey-lighter"><?php echo $commentTime; ?></p>
+              							<p class="color-blue-grey-lighter"><?php echo $commentTime; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
               						</div>
               						<div class="tbl-cell tbl-cell-photo" >
               							<a class="clc" onclick="aproveComment(<?php echo $commentId ?>,0)" title='Zabrani'>

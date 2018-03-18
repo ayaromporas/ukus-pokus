@@ -1,89 +1,192 @@
-<?php 
-/* javlja se na recipe strani, radi samo ocenjivanje */
+<?php
+/* javlja se na units/index stranici */
 include ('../config.php');
 include ('../classes/Database.php');
-include ('../classes/Model.php');
-include ('../models/RecipeModel.php');
+
 $database = new Database();
-$recipemodel = new RecipeModel();
+
 $errors = array();
 
-if(isset($_POST['id']) ){    //ako nema recepta sa trazenim id-jem u bazi, vracanje na pocetnu
-	$id = $_POST['id'];
-	$idRecipe = sanitize($id);
-	//echo $idRecipe;
-	$recipemodel->query('SELECT recipe_id, avg_rating, no_votes FROM recipes WHERE status=1 AND recipe_id=' . $idRecipe);
-	$recipeId = $recipemodel->single();
-	$ID = intval($recipeId['recipe_id']);
-	if (!($recipeId)) {						
-		$id = false;						//ako nema takvog id recepta u bazi
-		header('Location: ' . ROOT_URL); //resitiiii!!!!!!!
-	}else{	
-		$id = true;
-	}
-		
-	if(isset($_POST['rating'])){
-		$rating = $_POST['rating'];
-		//echo "rejting je" . $rating;
-		$rating = intval($rating);
-
-		if(($rating <= 0) || ($rating > 5)){
-			?>
-			<div class="alert alert-danger mx-2" role="alert">
-			  <h5 class="alert-heading">Došlo je do greške u slanju ocene!</h5>
-			  <p>Osvežite stranu i pokušajte ponovo.</p>
-			</div>
-			<?php
-		}else{
-
-			$nrVotesBefore = $recipeId['no_votes']; 
-			$avgRatingBefore = $recipeId['avg_rating']; 
-			$sumBefore = $nrVotesBefore * $avgRatingBefore; 
-
-			$nrVotesNew = $nrVotesBefore + 1;
-			$sumNew = $sumBefore + $rating; 
-			$avgRatingNew = $sumNew / $nrVotesNew; 
-			$avgRatingNewRound = round( $avgRatingNew, 1, PHP_ROUND_HALF_EVEN); 
-
-			$recipemodel->query('UPDATE recipes SET avg_rating = :newrating, no_votes=:novotes WHERE recipe_id = :id');
-
-			$recipemodel->bind(":newrating", $avgRatingNewRound);
-			$recipemodel->bind(":novotes", $nrVotesNew);
-			$recipemodel->bind(":id", $ID);
-
-			$recipemodel->execute();
-
-			?>
-			<div class="alert alert-success mx-2" role="alert">
-			  <h5 class="alert-heading">Hvala vam što ste ocenili ovaj recept!</h5>
-			  <p>Nadamo se da ćete isprobati još neki naš recept i javiti nam kako vam se čini.</p>
-			  <p class="mb-0">Prijatno! </p>
-			</div>
-			<?php
+$page = 1;
+$number = 10;
+$keyword = "%%";
 
 
-		}
-	}
+
+if(isset($_POST)){
+	$postArray = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 }
+
+if(isset($postArray['page']) ){
+	$page = $postArray['page'];
+	// echo "Promenljiva page: ";
+	// var_dump($page);
+}
+
+if(isset($postArray['number']) ){
+	$number = $postArray['number'];
+	// echo "Promenljiva number: ";
+	// var_dump($number);
+}
+
+if(isset($postArray['keyword']) ){
+	$keyword = $postArray['keyword'];
+	$keyword = "%". $keyword . "%";
+	// echo "Promenljiva keyword: ";
+	// var_dump($keyword);
+}
+
+//upit u bazu
+$database->query("SELECT * FROM ingredients WHERE ingredient_name LIKE '{$keyword}' ORDER BY ingredient_id");
+$ingredients = $database->resultSet();
+$numberResults = count($ingredients);
+
+//definisanje limita i paginacije
+$limit = $number; // broj komada po strani
+
+//echo $numberResults;
+
+if($numberResults == 0){
+	echo '<div class="alert alert-warning alert-dismissible fade show keywords-warning mx-auto mt-3" role="alert">Nema takve jedinice mere u bazi.</div>';
+	return;
+}else{
+
 ?>
 
+<table id="ingredientslist" class="table">
+	<thead>
+	<tr>
+		<th class="text-center">Id</th>
+		<th class="text-center">Naziv</th>
+		<th class="text-center">Status</th>
+		<th class="text-center">Izmeni</th>
+		<th class="text-center">Obriši</th>
+	</tr>
+	</thead>
+	<tbody>
 
+<?php
 
+	// Ispis pronadjenih jedinica mere petljom
+             $x = ($page-1) * $limit;
+             $y = $x + $limit;
 
+             while ($x < $y){
 
+                	 if (!($x > ($numberResults-1))) {
 
-<?php 
+                	 	$id = $ingredients[$x]['ingredient_id'];
+                	 	$name = $ingredients[$x]['ingredient_name'];
+                	 	$statusw = $ingredients[$x]['status'];
 
-function sanitize($string){     //proveriti sa nekim oko sanitacije ulaznih stringova za user input comment
-	$a = trim($string);
-	$b = htmlspecialchars($a);
-	$c = htmlentities($b);
-	//$c .= "sanitize";
-	return $c;
-}
+                	 	if($statusw == 1){
+				$status = "aktivno";
+				$color = "btn-success";
+			}elseif ($statusw == 0) {
+				$status = "obrisano";
+				$color = "btn-danger";
+			}
 
+			// stampanje liste
+?>
+<tr>
+	<td class="text-center"><span class="label label-pill"><?php echo $id; ?></span></td>
+	<td class="text-center"><?php echo $name; ?></td>
+	<td class="text-center"><button type="button" class="btn btn-rounded <?php echo $color; ?> btn-sm"><?php echo $status; ?></button></td>
+	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>ingredients/edit/<?php echo $id; ?>"><i class="font-icon fas fa-edit"></i></a></td>
+	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>ingredients/delete/<?php echo $id; ?>"><i class="font-icon fas fa-trash"></i></a></td>
 
+</tr>
 
- ?>
+<?php
+		} // kraj if - ako je x < rezultata
+		$x++;
+	} // kraj while
 
+?>
 
+	</tbody>
+</table>
+
+<?php
+$countIngredientsArray = array('count' => $numberResults);
+$fp = fopen('results.json', 'w');
+fwrite($fp, json_encode($countIngredientsArray, JSON_PRETTY_PRINT));   //here it will print the array pretty
+fclose($fp);
+
+} // kraj else glavni - ako ima rezultata
+
+?>
+
+<section id="paginationUnits" class="text-center">
+	<br>
+  <nav aria-label="pagination">
+          <ul class="pagination justify-content-center">
+
+	<?php
+
+/*-------------------------------------------------------iscrtavanje paginacije -----------------------------------*/
+	 if ($numberResults > 0){  //iscrtavanje paginacije
+
+		$i = ($numberResults/$limit);
+		$i = ceil($i);
+
+		if ($i == 1) {				/* prvi slucaj */
+			echo '<li class="page-item active"><span class="page-link" >'.$i.'</span></li>';
+
+		}elseif (($i > 1) && ($i < 8)) {
+			for ($e = 1; $e < ($i+1); $e++) {
+				if ($e == $page) {
+					echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+				}else{
+					echo '<li class="page-item"><span id="' . $e. '" class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+				       }
+			}
+
+		}elseif ($i >= 8) {			/*drugi slucaj  */
+			if ($page >= 5){
+				if ($page > ($i-4)) {
+					echo '<li class="page-item"><span id=" ' . "1". ' " class="page-link" onclick="pagination('. "1" .')">1</span></li>';
+					echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+					for ($e = ($i-4); $e < ($i+1); $e++) {
+						if ($e == $page) {
+						echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+						}else{
+						echo '<li class="page-item"><span id="' . $e. '" class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+						}
+					}
+
+				}else{
+					echo '<li class="page-item"><span id=" ' . "1". ' " class="page-link" onclick="pagination('. "1" .')">1</span></li>';
+					echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+
+					for ($e = $page-2; $e < ($page+3); $e++) {
+						if ($e == $page) {
+						echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+						}else{
+						echo '<li class="page-item"><span id="' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+						}
+					}
+
+					echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+					echo '<li class="page-item"><span id=" ' . $i. ' " class="page-link" onclick="pagination('. $i .')">'.$i.'</span></li>';
+				}
+
+			}elseif ($page < 5) {
+				for ($e = 1; $e < 6; $e++) {
+					if ($e == $page) {
+						echo '<li class="page-item active"><span class="page-link" >'.$e.'</span></li>';
+					}else{
+						echo '<li class="page-item"><span id="' . $e. ' " class="page-link" onclick="pagination('. $e .')">'.$e.'</span></li>';
+					}
+				}
+				echo '<li class="page-item"><span class="page-link" >'."...".'</span></li>';
+				echo '<li class="page-item"><span id=" ' . $i. ' " class="page-link" onclick="pagination('. $i .')">'.$i.'</span></li>';
+			}
+		} /* treci slucaj */
+	?>
+       </ul>
+   </nav>
+</section>
+<?php
+	}

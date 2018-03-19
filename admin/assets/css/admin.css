@@ -186,4 +186,8 @@ font-weight: lighter !important;
 	z-index: 9999 !important;
 }
 
+.bootstrap-table .table a, .fixed-table-body .table a, .table a {
+	border-bottom: none !important;
+	outline: 0 !important;
+}
 

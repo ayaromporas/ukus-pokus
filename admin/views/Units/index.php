@@ -1,24 +1,24 @@
-<?php 
+<?php
 
-if(($superadmin || $admin || $editor) === true){ 
+if(($superadmin || $admin || $editor) === true){
 ?>
 
 <!-- JS biblioteke -->
   <script src="<?php echo ROOT_URL; ?>assets/js/lib/jquery/jquery-3.2.1.min.js"></script>
 
-<section class="box-typical mb-0" >
+<section class="box-typical mb-0 stickyHeader" >
 	<header class="box-typical-header">
-		<div class="tbl-row">			 
-			<div class="tbl-cell tbl-cell-title text-center">			
-				<h3><i class="font-icon purple fas fa-balance-scale"></i>&nbsp; &nbsp; &nbsp; Jedinice mere &nbsp; &nbsp; &nbsp; <i class="font-icon purple fas fa-balance-scale"></i></h3>			
-			</div>	
+		<div class="tbl-row">
+			<div class="tbl-cell tbl-cell-title text-center">
+				<h3><i class="font-icon purple fas fa-balance-scale"></i>&nbsp; &nbsp; &nbsp; Jedinice mere &nbsp; &nbsp; &nbsp;<span class="label label-pill" id="numberUnits"></span></h3>
+			</div>
 		</div>
 	</header>
 	<header class="box-typical-header">
 		<div class="tbl-row">
 			<div class="tbl-cell tbl-cell-action-bordered">
 				<form>
-					<select class="form-control" id="numberitems1" class="numberitems">
+					<select class="form-control pointerClass" id="numberitems1" class="numberitems">
 						<option value="10" selected="selected">10</option>
 						<option value="25">25</option>
 						<option value="50">50</option>
@@ -27,25 +27,25 @@ if(($superadmin || $admin || $editor) === true){
 				</form>
 			</div>
 
-			<div class="tbl-cell tbl-cell-title text-center">	
-				<form>	
+			<div class="tbl-cell tbl-cell-title text-center">
+				<form>
 					<input type="text" class="form-control" name="search-keywords" id="search-keywords" placeholder="Unesite minimum 2 slova...">
 				</form>
-				
+
 			</div>
 			<div class="tbl-cell tbl-cell-action-bordered">
 				<a href="<?php echo ROOT_URL; ?>units/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
-			</div>	
-				
+			</div>
+
 		</div>
 	</header>
 	<div id="keywords-warning" class="text-center mx-auto"></div>
 </section>
 
 <section class="box-typical">
-	
+
 	<div class="box-typical-body" id="units-index">
-		
+
 	</div><!--.box-typical-body-->
 </section><!--.box-typical-->
 
@@ -108,7 +108,7 @@ $("#search-keywords").keyup(function() {
 		//console.log(keyword + number + page);
 		return ajax_call(keyword, number, page);
 	}
-	
+
 });
 
 
@@ -131,16 +131,34 @@ function pagination(page){
 		var keyword = $("#search-keywords").val();
 		$("#keywords-warning").text ("");
 		//console.log(keyword + number + page);
-		
+
 	}
 return ajax_call(keyword, number, page);
-}   	
+}
 
+function numberUnitsWrt(){
+  var ourRequest = new XMLHttpRequest();
+   ourRequest.open('GET','<?php echo ROOT_URL; ?>assets/results.json');
+   ourRequest.onload = function() {
+       if (ourRequest.status >= 200 && ourRequest.status < 400) {
+       var ourData = JSON.parse(ourRequest.responseText);
+       // alert(ourData.name);
+       document.getElementById("numberUnits").innerHTML=ourData.count;
+     } else {
+       alert('Connected to the server but returned an error');
+     }
+}
+ourRequest.onerror = function () {
+     alert('Connection error!');
+   }
+ ourRequest.send();
+}
 
 //ajax funkcija
- function ajax_call(keyword, number, page) {             
+ function ajax_call(keyword, number, page) {
     $.post("<?php echo ROOT_URL; ?>assets/ajaxUnits.php", {keyword: keyword, number: number, page: page}, function(result){
             $("#units-index").html(result);
+            numberUnitsWrt()
     });
 }
 
@@ -160,16 +178,16 @@ $( document ).ready(function() {
 		var keyword = $("#search-keywords").val();
 		$("#keywords-warning").text ("");
 		//console.log(keyword + number + page);
-		
+
 	}
 return ajax_call(keyword, number, page);
 });
 </script>
 
-<?php 
+<?php
 
 }elseif ($demo === true) {
-	
+
 $units = $viewmodel[0];  //spisak svih jedinica mere
 
  ?>
@@ -179,17 +197,17 @@ $units = $viewmodel[0];  //spisak svih jedinica mere
 			<div class="tbl-cell tbl-cell-action-bordered">
 				<a href="<?php echo ROOT_URL; ?>units/insert"><i class="green fas fa-plus-square fa-2x"></i></a>
 			</div>
-			<div class="tbl-cell tbl-cell-title text-center">			
+			<div class="tbl-cell tbl-cell-title text-center">
 				<h3><i class="font-icon purple fas fa-balance-scale"></i>&nbsp; &nbsp; &nbsp; Jedinice mere &nbsp; &nbsp; &nbsp; <i class="font-icon purple fas fa-balance-scale"></i></h3>
-			
-			</div>	
+
+			</div>
 			<div class="tbl-cell tbl-cell-action-bordered">
 				<select>
 					<option>10</option>
 					<option>25</option>
 					<option>50</option>
 				</select>
-			</div>	
+			</div>
 		</div>
 	</header>
 	<div class="box-typical-body">
@@ -206,10 +224,10 @@ $units = $viewmodel[0];  //spisak svih jedinica mere
 				</thead>
 				<tbody>
 
-<?php 
+<?php
 
 foreach ($units as $unit) {
-	
+
 	$id = $unit['unit_id'];
 	$name = $unit['unit_name'];
 	$status = $unit['status'];
@@ -229,16 +247,16 @@ foreach ($units as $unit) {
 		<td class="text-center"><button type="button" class="btn btn-rounded <?php echo $color; ?> btn-sm"><?php echo $status; ?></button></td>
 		<td class="table-icon-cell text-center"><i class="font-icon fas fa-edit"></i></td>
 		<td class="table-icon-cell text-center"><i class="font-icon fas fa-trash"></i></td>
-		
+
 	</tr>
 
-<?php	
-	
+<?php
+
 }
- ?>					
-					
-					
-				
+ ?>
+
+
+
 				</tbody>
 			</table>
 		</div>
@@ -248,7 +266,7 @@ foreach ($units as $unit) {
 <!-- paginacija -->
 <nav aria-label="Page navigation example" class="text-center">
   <ul class="pagination">
-    
+
     <li class="page-item"><a class="page-link" href="#">1</a></li>
     <li class="page-item"><a class="page-link" href="#">...</a></li>
     <li class="page-item"><a class="page-link" href="#">12</a></li>
@@ -260,9 +278,9 @@ foreach ($units as $unit) {
   </ul>
 </nav>
 
- 
 
- <?php 
+
+ <?php
 
 }
 

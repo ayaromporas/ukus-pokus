@@ -1,5 +1,5 @@
 <?php
-/* javlja se na units/index stranici */
+/* javlja se na categories/index stranici */
 include ('../config.php');
 include ('../classes/Database.php');
 
@@ -37,9 +37,9 @@ if(isset($postArray['keyword']) ){
 }
 
 //upit u bazu
-$database->query("SELECT * FROM units WHERE unit_name LIKE '{$keyword}' ORDER BY unit_id");
-$units = $database->resultSet();
-$numberResults = count($units);
+$database->query("SELECT * FROM categories WHERE cat_name LIKE '{$keyword}' ORDER BY cat_id");
+$categories = $database->resultSet();
+$numberResults = count($categories);
 
 //definisanje limita i paginacije
 $limit = $number; // broj komada po strani
@@ -53,7 +53,7 @@ if($numberResults == 0){
 
 ?>
 
-<table id="unitslist" class="table">
+<table id="categorieslist" class="table">
 	<thead>
 	<tr>
 		<th class="text-center">Id</th>
@@ -75,9 +75,9 @@ if($numberResults == 0){
 
                 	 if (!($x > ($numberResults-1))) {
 
-                	 	$id = $units[$x]['unit_id'];
-                	 	$name = $units[$x]['unit_name'];
-                	 	$statusw = $units[$x]['status'];
+                	 	$id = $categories[$x]['cat_id'];
+                	 	$name = $categories[$x]['cat_name'];
+                	 	$statusw = $categories[$x]['status'];
 
                 	 	if($statusw == 1){
 				$status = "aktivno";
@@ -93,8 +93,8 @@ if($numberResults == 0){
 	<td class="text-center"><span class="label label-pill"><?php echo $id; ?></span></td>
 	<td class="text-center"><?php echo $name; ?></td>
 	<td class="text-center"><button type="button" class="btn btn-rounded <?php echo $color; ?> btn-sm"><?php echo $status; ?></button></td>
-	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>units/edit/<?php echo $id; ?>"><i class="font-icon fas fa-edit"></i></a></td>
-	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>units/delete/<?php echo $id; ?>"><i class="font-icon fas fa-trash"></i></a></td>
+	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>categories/edit/<?php echo $id; ?>"><i class="font-icon fas fa-edit"></i></a></td>
+	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>categories/delete/<?php echo $id; ?>"><i class="font-icon fas fa-trash"></i></a></td>
 
 </tr>
 
@@ -109,16 +109,16 @@ if($numberResults == 0){
 </table>
 
 <?php
-$countUnitsArray = array('count' => $numberResults);
+$countCategoriesArray = array('count' => $numberResults);
 $fp = fopen('results.json', 'w');
-fwrite($fp, json_encode($countUnitsArray, JSON_PRETTY_PRINT));   //here it will print the array pretty
+fwrite($fp, json_encode($countCategoriesArray, JSON_PRETTY_PRINT));   //here it will print the array pretty
 fclose($fp);
 
 } // kraj else glavni - ako ima rezultata
 
 ?>
 
-<section id="paginationUnits" class="text-center">
+<section id="paginationCategories" class="text-center">
 	<br>
   <nav aria-label="pagination">
           <ul class="pagination justify-content-center">

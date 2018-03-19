@@ -4,7 +4,7 @@ if (($superadmin || $admin || $editor) === true) {
 
 
 ?>
-<section class="box-typical">
+<section class="box-typical stickyHeader">
 	<header class="box-typical-header">
 		<div class="tbl-row">
 			<div class="tbl-cell tbl-cell-title text-right">

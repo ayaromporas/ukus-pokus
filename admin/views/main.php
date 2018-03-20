@@ -350,16 +350,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
               </ul>
           </li>
 
-          <li class="aquamarine with-sub">
-              <span>
-                  <i class="font-icon fas fa-address-book"></i>
-                  <span class="lbl">Imenik</span>
-              </span>
-              <ul>
-                  <li><a href="#"><span class="lbl">Saradnici</span></a></li>
-                  <li><a href="#"><span class="lbl">Partneri</span></a></li>
-              </ul>
-          </li>
+      
 
       </ul>
 
@@ -565,16 +556,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
               </ul>
           </li>
 
-          <li class="aquamarine with-sub">
-              <span>
-                  <i class="font-icon fas fa-address-book"></i>
-                  <span class="lbl">Imenik</span>
-              </span>
-              <ul>
-                  <li><a href="#"><span class="lbl">Saradnici</span></a></li>
-                  <li><a href="#"><span class="lbl">Partneri</span></a></li>
-              </ul>
-          </li>
+      
 
       </ul>
 

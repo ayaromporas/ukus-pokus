@@ -8,7 +8,7 @@ if (($superadmin || $admin || $editor) === true) {
 	<header class="box-typical-header">
 		<div class="tbl-row">
 			<div class="tbl-cell tbl-cell-title text-right">
-				<h3><i class="font-icon text-warning fas fa-comments"></i>&nbsp; &nbsp; Komentari na čekanju &nbsp; &nbsp;<span class="label label-pill" id="numberComm"></span></h3>
+				<h3><i class="font-icon text-warning fas fa-comments fa-lg"></i>&nbsp; &nbsp; Komentari na čekanju &nbsp; &nbsp;<span class="label label-pill" id="numberComm"></span></h3>
 
 			</div>
 			<div class="tbl-cell tbl-cell-title text-right">

@@ -177,9 +177,9 @@ font-weight: lighter !important;
 
 .stickyHeader{
 	position: -webkit-sticky !important;
- position: sticky !important;
- top: 75px;
- z-index: 999;
+	 position: sticky !important;
+	 top: 75px;
+	 z-index: 999;
 }
 
 .alwaysOnTop{
@@ -191,3 +191,6 @@ font-weight: lighter !important;
 	outline: 0 !important;
 }
 
+.site-header {
+	z-index: 10000 !important;
+}

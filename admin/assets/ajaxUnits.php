@@ -81,10 +81,10 @@ if($numberResults == 0){
 
                 	 	if($statusw == 1){
 				$status = "aktivno";
-				$color = "btn-success";
+				$color = "label-success";
 			}elseif ($statusw == 0) {
 				$status = "obrisano";
-				$color = "btn-danger";
+				$color = "label-danger";
 			}
 
 			// stampanje liste
@@ -92,7 +92,7 @@ if($numberResults == 0){
 <tr>
 	<td class="text-center"><span class="label label-pill"><?php echo $id; ?></span></td>
 	<td class="text-center"><?php echo $name; ?></td>
-	<td class="text-center"><button type="button" class="btn btn-rounded <?php echo $color; ?> btn-sm"><?php echo $status; ?></button></td>
+	<td class="text-center"><span class="label <?php echo $color; ?>"><?php echo $status; ?></span></td>
 	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>units/edit/<?php echo $id; ?>"><i class="font-icon fas fa-edit"></i></a></td>
 	<td class="text-center table-icon-cell"><a href="<?php echo ROOT_URL; ?>units/delete/<?php echo $id; ?>"><i class="font-icon fas fa-trash"></i></a></td>
 

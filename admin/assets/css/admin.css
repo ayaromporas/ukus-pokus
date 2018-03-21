@@ -194,3 +194,7 @@ font-weight: lighter !important;
 .site-header {
 	z-index: 10000 !important;
 }
+
+.dark-link {
+	color: #343434;
+}

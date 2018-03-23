@@ -10,23 +10,23 @@ if(($superadmin || $admin || $editor) === true){
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Naziv</label>
 			<div class="col-sm-9">
-				<p class="form-control-static"><input type="text" class="form-control" id="photoname" placeholder='Početno slovo mora biti malo, npr. "američke palačinke"... ' name="photoname"></p>
+				<p class="form-control-static"><input type="text" class="form-control" id="photoname" placeholder='Početno slovo mora biti malo, npr. "američke palačinke"... ' name="photoname" required="required"></p>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Alt</label>
 			<div class="col-sm-9">
-				<p class="form-control-static"><input type="text" class="form-control" id="photoalt" placeholder='Početno slovo mora biti malo, npr. "američke palačinke"... ' name="photoalt" ></p>
+				<p class="form-control-static"><input type="text" class="form-control" id="photoalt" placeholder='Početno slovo mora biti malo, npr. "američke palačinke"... ' name="photoalt" required="required"></p>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Link</label>
 			<div class="col-sm-9">
-				<p class="form-control-static"><input type="text" class="form-control" id="photolink" name="photolink" placeholder='Samo mala slova, brojeve, crtice "-" i tačku ".", npr. "americke-palacinke.jpg"... ' ></p>
+				<p class="form-control-static"><input type="text" class="form-control" id="photolink" name="photolink" placeholder='Samo mala slova, brojeve, crtice "-" i tačku ".", npr. "americke-palacinke.jpg"... '  required="required"></p>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label class="col-sm-2 form-control-label">Id recepta kome pripada</label>
+			<label class="col-sm-2 form-control-label">Id recepta kome pripada (nije obavezno)</label>
 			<div class="col-sm-9">
 				<p class="form-control-static"><input type="text" class="form-control" id="photorecid" name="photorecid" placeholder='Isključivo brojevi, u obliku npr. "25"...' ></p>
 			</div>
@@ -35,7 +35,7 @@ if(($superadmin || $admin || $editor) === true){
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Upload slike</label>
 			<div class="col-sm-9">			
-		                       	<p class="form-control-static"><input type="file" id="fileToUpload" name="fileToUpload" placeholder="Izaberite sliku"></p>			
+		                       	<p class="form-control-static"><input type="file" id="fileToUpload" name="fileToUpload" placeholder="Izaberite sliku" required="required"></p>			
 		             </div>
 
 		                </div>

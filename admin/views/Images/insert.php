@@ -6,7 +6,7 @@ if(($superadmin || $admin || $editor) === true){
 <div class="box-typical box-typical-padding">				
 	<h5 class="m-t-lg with-border text-center"><i class="font-icon color-blue far fa-images"></i>&nbsp;&nbsp;&nbsp;<strong>Unos nove slike</strong>&nbsp;&nbsp;&nbsp;<i class="font-icon color-blue far fa-images"></i></h5><br>
 
-	<form method="POST" action="<?php echo ROOT_URL; ?>images/insert" name="newphoto">
+	<form method="POST" action="<?php echo ROOT_URL; ?>images/insert" name="newphoto" enctype="multipart/form-data" >
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Naziv</label>
 			<div class="col-sm-9">
@@ -22,15 +22,24 @@ if(($superadmin || $admin || $editor) === true){
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label">Link</label>
 			<div class="col-sm-9">
-				<p class="form-control-static"><input type="text" class="form-control" id="photolink" name="photolink" placeholder='Samo mala slova, brojeve, crtice "-" i tačku ".", npr. "americke-palacinke.jpg"... ' required="required"></p>
+				<p class="form-control-static"><input type="text" class="form-control" id="photolink" name="photolink" placeholder='Samo mala slova, brojeve, crtice "-" i tačku ".", npr. "americke-palacinke.jpg"... '  required="required"></p>
 			</div>
 		</div>
 		<div class="form-group row">
-			<label class="col-sm-2 form-control-label">Id recepta kome pripada</label>
+			<label class="col-sm-2 form-control-label">Id recepta kome pripada (nije obavezno)</label>
 			<div class="col-sm-9">
 				<p class="form-control-static"><input type="text" class="form-control" id="photorecid" name="photorecid" placeholder='Isključivo brojevi, u obliku npr. "25"...' ></p>
 			</div>
 		</div>
+
+		<div class="form-group row">
+			<label class="col-sm-2 form-control-label">Upload slike</label>
+			<div class="col-sm-9">			
+		                       	<p class="form-control-static"><input type="file" id="fileToUpload" name="fileToUpload" placeholder="Izaberite sliku" required="required"></p>			
+		             </div>
+
+		                </div>
+		            </div>
 	
 		<div class="text-center">
 			<button type="text" name="submit" value="submit" class="btn btn-rounded btn-success">Sačuvaj</button>
@@ -41,6 +50,14 @@ if(($superadmin || $admin || $editor) === true){
 </div><!--.box-typical-->
 
 
+<?php 
+
+if(isset($_POST['submit'])){
+	var_dump($_POST);
+	var_dump($_FILES);
+}
+
+ ?>
 
 
 

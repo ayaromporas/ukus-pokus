@@ -137,21 +137,9 @@ return ajax_call(keyword, number, page);
 }
 
 function numberUnitsWrt(){
-  var ourRequest = new XMLHttpRequest();
-   ourRequest.open('GET','<?php echo ROOT_URL; ?>assets/results.json');
-   ourRequest.onload = function() {
-       if (ourRequest.status >= 200 && ourRequest.status < 400) {
-       var ourData = JSON.parse(ourRequest.responseText);
-       // alert(ourData.name);
-       document.getElementById("numberUnits").innerHTML=ourData.count;
-     } else {
-       alert('Connected to the server but returned an error');
-     }
-}
-ourRequest.onerror = function () {
-     alert('Connection error!');
-   }
- ourRequest.send();
+   $.getJSON( '<?php echo ROOT_URL; ?>assets/results.json', function(json) {
+     document.getElementById("numberUnits").innerHTML=json.count;
+  });
 }
 
 //ajax funkcija

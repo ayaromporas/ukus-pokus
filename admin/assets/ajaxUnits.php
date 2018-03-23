@@ -80,12 +80,12 @@ if($numberResults == 0){
                 	 	$statusw = $units[$x]['status'];
 
                 	 	if($statusw == 1){
-				$status = "aktivno";
-				$color = "label-success";
-			}elseif ($statusw == 0) {
-				$status = "obrisano";
-				$color = "label-danger";
-			}
+								$status = "aktivno";
+								$color = "label-success";
+							}elseif ($statusw == 0) {
+								$status = "obrisano";
+								$color = "label-danger";
+							}
 
 			// stampanje liste
 ?>

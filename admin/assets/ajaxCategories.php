@@ -79,16 +79,16 @@ if($numberResults == 0){
                 	 	$name = $categories[$x]['cat_name'];
                 	 	$statusw = $categories[$x]['status'];
 
-                	 	if($statusw == 1){
-				$status = "aktivno";
-				$color = "label-success";
-			}elseif ($statusw == 0) {
-				$status = "obrisano";
-				$color = "label-danger";
-			}
+										if($statusw == 1){
+					$status = "aktivno";
+					$color = "label-success";
+					}elseif ($statusw == 0) {
+					$status = "obrisano";
+					$color = "label-danger";
+					}
 
-			// stampanje liste
-?>
+					// stampanje liste
+					?>
 <tr>
 	<td class="text-center"><span class="label label-pill"><?php echo $id; ?></span></td>
 	<td class="text-center"><?php echo $name; ?></td>

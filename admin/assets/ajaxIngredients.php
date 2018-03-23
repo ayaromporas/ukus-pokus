@@ -79,13 +79,14 @@ if($numberResults == 0){
                 	 	$name = $ingredients[$x]['ingredient_name'];
                 	 	$statusw = $ingredients[$x]['status'];
 
-                	 	if($statusw == 1){
+										if($statusw == 1){
 				$status = "aktivno";
 				$color = "label-success";
 			}elseif ($statusw == 0) {
 				$status = "obrisano";
 				$color = "label-danger";
 			}
+
 
 			// stampanje liste
 ?>

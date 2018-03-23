@@ -121,8 +121,8 @@ if($numberResults == 0){
 			<div class="photo">
 				<img src="<?php echo HOME; ?>/assets/img/<?php echo $link; ?>" alt="<?php echo $alt; ?>">
 			</div>
-			<div class="tbl-cell mr-auto p-2">
-				<p class="color-blue-grey-lighter"><a href="<?php echo HOME; ?>assets/img/<?php echo $link; ?>" target="blank"><?php echo HOME; ?>assets/img/<?php echo $link; ?></a></p>
+			<div class="tbl-cell p-1 " >
+				<p class="color-blue-grey-lighter "><a href="<?php echo HOME; ?>assets/img/<?php echo $link; ?>" target="blank"  style="word-break: break-all; ">home/assets/img/<?php echo $link; ?></a></p>
 			</div>
 					
 		</div>

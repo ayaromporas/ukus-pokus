@@ -97,20 +97,18 @@ if($numberResults == 0){
 		<div class="card-typical-section">
 			<div class="user-card-row images-view">
 
-				<div class="tbl-row">
-					<div class="tbl-cell tbl-cell-photo">
+				<div class="tbl-row d-flex">
+					<div class="tbl-cell tbl-cell-photo mr-auto p-2">
 						<span class="label label-pill"><?php echo $id; ?></span>
 					</div>
 
-					<div class="tbl-cell">
-						<p class="color-blue-grey-lighter"><a href="<?php echo HOME; ?>assets/img/<?php echo $link; ?>"  target="blank"><?php echo HOME; ?>assets/img/<?php echo $link; ?></a></p>
-					</div>
-					<div class="tbl-cell p-3">
+					
+					<div class="tbl-cell p-2">
 						<a href="<?php echo ROOT_URL; ?>images/edit/<?php echo $id; ?>">
 							<i class="font-icon fas fa-edit grey-icon fa-lg"></i>
 						</a>
 					</div>
-					<div class="tbl-cell p-1">
+					<div class="tbl-cell p-2">
 						<a href="<?php echo ROOT_URL; ?>images/delete/<?php echo $id; ?>">
 							<i class="font-icon fas fa-trash grey-icon fa-lg"></i>
 						</a>
@@ -123,9 +121,14 @@ if($numberResults == 0){
 			<div class="photo">
 				<img src="<?php echo HOME; ?>/assets/img/<?php echo $link; ?>" alt="<?php echo $alt; ?>">
 			</div>
-			
+			<div class="tbl-cell mr-auto p-2">
+				<p class="color-blue-grey-lighter"><a href="<?php echo HOME; ?>assets/img/<?php echo $link; ?>" target="blank"><?php echo HOME; ?>assets/img/<?php echo $link; ?></a></p>
+			</div>
+					
 		</div>
+
 		<div class="card-typical-section">
+			
 			<a href="#" class="card-typical-likes">
 				<span class="<?php echo $color; ?> btn-sm"><?php echo $status; ?></span>
 			</a>

@@ -123,6 +123,10 @@ a#logged:hover, a#logged:active {
 	overflow-wrap: break-word;
 }
 
+.word-wrap {
+	word-wrap: break-word;
+}
+
 .box-typical .box-typical-header .tbl-cell.tbl-cell-action-bordered {
 	border-left: none !important;
 }
@@ -198,3 +202,4 @@ font-weight: lighter !important;
 .dark-link {
 	color: #343434;
 }
+

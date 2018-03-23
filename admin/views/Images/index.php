@@ -15,7 +15,7 @@ if(($superadmin || $admin || $editor) === true){
 	<header class="box-typical-header">
 		<div class="tbl-row">
 			<div class="tbl-cell tbl-cell-title text-center">
-				<h3><i class="font-icon color-blue far fa-images fa-lg"></i>&nbsp; &nbsp; &nbsp; Slike &nbsp; &nbsp; &nbsp; <span class="label label-pill" id="numberIngredients"></span></h3>
+				<h3><i class="font-icon color-blue far fa-images fa-lg"></i>&nbsp; &nbsp; &nbsp; Slike &nbsp; &nbsp; &nbsp; <span class="label label-pill" id="numberImages"></span></h3>
 			</div>
 		</div>
 	</header>
@@ -146,9 +146,9 @@ function numberIngredientsWrt(){
        if (ourRequest.status >= 200 && ourRequest.status < 400) {
        var ourData = JSON.parse(ourRequest.responseText);
        // alert(ourData.name);
-       document.getElementById("numberIngredients").innerHTML=ourData.count;
+       document.getElementById("numberImages").innerHTML=ourData.count;
      } else {
-       alert('Connected to the server but returned an error');
+       console.log('Connected to the server but returned an error');
      }
 }
 ourRequest.onerror = function () {

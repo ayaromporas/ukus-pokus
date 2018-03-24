@@ -49,7 +49,7 @@ if(($superadmin || $admin || $editor) === true){
 <br>
 
 <div id="images-index">
-	
+
 </div><!--.box-typical-->
 
 <section>
@@ -139,29 +139,17 @@ function pagination(page){
 return ajax_call(keyword, number, page);
 }
 
-function numberIngredientsWrt(){
-  var ourRequest = new XMLHttpRequest();
-   ourRequest.open('GET','<?php echo ROOT_URL; ?>assets/results.json');
-   ourRequest.onload = function() {
-       if (ourRequest.status >= 200 && ourRequest.status < 400) {
-       var ourData = JSON.parse(ourRequest.responseText);
-       // alert(ourData.name);
-       document.getElementById("numberImages").innerHTML=ourData.count;
-     } else {
-       console.log('Connected to the server but returned an error');
-     }
-}
-ourRequest.onerror = function () {
-     alert('Connection error!');
-   }
- ourRequest.send();
+function numberImagesWrt(){
+   $.getJSON( '<?php echo ROOT_URL; ?>assets/results.json', function(json) {
+     document.getElementById("numberImages").innerHTML=json.count;
+  });
 }
 
 //ajax funkcija
  function ajax_call(keyword, number, page) {
     $.post("<?php echo ROOT_URL; ?>assets/ajaxPhotos.php", {keyword: keyword, number: number, page: page}, function(result){
             $("#images-index").html(result);
-            numberIngredientsWrt();
+            numberImagesWrt();
     });
 }
 

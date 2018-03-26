@@ -95,8 +95,9 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
 
     <!-- main styling -->
     <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/lib/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/main.css">
     <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/admin.css">
+    <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/main.css">
+  
 
 
 

@@ -194,3 +194,6 @@ font-weight: lighter !important;
 .site-header {
 	z-index: 10000 !important;
 }
+.modal-content {
+    margin-top:150px;
+}

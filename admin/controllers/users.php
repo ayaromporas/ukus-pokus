@@ -20,10 +20,6 @@ class Users extends Controller{
 		$viewmodel = new UserModel();
 		$this->returnView($viewmodel->Login(), true);
 	}
-	protected function View(){
-		$viewmodel = new UserModel();
-		$this->returnView($viewmodel->View(), true);
-	}
 
 	protected function Logout(){
 		unset($_SESSION['logged']);

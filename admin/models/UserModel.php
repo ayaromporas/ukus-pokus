@@ -3,19 +3,16 @@ class UserModel extends Model{
 
 	public function Index(){
 
-		$this->query('SELECT * FROM users ORDER BY user_name ASC');
+		$this->query('SELECT * FROM users WHERE status > 0 ORDER BY user_name ASC');
 		$users = $this->resultSet();
-
-		$resultArray = array($users);
-
-		return $resultArray;
+		return $users;
 
 	}
-
-	public function Insert(){
-		return;
+	public function edit(){
+		$id = $_GET['id'];
+		$this->query("SELECT * FROM users WHERE user_id = {$id}");//
+		$user = $this->single();
+		return $user;
+		
 	}
-
-
-
 }

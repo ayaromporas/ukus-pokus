@@ -1,5 +1,5 @@
 <?php 
-$users = $viewmodel[0];  //spisak svih korisnika
+$users = $viewmodel;  //spisak svih korisnika
 
 ?>
 
@@ -106,7 +106,7 @@ $users = $viewmodel[0];  //spisak svih korisnika
 
 <?php 
 
-foreach ($users as $user) {
+foreach ($viewmodel as $user) {
 	if ($user['status'] != 0) {
 		
 	
@@ -133,7 +133,7 @@ foreach ($users as $user) {
 						<td class="text-center"><?php echo $email; ?></td>
 						<td class="text-center"><?php echo $cellphone; ?></td>
 						<td class="text-center"><button type="button" class="btn btn-rounded <?php echo $color; ?> btn-sm"><?php echo $status; ?></button></td>
-						<td class="table-icon-cell text-center"><i class="font-icon fas fa-edit"></i></td>
+						<td class="table-icon-cell text-center" ><a href="<?php echo ROOT_URL; ?>users/edit/<?php echo $user['user_id']; ?>"><i class="font-icon fas fa-edit"></i></a></td>
 						<td class="table-icon-cell text-center"><i class="font-icon fas fa-trash"></i></td>
 						
 					</tr>
@@ -142,16 +142,7 @@ foreach ($users as $user) {
 	}
 }
  ?>					
-					
-					<tr>
-						<td class="text-center">Demo</td>
-						<td class="text-center">demo</td>
-						<td class="text-center">demo@gmail.com</td>
-						<td class="text-center">060.123.45.67</td>
-						<td class="text-center"><button id="notie-success-a" type="button" class="btn btn-rounded btn-yellow btn-sm">demo</button></td>
-						<td class="table-icon-cell text-center"><i class="font-icon fas fa-edit"></i></td>
-						<td class="table-icon-cell text-center"><i class="font-icon fas fa-trash"></i></td>
-					</tr>
+			
 				
 				</tbody>
 			</table>
@@ -173,5 +164,4 @@ foreach ($users as $user) {
 
   </ul>
 </nav>
-
 

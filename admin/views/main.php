@@ -328,7 +328,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
           </li>
 
           <li class="green-light">
-                  <a href="#"><span>
+                  <a href="<?php echo ROOT_URL; ?>notice"><span>
                     <i class="font-icon fas fa-bullhorn"></i>
                     <span class="lbl">Obaveštenje svim superadminima</span>
                  </span></a>
@@ -350,7 +350,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
               </ul>
           </li>
 
-      
+
 
       </ul>
 
@@ -556,7 +556,7 @@ if(($superadmin === true) || ($admin === true) || ($editor === true)) {
               </ul>
           </li>
 
-      
+
 
       </ul>
 

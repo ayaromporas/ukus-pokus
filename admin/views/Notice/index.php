@@ -28,7 +28,7 @@
 
 		<!-- submit -->
 		<div class="text-center">
-			<button type="text" name="submit" value="submit" class="btn btn-rounded btn-success">Sačuvaj</button>
+			<button type="text" name="submit" value="submit" class="btn btn-rounded btn-success">Pošalji poruku</button>
 		</div>
 	</form><br>
 </div><!--.box-typical-->

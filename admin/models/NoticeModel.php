@@ -29,14 +29,15 @@ class NoticeModel extends Model{
     			Messages::setMsg('Problem sa unosom. Nedovoljan broj unetih slova, naslov ili tekst poruke suviše kratak. '. $nr2, 'error');
     			return;
     		}
-
-        $emailText = 'Poruka poslata od: '. $userName. ' ID: '.$userId. "tekst poruke: \n".$noticeBody;
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+        $emailText = 'Poruka poslata od korisnika: '. $userName. ' ID: '.$userId. " tekst poruke glasi: \n".$noticeBody;
 
     		$this->query("SELECT user_email FROM users WHERE status IN (1,2)");
     		$results = $this->resultSet();
 
         foreach ($results as $result) {
-            mail($result['user_email'],$noticeTitle,$emailText);
+            mail($result['user_email'],$noticeTitle,$emailText,$headers);
         }
 
         $numberRecipiens = count($results);

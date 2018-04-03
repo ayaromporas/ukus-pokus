@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $ingredients = $viewmodel[0];  //spisak namirnica za punjenje select polja
 $categoriesAll = $viewmodel[1];  //spisak kategorija za punjenje checkboxova
@@ -19,7 +19,7 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
               <div class="col"><h2 class="text-center display-4">Napredna pretraga </h2></div>
               <div class="col"><hr></div>
           <br>
-          
+
           <!-- main row za celu stranu-->
           <div class="row">
             <div class="col-md-4"><!-- kolona u kojoj se nalaze sve pretrage-->
@@ -27,7 +27,7 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
 
               <h5 class="search-title">Odaberite sastojke &nbsp;&nbsp;&nbsp;
                     <a data-toggle="collapse" href="#naprednaPretraga1" role="button" aria-expanded="true" aria-controls="naprednaPretraga1"><i class="fas fa-angle-down"></i></a>
-               </h5>          
+               </h5>
                       <div id="naprednaPretraga1" class="collapse.show">
                         <div class="card card-body search-card px-0 py-1 m-0">
                             <form>
@@ -38,27 +38,30 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
                                         echo '<option value="' . $ingredient['ingredient_id'] . '">' . $ingredient['ingredient_name'] . '</option>';
                                     }
                                     ?>
-                              </select> 
+                              </select>
                           </form>
-                          <small class="text-left">Unesite prva dva slova namirnice, a zatim je izaberite iz padajućeg menija.</small>                
+                          <small class="text-left">Unesite prva dva slova namirnice, a zatim je izaberite iz padajućeg menija.</small>
                         </div>
                       </div>
               <hr> <h5 class="search-title">Pretraga po naslovu &nbsp;&nbsp;&nbsp;
                     <a data-toggle="collapse" href="#naprednaPretraga2" role="button" aria-expanded="true" aria-controls="naprednaPretraga2"><i class="fas fa-angle-down"></i></a>
-               </h5>           
+               </h5>
                       <div class="collapse.show" id="naprednaPretraga2">
                         <div class="card card-body search-card px-0 py-1 m-0">
                             <form>
                                 <input type="text" class="form-control" id="search-keywords" name="search-keywords" placeholder='Npr. "sos", "pita"... '>
                           </form>
-                          <small class="text-left">Unesite reči koje se mogu nalaziti u naslovu recepta.</small>  <br>  
-                          <div id="keywords-warning"></div>           
+                          <small class="text-left">Unesite reči koje se mogu nalaziti u naslovu recepta.</small>  <br>
+                          <div id="keywords-warning"></div>
                         </div>
                       </div>
-              <hr> <h5 class="search-title">Pretraga po rejtingu &nbsp;&nbsp;&nbsp;
-                    <a data-toggle="collapse" href="#naprednaPretraga3" role="button" aria-expanded="true" aria-controls="naprednaPretraga3"><i class="fas fa-angle-down"></i></a>
-               </h5>           
-                      <div class="collapse.show" id="naprednaPretraga3">
+              <hr>
+              <div data-toggle="collapse" href="#naprednaPretraga3" role="button" aria-expanded="true" aria-controls="naprednaPretraga3" class="pointerClass">
+                <h5 class="search-title">Pretraga po rejtingu &nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-angle-down"></i>
+                </h5>
+              </div>
+                      <div class="collapse" id="naprednaPretraga3">
                         <div class="card card-body search-card px-0 py-1 m-0">
 
                           <div class="custom-control custom-checkbox">
@@ -86,13 +89,17 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
                             <label class="custom-control-label" for="star1">1 zvezdica</label>
                           </div>
 
-                        </div>                
+                        </div>
                       </div>
 
-            <hr> <h5 class="search-title">Vreme pripreme &nbsp;&nbsp;&nbsp;
-                    <a data-toggle="collapse" href="#naprednaPretraga4" role="button" aria-expanded="true" aria-controls="naprednaPretraga4"><i class="fas fa-angle-down"></i></a>
-               </h5>           
-                      <div class="collapse.show" id="naprednaPretraga4">
+            <hr>
+            <div data-toggle="collapse" href="#naprednaPretraga4" role="button" aria-expanded="true" aria-controls="naprednaPretraga4" class="pointerClass">
+                <h5 class="search-title">Vreme pripreme &nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-angle-down"></i>
+                  </h5>
+              </div>
+
+                      <div class="collapse" id="naprednaPretraga4">
                         <div class="card card-body search-card px-0 py-1 m-0">
 
                           <div class="custom-control custom-checkbox">
@@ -124,14 +131,18 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
                             <input type="checkbox" class="custom-control-input" id="BETWEEN 120 AND 600" value="BETWEEN 120 AND 600" name="preptime">
                             <label class="custom-control-label" for="BETWEEN 120 AND 600">više od 120 min</label>
                           </div>
-                          
-                        </div>                
+
+                        </div>
                       </div>
 
-            <hr> <h5 class="search-title">Koliko prljavih sudova? &nbsp;&nbsp;&nbsp;
-                    <a data-toggle="collapse" href="#naprednaPretraga5" role="button" aria-expanded="true" aria-controls="naprednaPretraga5"><i class="fas fa-angle-down"></i></a>
-               </h5>           
-                      <div class="collapse.show" id="naprednaPretraga5">
+            <hr>
+            <div data-toggle="collapse" href="#naprednaPretraga5" role="button" aria-expanded="true" aria-controls="naprednaPretraga5" class="pointerClass">
+                <h5 class="search-title">Koliko prljavih sudova? &nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-angle-down"></i>
+                  </h5>
+              </div>
+
+                      <div class="collapse" id="naprednaPretraga5">
                         <div class="card card-body search-card px-0 py-1 m-0">
 
                           <div class="custom-control custom-checkbox">
@@ -158,39 +169,42 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
                             <input type="checkbox" class="custom-control-input" id="dish5" value="5" name="dishes">
                             <label class="custom-control-label" for="dish5">5 i više posuda</label>
                           </div>
-                         
-                        </div>                
-                      </div>       
-     
-              <hr> <h5 class="search-title">Odaberite kategorije &nbsp;&nbsp;&nbsp;
-                    <a data-toggle="collapse" href="#naprednaPretraga6" role="button" aria-expanded="true" aria-controls="naprednaPretraga6"><i class="fas fa-angle-down"></i></a>
-               </h5>           
-                      <div class="collapse.show" id="naprednaPretraga6">
-                        <div class="card card-body search-card px-0 py-1 m-0">
 
-			<?php 
+                        </div>
+                      </div>
+
+              <hr>
+            <div data-toggle="collapse" href="#naprednaPretraga6" role="button" aria-expanded="true" aria-controls="naprednaPretraga6" class="pointerClass">
+                <h5 class="search-title">Odaberite kategorije &nbsp;&nbsp;&nbsp;
+                      <i class="fas fa-angle-down"></i>
+                 </h5>
+               </div>
+                    <div class="collapse" id="naprednaPretraga6">
+                      <div class="card card-body search-card px-0 py-1 m-0">
+
+			<?php
 			foreach ($categoriesAll as $category) {
 			?>
 		                          <div class="custom-control custom-checkbox">
 		                            <input type="checkbox" class="custom-control-input" id="cat<?php echo $category['cat_id']; ?>" value="<?php echo $category['cat_id']; ?>" name="cat">
 		                            <label class="custom-control-label" for="cat<?php echo $category['cat_id']; ?>"><?php echo $category['cat_name']; ?></label>
 		                          </div>
-			 <?php 
+			 <?php
 			}
-			?>                        
-                        </div>                
-                      </div>      
+			?>
+                        </div>
+                      </div>
                       <br><br>
 
             </div>
             <div class="col-md-8"><!-- kolona u kojoj se nalaze svi rezultati-->
 
 	     <!-- Prikaz rezultata Ajax pretrage ako ih ima-->
-	     <div id="result">	
+	     <div id="result">
 	     </div> <!-- Kraj prikaza rezultata pretrage -->
-	
+
 	     <!-- Najpopularniji recepti, poslednjih 6 -->
-<section id="recipesPop">      
+<section id="recipesPop">
        <div class="bestRecipes">
          <div class="container">
               <div class="col"></div>
@@ -199,17 +213,17 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
             <br>
 
               <div class="row">
- 
+
                 <?php  for ($i = 0; $i < 6; $i++) : ?>
 
-                <?php 
+                <?php
 
-                  $recipeRating = $recipesPop[$i]['avg_rating']. "";  
-                  $nFullStars = $recipeRating[0]; 
-                  $halfOrEmptyStar = $recipeRating[2]; 
- 
+                  $recipeRating = $recipesPop[$i]['avg_rating']. "";
+                  $nFullStars = $recipeRating[0];
+                  $halfOrEmptyStar = $recipeRating[2];
+
                  ?>
-                        
+
                       <div class="col-md-4">
                         <div class="card card-recipes">
                           <div class="double"><a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipesPop[$i]['recipe_id']; ?>/<?php echo $recipesPop[$i]['recipe_permalink']; ?>"><h5 class="card-title text-center"><?php echo $recipesPop[$i]['recipe_title']; ?></h5></a></div>
@@ -256,7 +270,7 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
 
 
      <!-- Najnoviji recepti, poslednjih 6 -->
-     <section id="recipesLatest">      
+     <section id="recipesLatest">
        <div class="bestRecipes">
          <div class="container">
             <br>
@@ -268,14 +282,14 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
 
                 <?php  for ($i = 0; $i < 6; $i++) : ?>
 
-                <?php 
+                <?php
 
-                  $recipeRating = $recipesPop[$i]['avg_rating']. "";  
-                  $nFullStars = $recipeRating[0]; 
-                  $halfOrEmptyStar = $recipeRating[2]; 
- 
+                  $recipeRating = $recipesPop[$i]['avg_rating']. "";
+                  $nFullStars = $recipeRating[0];
+                  $halfOrEmptyStar = $recipeRating[2];
+
                  ?>
-                       
+
                       <div class="col-md-4">
                         <div class="card  card-recipes">
                           <div class="double"><a href="<?php echo ROOT_URL; ?>recipe/<?php echo $recipesLatest[$i]['recipe_id']; ?>/<?php echo $recipesLatest[$i]['recipe_permalink']; ?>">
@@ -326,8 +340,8 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
 
           </div> <!-- kraj main row-->
 
-    </div><!-- kraj container --> 
-</div><!-- kraj main -->    
+    </div><!-- kraj container -->
+</div><!-- kraj main -->
 
 
 
@@ -336,7 +350,7 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
 
 <script type="text/javascript">
 
-  var select_val;  
+  var select_val;
   var keyword = "";
   var rating = "";
   var preptime = "";
@@ -344,8 +358,8 @@ $photosPop = $viewmodel[5]; //naslovne fotke za najpopularnije recepte
   var cat = "";
   var page;
 
-//select polje, osnovni kod 
-$("select").select2({            
+//select polje, osnovni kod
+$("select").select2({
   minimumInputLength: 1,
   placeholder: 'Sastojci...',
   language: {
@@ -360,7 +374,7 @@ $("select").select2({
 
 //select polje kad se cekira neka namirnica
 $("select").on("select2:select", function (evt) {
-  
+
       var select_val = $(evt.currentTarget).val();
 
       var keyword = $("#search-keywords").val();
@@ -370,7 +384,7 @@ $("select").on("select2:select", function (evt) {
 	 	$("#result").text ("");
 		var keyword = "";
       }else{
-		$("#keywords-warning").text ("");	   	
+		$("#keywords-warning").text ("");
 		var select_val = $("select").val();
 		var keyword = $("#search-keywords").val();
 		var rating = [];
@@ -398,8 +412,8 @@ $("select").on("select2:select", function (evt) {
 
 //select polje kad se odcekira namirnica
 $("select").on("select2:unselect", function (evt) {
-      
-      var select_val = $(evt.currentTarget).val(); 
+
+      var select_val = $(evt.currentTarget).val();
 
       var keyword = $("#search-keywords").val();
       var x = keyword.length;
@@ -408,7 +422,7 @@ $("select").on("select2:unselect", function (evt) {
 	 	$("#result").text ("");
 		var keyword = "";
       }else{
-		$("#keywords-warning").text ("");	   	
+		$("#keywords-warning").text ("");
 		var select_val = $("select").val();
 		var keyword = $("#search-keywords").val();
 		var rating = [];
@@ -445,7 +459,7 @@ $("#search-keywords").keyup(function(){
 	 	$("#result").text ("");
 		var keyword = "";
 	}else{
-		$("#keywords-warning").text ("");	  
+		$("#keywords-warning").text ("");
 		var select_val = $("select").val();
 		var keyword = $(this).val();
 		var rating = [];
@@ -485,8 +499,8 @@ $("[name='rating']").click(function(){
 	 		$("#result").text ("");
 			var keyword = "";
 	      }else{
-			$("#keywords-warning").text ("");	    
-		 	
+			$("#keywords-warning").text ("");
+
 			var select_val = $("select").val();
 			var keyword = $("#search-keywords").val();
 			var preptime = [];
@@ -522,8 +536,8 @@ $("[name='preptime']").click(function(){
 	 		$("#result").text ("");
 			var keyword = "";
 	      }else{
-			$("#keywords-warning").text ("");	    
-		 	
+			$("#keywords-warning").text ("");
+
 			var select_val = $("select").val();
 			var keyword = $("#search-keywords").val();
 			var rating = [];
@@ -558,7 +572,7 @@ $("[name='dishes']").click(function(){
 	 		$("#result").text ("");
 			var keyword = "";
 	      }else{
-			$("#keywords-warning").text ("");	  		 	
+			$("#keywords-warning").text ("");
 			var select_val = $("select").val();
 			var keyword = $("#search-keywords").val();
 			var rating = [];
@@ -593,8 +607,8 @@ $("[name='cat']").click(function(){
 	 		$("#result").text ("");
 			var keyword = "";
 	      }else{
-			$("#keywords-warning").text ("");	  
-		 	
+			$("#keywords-warning").text ("");
+
 			var select_val = $("select").val();
 			var keyword = $("#search-keywords").val();
 			var rating = [];
@@ -618,15 +632,15 @@ $("[name='cat']").click(function(){
 
 
 //ajax funkcija
-function ajax_call(select_val, keyword, rating, preptime, dishes, cat, page) {  
+function ajax_call(select_val, keyword, rating, preptime, dishes, cat, page) {
 	if (    ((select_val == null) || (select_val == "") || (select_val == undefined)) && ((keyword == "") || (keyword == undefined) || (keyword == null)) && ((rating == "") || (rating == null) || (rating == undefined)) && ((preptime == "") || (preptime == null) || (preptime == undefined)) && ((dishes == "") || (dishes == null) || (dishes == undefined)) && ((cat == "") || (cat == null) || (cat == undefined))  ) {
 		$("#result").text ("");
 	}else{
 		$.post("<?php echo ROOT_URL; ?>assets/ajax2.php", {data: select_val, keyword: keyword, rating: rating, preptime: preptime, dishes: dishes, cat:cat, page:page}, function(result){
             			$("#result").html(result);
     		});
-	}         
-    
+	}
+
 }
 
 //paginacija
@@ -653,7 +667,7 @@ function pagination(page){
 	        });
 
       return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
-}     
+}
 
 // //zadrzavanje vrednosti nakon dugmeta Back
 $(document).ready(function(){
@@ -665,7 +679,7 @@ $(document).ready(function(){
 	 		$("#result").text ("");
 			var keyword = "";
 	      }else{
-			$("#keywords-warning").text ("");	   
+			$("#keywords-warning").text ("");
 			var select_val = $("select").val();
 			var keyword = $("#search-keywords").val();
 			var rating = [];
@@ -686,10 +700,8 @@ $(document).ready(function(){
 		            });
 			console.log(select_val, keyword, rating, preptime, dishes, cat, page);
 			return ajax_call(select_val, keyword, rating, preptime, dishes, cat, page);
-	       }    
+	       }
 });
 
 
  </script>
-
-

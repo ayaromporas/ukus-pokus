@@ -24,9 +24,9 @@ class NoticeModel extends Model{
     		$nr1 = strlen($noticeTitle);
     		$nr2 = strlen($noticeBody);
 
-    		if($nr1 < 3 or $nr2 < 18){
+    		if($nr1 < 3 or $nr2 < 17){
 
-    			Messages::setMsg('Problem sa unosom. Nedovoljan broj unetih slova, naslov ili tekst poruke suviše kratak. '. $nr2, 'error');
+    			Messages::setMsg('Problem sa unosom. Naslov mora imati 3 i više karaktera, tekst poruke mora imati više od 10 karaktera.', 'error');
     			return;
     		}
         $headers  = 'MIME-Version: 1.0' . "\r\n";

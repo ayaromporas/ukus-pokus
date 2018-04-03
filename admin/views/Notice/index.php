@@ -13,7 +13,7 @@
 		<!-- naziv -->
 		<div class="form-group row">
 			<label class="col-sm-1 form-control-label">Naslov</label>
-			<div class="col-sm-8">
+			<div class="col-sm-10">
 				<p class="form-control-static"><input type="text" class="form-control" id="notice_title" placeholder='Unesite naslov' name="notice_title"></p>
 			</div>
 		</div>

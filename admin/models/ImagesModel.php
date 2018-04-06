@@ -57,11 +57,12 @@ if(($postArray['photoname'] && $postArray['photoalt'] && $postArray['photolink']
 		/*--------upload i provere slike i upis u bazu --------*/
 
 		// upload slike ako je sve dovde ok
-		$target_dir ="c://wamp64/www/kibo/ukus-pokus/assets/img/"; 
+		$target_dir ="c://wamp64/www/kibo/ukus-pokus/assets/img/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$target_file = $target_dir . $photolink;
 		$uploadOk = 1;  // postavljanje promenljive na 1
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
 
 		// Check if file is an image
 		$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -104,7 +105,8 @@ if(($postArray['photoname'] && $postArray['photoalt'] && $postArray['photolink']
 
 		// if everything is ok, try to upload file
 		} else {
-		    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+				$file_tmp = $_FILES["fileToUpload"]["tmp_name"];
+		    if (watermark_image($file_tmp, 'c://wamp64/www/kibo/ukus-pokus/assets/img/' . $photolink) == true) {
 		        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 
 
@@ -155,7 +157,24 @@ return;
 } // kraj modela
 
 
+function watermark_image($file, $destination){
+    $watermark = imagecreatefrompng('c://wamp64/www/kibo/ukus-pokus/assets/img/ukus.png');
+    $source = getimagesize($file);
+    $source_mime = $source['mime'];
+    if ($source_mime === 'image/png'){
+        $image = imagecreatefrompng($file);
+    }else if($source_mime === 'image/jpeg'){
+        $image = imagecreatefromjpeg($file);
+    }else if($source_mime === 'image/gif'){
+        $image = imagecreatefromgif($file);
+    }
+    imagecopy($image, $watermark, 0, 0, 0, 0, imagesx($watermark),imagesy($watermark));
+    (imagepng($image, $destination) == true) ? $status_of_merge = true : $status_of_merge = false;
+    imagedestroy($image);
+    imagedestroy($watermark);
+		return $status_of_merge;
 
+}
 
 
 ?>

@@ -146,7 +146,7 @@ function numberIngredientsWrt(){
  function ajax_call(keyword, number, page) {
     $.post("<?php echo ROOT_URL; ?>assets/ajaxIngredients.php", {keyword: keyword, number: number, page: page}, function(result){
             $("#ingredients-index").html(result);
-            numberIngredientsWrt()
+            numberIngredientsWrt();
     });
 }
 

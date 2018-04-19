@@ -157,6 +157,7 @@ return ajax_call(keyword, number, page);
 
 
 function numberRecipesWrt(){
+	 $.ajaxSetup({ cache: false });
 	 $.getJSON( '<?php echo ROOT_URL; ?>assets/results.json', function(json) {
 		 document.getElementById("numberRecipes").innerHTML=json.count;
 	});

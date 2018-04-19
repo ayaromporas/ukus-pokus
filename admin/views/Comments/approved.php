@@ -72,6 +72,7 @@ function pagination(pagination){
 
  //ispis broja komentara
  function numberCommentsWrt(){
+	  $.ajaxSetup({ cache: false });
 		$.getJSON( '<?php echo ROOT_URL; ?>assets/results.json', function(json) {
 			document.getElementById("numberComm").innerHTML=json.count;
 	 });

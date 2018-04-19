@@ -137,6 +137,7 @@ return ajax_call(keyword, number, page);
 }
 
 function numberIngredientsWrt(){
+   $.ajaxSetup({ cache: false });
    $.getJSON( '<?php echo ROOT_URL; ?>assets/results.json', function(json) {
      document.getElementById("numberIngredients").innerHTML=json.count;
   });

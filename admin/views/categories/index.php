@@ -136,6 +136,7 @@
 					}
 
 					function numberCategoriesWrt(){
+					   $.ajaxSetup({ cache: false });
 						 $.getJSON( '<?php echo ROOT_URL; ?>assets/results.json', function(json) {
 							 document.getElementById("numberCategories").innerHTML=json.count;
 						});
@@ -143,6 +144,7 @@
 
 					//ajax funkcija
 					 function ajax_call(keyword, number, page) {
+						 $.ajaxSetup({ cache: false });
 					    $.post("<?php echo ROOT_URL; ?>assets/ajaxCategories.php", {keyword: keyword, number: number, page: page}, function(result){
 					            $("#categories-index").html(result);
 					            numberCategoriesWrt();

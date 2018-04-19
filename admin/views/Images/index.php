@@ -140,6 +140,7 @@ return ajax_call(keyword, number, page);
 }
 
 function numberImagesWrt(){
+   $.ajaxSetup({ cache: false });
    $.getJSON( '<?php echo ROOT_URL; ?>assets/results.json', function(json) {
      document.getElementById("numberImages").innerHTML=json.count;
   });

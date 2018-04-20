@@ -144,8 +144,7 @@
 
 					//ajax funkcija
 					 function ajax_call(keyword, number, page) {
-						 $.ajaxSetup({ cache: false });
-					    $.post("<?php echo ROOT_URL; ?>assets/ajaxCategories.php", {keyword: keyword, number: number, page: page}, function(result){
+					   $.post("<?php echo ROOT_URL; ?>assets/ajaxCategories.php", {keyword: keyword, number: number, page: page}, function(result){
 					            $("#categories-index").html(result);
 					            numberCategoriesWrt();
 					    });

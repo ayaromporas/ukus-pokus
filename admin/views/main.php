@@ -48,6 +48,7 @@ if (isset($_SESSION['logged']) && ($_SESSION['logged'] === true) && isset($_SESS
 
         $username = $_SESSION['username'];
         $userName = $_SESSION['user_name'];
+        // $userId = $_SESSION['user_id'];
 
 }else{
         $superadmin = false;

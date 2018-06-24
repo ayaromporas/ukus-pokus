@@ -1,6 +1,6 @@
 <?php
-class RecipesModel extends Model{
-	
+class RecipesModel extends Query{
+
 	public function Index(){
 
 		$this->query('SELECT recipe_id, recipe_title, prep_time, dirty_dishes, status, user_id, avg_rating, no_votes FROM recipes ORDER BY recipe_title ASC LIMIT 10');
@@ -13,6 +13,42 @@ class RecipesModel extends Model{
 
 		return $resultArray;
 
+	}
+	public function Edit(){
+		if (isset($_GET['id'])) {
+			$id = $_GET['id'];
+			$this->query("SELECT * FROM recipes WHERE recipe_id = $id");
+			$recipe = $this->single();
+			if(count($recipe) == 0){
+				header('Location: ' . ROOT_URL);
+			}
+			$this->query('SELECT ingredient_id, ingredient_name FROM ingredients WHERE status=1 ORDER BY ingredient_name ASC');
+			$ingredientsAll = $this->resultSet();
+
+			$this->query('SELECT unit_id, unit_name FROM units WHERE status=1 ORDER BY unit_name ASC');
+			$unitsAll = $this->resultSet();
+
+			$this->query('SELECT cat_id, cat_name FROM categories WHERE status=1 ORDER BY cat_name ASC');
+			$catsAll = $this->resultSet();
+
+			$recipePhotosString = $recipe['recipe_photos'];
+			$recipePhotosArray = explode(",", $recipePhotosString);
+			$photosAll = array();
+			foreach ($recipePhotosArray as $photoId) {
+				$this->query("SELECT * FROM photos WHERE status=1 AND photo_id=$photoId");
+				$photo = $this->single();
+				array_push($photosAll, $photo);
+			}
+
+			$recipeIngrs = explode("/", $recipe['recipe_ingrs']);
+			// $recipeIngrsNumber = count($recipeIngrs);
+
+
+			$resultArray = array($ingredientsAll, $unitsAll, $catsAll, $recipe, $photosAll, $recipeIngrs);
+		 	return $resultArray;
+		}else{
+			header('Location: ' . ROOT_URL);
+		}
 	}
 
 	public function Insert(){
@@ -28,14 +64,14 @@ class RecipesModel extends Model{
 
 		$resultArray = array($ingredientsAll, $unitsAll, $catsAll);
 
-	
-		
-// prijem unosa u polja, provera i unos u bazu
-if(isset($_POST['submit'])){	
 
-	if( 
-		(isset($_POST['authorid']) && is_string($_POST['authorid']) && !(empty($_POST['authorid'] )) )&& 
-		(isset($_POST['recipetitle']) && is_string($_POST['recipetitle']) && !(empty($_POST['recipetitle'])) ) && 
+
+// prijem unosa u polja, provera i unos u bazu
+if(isset($_POST['submit'])){
+		// $recipeTitle =$_POST['instructions'];
+	if(
+		(isset($_POST['authorid']) && is_string($_POST['authorid']) && !(empty($_POST['authorid'] )) )&&
+		(isset($_POST['recipetitle']) && is_string($_POST['recipetitle']) && !(empty($_POST['recipetitle'])) ) &&
 		(isset($_POST['permalink']) && is_string($_POST['permalink']) && !(empty($_POST['permalink'])) ) &&
 		(isset($_POST['description']) && is_string($_POST['description']) && !(empty($_POST['description']))) &&
 		(isset($_POST['preptime']) && is_string($_POST['preptime']) && !(empty($_POST['preptime']))) &&
@@ -45,8 +81,8 @@ if(isset($_POST['submit'])){
 		(isset($_POST['ammount']) && is_array($_POST['ammount']) && !(empty($_POST['ammount']))) &&
 		(isset($_POST['units']) && is_array($_POST['units']) && !(empty($_POST['units']))) &&
 		(isset($_POST['cats']) && is_array($_POST['cats']) && !(empty($_POST['cats']))) &&
-		(isset($_POST['images']) && is_array($_POST['images']) && !(empty($_POST['images']))) 
-	
+		(isset($_POST['images']) && is_array($_POST['images']) && !(empty($_POST['images'])))
+
 
 	)
 
@@ -92,7 +128,7 @@ if(isset($_POST['submit'])){
 		$i = 0;
 		$recipeIngrs = "";
 		while ($i < $nr) {
-			$recipeIngrs .= $ingredientsTotal[$i] . "," . $ammountTotal[$i] . "," . $unitsTotal[$i] . "/";		    
+			$recipeIngrs .= $ingredientsTotal[$i] . "," . $ammountTotal[$i] . "," . $unitsTotal[$i] . "/";
 		    $i++;
 		}
 		$recipeIngrs = rtrim($recipeIngrs, "/");
@@ -145,19 +181,19 @@ if(isset($_POST['submit'])){
 
 			$lastId = $this->lastInsertId();
 
-			
+
 
 			Messages::setMsg('Uspešno ubačen nov recept! <br>Id poslednjeg recepta u bazi sada je: '. $lastId, 'success');
 		} // kraj unosa
 
 	}else{
-		Messages::setMsg('Sva polja moraju biti popunjena', 'error');
+		Messages::setMsg('Sva polja moraju biti popunjena '.$recipeTitle, 'error');
 	}
 
-	
+
 }	//end if submit
 
 		return $resultArray;
-		
+
 	}
 }

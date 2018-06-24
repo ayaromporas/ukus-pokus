@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* javlja se na insert recipe stranici, radi prikaz slika na pretragu, za unos u recept */
 
 include ('../config.php');
@@ -17,7 +17,7 @@ if (isset($_POST['keyword']) && is_string($_POST['keyword']) ) {
 
 	$postArray = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 	$keyword = $postArray['keyword'];
-	
+
 	// echo "Ključne reči: ";
  //    	var_dump($keyword);
  //    	echo '<br>';
@@ -43,18 +43,22 @@ if (isset($_POST['keyword']) && is_string($_POST['keyword']) ) {
 
 
 				foreach ($photos as $photo) {
-					$photoId = $photo['photo_id']; 
+					$photoId = $photo['photo_id'];
 					$photoTitle = $photo['photo_title'];
-					$photoLink = $photo['photo_link']; 
+					$photoLink = $photo['photo_link'];
 
 					?>
 
 					<div class="card col-sm-3 pt-1">
 						<header>
-							<label for="photo<?php echo $photoId; ?>"><input type="checkbox" name="images[]" id="photo<?php echo $photoId; ?>" value="<?php echo $photoId; ?>"> &nbsp; <span class="label label-pill"><?php echo $photoId; ?></span>  <?php echo $photoTitle; ?></label>
-						</header>							<img src="<?php echo HOME; ?>assets/img/<?php echo $photoLink; ?>" class="imgrec my-2">
-						
-						
+							<label for="photo<?php echo $photoId; ?>" style="cursor:pointer;">
+								<input type="checkbox" name="images[]" id="photo<?php echo $photoId; ?>" value="<?php echo $photoId; ?>" style="cursor:pointer;"> &nbsp; <span class="label label-pill"><?php echo $photoId; ?></span>  <?php echo $photoTitle; ?>
+								<img src="<?php echo HOME; ?>assets/img/<?php echo $photoLink; ?>" class="imgrec my-2">
+							</label>
+						</header>
+
+
+
 					</div>
 
 
@@ -67,7 +71,7 @@ if (isset($_POST['keyword']) && is_string($_POST['keyword']) ) {
 				<!-- paginacija -->
 			<!-- 	<nav aria-label="Page navigation example" class="text-center" id="recipeimginsert">
 				  <ul class="pagination">
-				    
+
 				    <li class="page-item"><a class="page-link" href="#">1</a></li>
 				    <li class="page-item"><a class="page-link" href="#">...</a></li>
 				    <li class="page-item"><a class="page-link" href="#">12</a></li>
@@ -111,34 +115,7 @@ if (isset($_POST['keyword']) && is_string($_POST['keyword']) ) {
     		}else{
     			echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">Potrebno je uneti 5 i više slova</div>';
     		}
-		
-		
+
+
 	}
 }
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

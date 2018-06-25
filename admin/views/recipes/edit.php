@@ -7,27 +7,27 @@ $recipe = $viewmodel[3]; // recepat koji se edituje
 $photos = $viewmodel[4]; // sve slike koje pripadaju receptu
 $recipeIngrsAll = $viewmodel[5]; // sastojci, kolicina i mere za izabrani recepat
 
-// $ingsAllOption = "<select name='ingredients[]' class='select2'>";
-// foreach ($ingredients as $ingredient) {
-// 	$id = $ingredient['ingredient_id'];
-// 	$name = $ingredient['ingredient_name'];
-//
-// 	$ingsAllOption .= "<option value="."''"."></option><option value='" . $id . "'>" . $name . "</option>";
-// }
-//
-// $ingsAllOption .= "</select>";
-// //echo $ingsAllOption;
-//
-// $unitsAllOption = "<select name='units[]' class='select2'>";
-// foreach ($units as $unit) {
-// 	$id = $unit['unit_id'];
-// 	$name = $unit['unit_name'];
-//
-// 	$unitsAllOption .= "<option value="."''"."></option><option value='" . $id . "'>" . $name . "</option>";
-// }
-//
-// $unitsAllOption .= "</select>";
-//echo $unitsAllOption;
+$ingsAllOption = "<select name='ingredients[]' class='select2'>";
+foreach ($ingredients as $ingredient) {
+	$id = $ingredient['ingredient_id'];
+	$name = $ingredient['ingredient_name'];
+
+	$ingsAllOption .= "<option value="."''"."></option><option value='" . $id . "'>" . $name . "</option>";
+}
+
+$ingsAllOption .= "</select>";
+//echo $ingsAllOption;
+
+$unitsAllOption = "<select name='units[]' class='select2'>";
+foreach ($units as $unit) {
+	$id = $unit['unit_id'];
+	$name = $unit['unit_name'];
+
+	$unitsAllOption .= "<option value="."''"."></option><option value='" . $id . "'>" . $name . "</option>";
+}
+
+$unitsAllOption .= "</select>";
+echo $unitsAllOption;
 
 
 
@@ -113,15 +113,17 @@ if(($superadmin || $admin || $editor) === true){
 
 		<!-- sastojci / kolicina / jedinica mere 1 -->
 		<div class="form-group row addafterthis">
-			<label for='ingredients' class='col-sm-2 form-control-label'>Sastojci, količine i jedinice mere</label>
-			<?php foreach ($recipeIngrsAll as $recipeIngr):
-				
-				$singleInstruction = explode(",", $recipeIngr);
+			<label for='ingredients' class='col-sm-12 form-control-label text-center'><strong>Sastojci, količine i jedinice mere</strong> <p>&nbsp;</p>
+			</label>
 
-				foreach ($singleInstruction as $instruction) {
-					$instructionIngrId = $instruction[0];
-					$amount = $instruction[1];
-					$unitInst = $instruction[2];
+			<?php foreach ($recipeIngrsAll as $recipeIngr):
+
+				$singleInstruction = explode(",", $recipeIngr);
+						// print_r($singleInstruction);
+
+					$instructionIngrId = $singleInstruction [0];
+					$amount = $singleInstruction [1];
+					$unitInst = $singleInstruction[2];
 					foreach ($ingredients as $ingr) {
 						$ingrId = $ingr['ingredient_id'];
 						$ingrName = $ingr['ingredient_name'];
@@ -129,7 +131,7 @@ if(($superadmin || $admin || $editor) === true){
 						if($instructionIngrId == $ingrId){ ?>
 							<div class='col-sm-4'>
 							<select name='ingredients[]' class='select2'>
-							<option value= "<?php echo $ingrId ?> "><?php echo $ingrName ?></option>;
+							<option value= "<?php echo $ingrId ?>"><?php echo $ingrName ?></option>;
 						</select>
 						</div>
 						<?php
@@ -138,15 +140,15 @@ if(($superadmin || $admin || $editor) === true){
 							//
 						}
 					} ?>
-					<div class='col-sm-2'>
-						<p class='form-control-static'><input type='number' class='form-control' value= "<?php echo $amount ?> " name='ammount[]' placeholder='Samo brojevi, npr. "300"...' ></p>
+					<div class='col-sm-3'>
+						<p class='form-control-static'><input class='form-control'  name='ammount[]' value= "<?php echo $amount ?> " placeholder='Samo brojevi, npr. "300"...' ></p>
 					</div>
 					<?php
 					foreach ($units as $unit) {
 						$unitId = $unit['unit_id'];
 						$unitName = $unit['unit_name'];
 
-						if($unitInst == $unitId ){ ?>
+						if($unitId == $unitInst){ ?>
 							<div class='col-sm-4'>
 							<select name='units[]' class='select2'>
 							<option value= "<?php echo $unitId ?> "><?php echo $unitName ?></option>;
@@ -157,35 +159,27 @@ if(($superadmin || $admin || $editor) === true){
 						} else {
 							//
 						}
-					}
-				}
+					} ?>
+					<div class='col-sm-1'>
+						<p class='form-control-static'><a class='addfields' id="btn2"><i class='red fas fa-minus-square fa-2x'></i></a></p>
+					</div>
+					<?php
 		 endforeach;
 		 ?>
-			<!-- sastojci -->
-			<div class='col-sm-4'><?php echo $ingsAllOption; ?></div>
-			<!-- kolicina -->
-			<div class='col-sm-2'>
-				<p class='form-control-static'><input type='number' class='form-control'  name='ammount[]' placeholder='Samo brojevi, npr. "300"...' ></p>
-			</div>
-			<!-- jedinica mere -->
-			<div class='col-sm-2'><?php echo $unitsAllOption; ?></div>
-			<!-- dugme + -->
-			<!-- <div class='col-sm-1'>
-				<p class='form-control-static'><a class='addfields' id="btn1"><i class='green fas fa-plus-square fa-2x'></i></a></p>
-			</div> -->
+
 		</div>
 
 		<!-- sastojci / kolicina / jedinica mere 2 -->
 		<div class="form-group row">
-			<label for='ingredients' class='col-sm-2 form-control-label'></label>
+			<!-- <label for='ingredients' class='col-sm-2 form-control-label'></label> -->
 			<!-- sastojci -->
 			<div class='col-sm-4'><?php echo $ingsAllOption; ?></div>
 			<!-- kolicina -->
-			<div class='col-sm-2'>
+			<div class='col-sm-3'>
 				<p class='form-control-static'><input type='number' class='form-control'  name='ammount[]' placeholder='Samo brojevi, npr. "300"...' ></p>
 			</div>
 			<!-- jedinica mere -->
-			<div class='col-sm-2'><?php echo $unitsAllOption; ?></div>
+			<div class='col-sm-4'><?php echo $unitsAllOption; ?></div>
 			<!-- dugme + -->
 			<div class='col-sm-1'>
 				<p class='form-control-static'><a class='addfields' id="btn2"><i class='green fas fa-plus-square fa-2x'></i></a></p>

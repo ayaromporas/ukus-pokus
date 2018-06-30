@@ -111,6 +111,7 @@ class RecipesModel extends Query{
 					    $i++;
 					}
 					$recipeIngrs = rtrim($recipeIngrs, "/");
+					$recipeIngrs = preg_replace('/\s+/', '', $recipeIngrs);
 
 					//pravljenje stringa za unos u polje recipe_ingrs_id
 					$recipeIngrsId = ",";
@@ -161,11 +162,9 @@ class RecipesModel extends Query{
 						$this->bind(':recipe_id', $id);
 						$this->execute();
 
-						$lastId = $this->lastInsertId();
 
 
-
-						Messages::setMsg('Uspešno ubačen nov recept! <br>Id poslednjeg recepta u bazi sada je: '. $lastId, 'success');
+						Messages::setMsg('Uspešno izmenjen recept ', 'success');
 
 						return $resultArray;
 				}else{

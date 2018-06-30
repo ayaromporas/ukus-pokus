@@ -44,7 +44,7 @@ class RecipesModel extends Query{
 			// $recipeIngrsNumber = count($recipeIngrs);
 
 
-			$resultArray = array($ingredientsAll, $unitsAll, $catsAll, $recipe, $photosAll, $recipeIngrs);
+			$resultArray = array($ingredientsAll, $unitsAll, $catsAll, $recipe, $photosAll, $recipeIngrs, $id );
 		 	return $resultArray;
 		}else{
 			header('Location: ' . ROOT_URL);

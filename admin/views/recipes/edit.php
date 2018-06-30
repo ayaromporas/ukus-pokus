@@ -6,6 +6,7 @@ $cats = $viewmodel[2];  //spisak svih kategorija
 $recipe = $viewmodel[3]; // recepat koji se edituje
 $photos = $viewmodel[4]; // sve slike koje pripadaju receptu
 $recipeIngrsAll = $viewmodel[5]; // sastojci, kolicina i mere za izabrani recepat
+$recId = $viewmodel[6]; // sastojci, kolicina i mere za izabrani recepat
 
 $ingsAllOption = "<select name='ingredients[]' class='select2'>";
 foreach ($ingredients as $ingredient) {
@@ -27,11 +28,6 @@ foreach ($units as $unit) {
 }
 
 $unitsAllOption .= "</select>";
-echo $unitsAllOption;
-
-
-
-
 
 ?>
  <script src="<?php echo ROOT_URL; ?>assets/js/lib/jquery/jquery-3.2.1.min.js"></script>
@@ -46,7 +42,7 @@ if(($superadmin || $admin || $editor) === true){
 
 
 	<!-- forma za unos recepta -->
-	<form method="POST" action="<?php echo ROOT_URL; ?>recipes/insert" name="newrecipe" enctype='multipart/form-data'>
+	<form method="POST" action="<?php echo ROOT_URL; ?>recipes/edit" name="newrecipe" enctype='multipart/form-data'>
 
 		<!-- hidden, admin id -->
 		<input type="hidden" name="authorid" value="<?php echo $_SESSION['user_id'] ; ?>" >
@@ -78,14 +74,14 @@ if(($superadmin || $admin || $editor) === true){
 
 		<!-- vreme pripreme -->
 		<div class="form-group row">
-			<label class="col-sm-2 form-control-label">Vreme pripreme</label>
-			<div class="col-sm-3">
+			<label class="col-sm-2 form-control-label text-center">Vreme pripreme</label>
+			<div class="col-sm-4">
 				<p class="form-control-static"><input type="number" class="form-control" id="preptime" name="preptime" value="<?php echo $recipe['prep_time']; ?>" placeholder='Samo brojevi, npr. "30"... '></p>
 			</div>
 			<?php $optionsData = [1,2,3,4,5];
 			?>
 			<!-- broj prljavih sudova -->
-			<label for="dirtydishes" class="col-sm-2 form-control-label">Isprljani sudovi</label>
+			<label for="dirtydishes" class="col-sm-2 form-control-label text-center">Isprljani sudovi</label>
 			<div class="col-sm-3">
 				<select id="dirtydishes" class="form-control" name="dirtydishes">
 					<?php foreach($optionsData as $option) :?>
@@ -112,16 +108,19 @@ if(($superadmin || $admin || $editor) === true){
 
 
 		<!-- sastojci / kolicina / jedinica mere 1 -->
-		<div class="form-group row addafterthis">
+
 			<label for='ingredients' class='col-sm-12 form-control-label text-center'><strong>Sastojci, količine i jedinice mere</strong> <p>&nbsp;</p>
 			</label>
 
-			<?php foreach ($recipeIngrsAll as $recipeIngr):
-
+			<?php
+				$i = 1;
+			foreach ($recipeIngrsAll as $recipeIngr):
+		?>	<div class="form-group row addafterthis" id="set<?php echo $i; ?>">
+			<?php
 				$singleInstruction = explode(",", $recipeIngr);
 						// print_r($singleInstruction);
 
-					$instructionIngrId = $singleInstruction [0];
+					$instructionIngrId = $singleInstruction[0];
 					$amount = $singleInstruction [1];
 					$unitInst = $singleInstruction[2];
 					foreach ($ingredients as $ingr) {
@@ -161,16 +160,20 @@ if(($superadmin || $admin || $editor) === true){
 						}
 					} ?>
 					<div class='col-sm-1'>
-						<p class='form-control-static'><a class='addfields' id="btn2"><i class='red fas fa-minus-square fa-2x'></i></a></p>
+						<p class='form-control-static remove'><a class='addfields' id="btn<?php echo $i; ?>"><i class='red fas fa-minus-square fa-2x '></i></a></p>
+					</div>
+					<?php
+					$i++;
+					?>
 					</div>
 					<?php
 		 endforeach;
 		 ?>
 
-		</div>
+
 
 		<!-- sastojci / kolicina / jedinica mere 2 -->
-		<div class="form-group row">
+		<div class="form-group row" id="set<?php echo $i; ?>">
 			<!-- <label for='ingredients' class='col-sm-2 form-control-label'></label> -->
 			<!-- sastojci -->
 			<div class='col-sm-4'><?php echo $ingsAllOption; ?></div>
@@ -182,29 +185,28 @@ if(($superadmin || $admin || $editor) === true){
 			<div class='col-sm-4'><?php echo $unitsAllOption; ?></div>
 			<!-- dugme + -->
 			<div class='col-sm-1'>
-				<p class='form-control-static'><a class='addfields' id="btn2"><i class='green fas fa-plus-square fa-2x'></i></a></p>
+				<p class='form-control-static'><a class='addfields' id="btn<?php echo $i; ?>"><i class='green fas fa-plus-square fa-2x'></i><i class='red fas fa-minus-square fa-2x hidethis'></i></a></p>
 			</div>
 		</div>
 
 <?php
-
-for ($i = 3; $i < 50; $i++) {
+$i++;
+for ($i = $i; $i < 50; $i++) {
  ?>
 
 <!-- sastojci / kolicina / jedinica mere <?php echo $i; ?> -->
 		<div class="form-group row hidethis" id="set<?php echo $i; ?>">
-			<label for='ingredients' class='col-sm-2 form-control-label'></label>
-			<!-- sastojci -->
+					<!-- sastojci -->
 			<div class='col-sm-4'><?php echo $ingsAllOption; ?></div>
 			<!-- kolicina -->
-			<div class='col-sm-2'>
+			<div class='col-sm-3'>
 				<p class='form-control-static'><input type='number' class='form-control'  name='ammount[]' placeholder='Samo brojevi, npr. "300"...' ></p>
 			</div>
 			<!-- jedinica mere -->
-			<div class='col-sm-2'><?php echo $unitsAllOption; ?></div>
+			<div class='col-sm-4'><?php echo $unitsAllOption; ?></div>
 			<!-- dugme + -->
 			<div class='col-sm-1'>
-				<p class='form-control-static'><a class='addfields' id='btn<?php echo $i; ?>'><i class='green fas fa-plus-square fa-2x'></i></a></p>
+				<p class='form-control-static'><a class='addfields' id='btn<?php echo $i; ?>'><i class='green fas fa-plus-square fa-2x'></i><i class='red fas fa-minus-square fa-2x hidethis'></i></a></p>
 			</div>
 
 		</div>
@@ -332,13 +334,17 @@ $("#search-keywords").keyup(function(){
 $(".addfields").click(function() {
 	var btn = $(this).attr('id').slice(3);
 	var btn = parseInt(btn);
-	var btn = btn+1;
-	$("#set" + btn).removeClass('hidethis');
-	// $(this).addClass('hidethis');
+	var btn1 = btn+1;
+	$("#set" + btn1).removeClass('hidethis');
+
+	if ($("#btn" + btn).parents("div.col-sm-1").find('p').hasClass("remove")) {
+  	$(this).parents(".form-group").remove();
+} else {
+		$("#btn" + btn).parents("div.col-sm-1").find('p').addClass('remove');
+		$(this).children(":first").addClass('hidethis');
+		$(this).children(":first").next().removeClass('hidethis');
+}
 });
-
-
-
 
 //ajax funkcija
 function ajax_call(keyword) {

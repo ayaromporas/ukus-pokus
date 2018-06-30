@@ -42,7 +42,7 @@ if(($superadmin || $admin || $editor) === true){
 
 
 	<!-- forma za unos recepta -->
-	<form method="POST" action="<?php echo ROOT_URL; ?>recipes/edit" name="newrecipe" enctype='multipart/form-data'>
+	<form method="POST" action="<?php echo ROOT_URL; ?>recipes/edit/<?php echo $recId; ?>" name="newrecipe" enctype='multipart/form-data'>
 
 		<!-- hidden, admin id -->
 		<input type="hidden" name="authorid" value="<?php echo $_SESSION['user_id'] ; ?>" >

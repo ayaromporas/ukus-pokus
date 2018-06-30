@@ -162,10 +162,30 @@ class RecipesModel extends Query{
 						$this->bind(':recipe_id', $id);
 						$this->execute();
 
-
-
 						Messages::setMsg('Uspešno izmenjen recept ', 'success');
 
+						$this->query("SELECT * FROM recipes WHERE recipe_id = $id");
+						$recipe = $this->single();
+						$this->query('SELECT ingredient_id, ingredient_name FROM ingredients WHERE status=1 ORDER BY ingredient_name ASC');
+						$ingredientsAll = $this->resultSet();
+
+						$this->query('SELECT unit_id, unit_name FROM units WHERE status=1 ORDER BY unit_name ASC');
+						$unitsAll = $this->resultSet();
+
+						$this->query('SELECT cat_id, cat_name FROM categories WHERE status=1 ORDER BY cat_name ASC');
+						$catsAll = $this->resultSet();
+
+						$recipePhotosString = $recipe['recipe_photos'];
+						$recipePhotosArray = explode(",", $recipePhotosString);
+						$photosAll = array();
+						foreach ($recipePhotosArray as $photoId) {
+							$this->query("SELECT * FROM photos WHERE status=1 AND photo_id=$photoId");
+							$photo = $this->single();
+							array_push($photosAll, $photo);
+						}
+						$recipeIngrs = explode("/", $recipe['recipe_ingrs']);								
+
+						$resultArray = array($ingredientsAll, $unitsAll, $catsAll, $recipe, $photosAll, $recipeIngrs, $id );
 						return $resultArray;
 				}else{
 					Messages::setMsg('Sva polja moraju biti popunjena '.$recipeTitle, 'error');

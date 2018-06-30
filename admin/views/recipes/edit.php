@@ -140,7 +140,7 @@ if(($superadmin || $admin || $editor) === true){
 						}
 					} ?>
 					<div class='col-sm-3'>
-						<p class='form-control-static'><input class='form-control'  name='ammount[]' value= "<?php echo $amount ?> " placeholder='Samo brojevi, npr. "300"...' ></p>
+						<p class='form-control-static'><input class='form-control'  name='ammount[]' value= "<?php echo $amount ?> " placeholder='Samo brojevi, npr. "300"...' readonly></p>
 					</div>
 					<?php
 					foreach ($units as $unit) {
